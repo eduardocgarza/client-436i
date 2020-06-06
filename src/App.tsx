@@ -3,6 +3,8 @@ import React from 'react';
 import Login from './components/Login.js'
 import NavBar from './components/NavBar.js'
 import Profile from './components/Profile.js'
+import SignUpForm from './components/SignUpForm.js';
+import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 
 function App() {
   return (
@@ -24,6 +26,8 @@ function App() {
       <NavBar/>
       <Login/>
       <Profile/>
+      <MuiThemeProvider> <SignUpForm/></MuiThemeProvider>
+   
     </div>
   );
 }
