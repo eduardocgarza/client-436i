@@ -2,6 +2,7 @@ import React from 'react';
 // import './App.css';
 import Login from './components/Login.js'
 import NavBar from './components/NavBar.js'
+import Profile from './components/Profile.js'
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
       </header> */}
       <NavBar/>
       <Login/>
+      <Profile/>
     </div>
   );
 }

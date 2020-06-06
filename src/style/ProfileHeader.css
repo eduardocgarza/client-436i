@@ -1,0 +1,9 @@
+#profile-pic {
+    /* display:inline-block; */
+    width: 25%;
+    height: 25%;
+}
+
+.profile-header {
+    display: inline-block;
+}
