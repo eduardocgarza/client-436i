@@ -1,6 +1,6 @@
 import React from 'react';
-import ProfileHeader from './ProfileHeader.js'
-import ProfileBody from './ProfileBody.js'
+import ProfileHeader from './ProfileHeader'
+import ProfileBody from './ProfileBody'
 // TODO: Styling
 // import "../style/NavBar.css"
 

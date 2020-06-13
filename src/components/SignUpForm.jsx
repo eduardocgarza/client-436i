@@ -4,9 +4,7 @@ import RaisedButton from "material-ui/RaisedButton";
 import TextField from "material-ui/TextField";
 import "../style/SignUp.css"
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
-const SignUpForm = ({
-
-}) => {
+const SignUpForm = () => {
   return (
     <div className="loginBox">
       <MuiThemeProvider>

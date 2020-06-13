@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
+import { Button, FormGroup, FormControl, FormLabel } from "react-bootstrap";
 import "../style/Login.css"
 
 export default function Login() {
@@ -10,15 +10,15 @@ export default function Login() {
     return email.length > 0 && password.length > 0;
   }
 
-  function handleSubmit(event) {
-    event.preventDefault();
+  function handleSubmit(e) {
+    e.preDefault();
   }
 
   return (
     <div className="Login">
       <form onSubmit={handleSubmit}>
         <FormGroup controlId="email" bsSize="large">
-          <ControlLabel>Email</ControlLabel>
+          <FormLabel>Email</FormLabel>
           <FormControl
             autoFocus
             type="email"
@@ -27,7 +27,7 @@ export default function Login() {
           />
         </FormGroup>
         <FormGroup controlId="password" bsSize="large">
-          <ControlLabel>Password</ControlLabel>
+          <FormLabel>Password</FormLabel>
           <FormControl
             type="password"
             value={password}
