@@ -14,8 +14,15 @@ export default function Login() {
     e.preDefault();
   }
 
+  // FB.getLoginStatus(function(response) {
+  //     if (response.status === 'connected') {
+  //       console.log(response.authResponse.accessToken);
+  //     }
+  //   });
+
   return (
     <div>
+      <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v7.0&appId=267140941383873&autoLogAppEvents=1" nonce="EOyVesdw"></script>
       <div className="Login">
         <form onSubmit={handleSubmit}>
           <FormGroup controlId="email" bsSize="large">
