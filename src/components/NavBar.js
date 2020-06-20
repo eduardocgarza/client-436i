@@ -1,27 +1,23 @@
 import React from 'react';
 import "../style/NavBar.css"
 import {Link} from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 export default function NavBar() {
+    const isLogged = useSelector(state => state.isLogged);
     return (
-        /**<div className="navbar">
-            <a href="../index.tsx">Sign Up</a>
-            <a href="../index.tsx">Log In</a>
-            <a href="TODO">Profile</a>
-        </div>**/
+
         <nav>
             <ul className="navbar">
-                <Link to="/profile">
+                {isLogged ?<Link to="/profile">
                     <li>Profile</li>
-                </Link>
-                <Link to="/signup">
-                    <li>SignUp</li>
-                </Link>
-                <Link to="/login">
-                    <li>Log In</li>
-                </Link>
-                
-            
+                </Link> : ''}
+                {!isLogged ?<Link to="/signup">
+                    <li>Sign-Up</li>
+                </Link> : ''}
+                {!isLogged ?<Link to="/login">
+                    <li>Log-in</li>
+                </Link> : ''}
             </ul>
         </nav>
     );

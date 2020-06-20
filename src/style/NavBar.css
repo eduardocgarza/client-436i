@@ -1,6 +1,7 @@
 .navbar {
     overflow: hidden;
     background-color: #333;
+    margin-top: 0;
 }
 
 .navbar a {
@@ -10,6 +11,7 @@
     text-align: center; 
     padding: 14px 20px;
     text-decoration: none; 
+    list-style-type: none;
 }
 
 .navbar a.right {
