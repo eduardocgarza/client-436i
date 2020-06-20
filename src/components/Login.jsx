@@ -1,10 +1,19 @@
 import React, { useState } from "react";
 import { Button, FormGroup, FormControl, FormLabel } from "react-bootstrap";
+import FacebookLogin from "react-facebook-login"
 import "../style/Login.css"
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  function facebookSuccess (res) {
+    console.log ("Facebook Response: ", res)
+  }
+
+  function componentClicked () {
+    console.log("also clicked")
+  }
 
   function validateForm() {
     return email.length > 0 && password.length > 0;
@@ -14,18 +23,11 @@ export default function Login() {
     e.preDefault();
   }
 
-  // FB.getLoginStatus(function(response) {
-  //     if (response.status === 'connected') {
-  //       console.log(response.authResponse.accessToken);
-  //     }
-  //   });
-
   return (
     <div>
-      <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v7.0&appId=267140941383873&autoLogAppEvents=1" nonce="EOyVesdw"></script>
       <div className="Login">
         <form onSubmit={handleSubmit}>
-          <FormGroup controlId="email" bsSize="large">
+          <FormGroup controlId="email" size="lg">
             <FormLabel>Email</FormLabel>
             <FormControl
               autoFocus
@@ -34,7 +36,7 @@ export default function Login() {
               onChange={e => setEmail(e.target.value)}
             />
           </FormGroup>
-          <FormGroup controlId="password" bsSize="large">
+          <FormGroup controlId="password" size="lg">
             <FormLabel>Password</FormLabel>
             <FormControl
               type="password"
@@ -42,14 +44,19 @@ export default function Login() {
               onChange={e => setPassword(e.target.value)}
             />
           </FormGroup>
-          <Button block bsSize="large" disabled={!validateForm()} type="submit">
+          <Button block size="lg" disabled={!validateForm()} type="submit">
             Login
           </Button>
         </form>
       </div>
-      <div class="container">
-        <div class="center">
-          <div class="fb-login-button" data-size="large" data-button-type="login_with" data-layout="default" data-auto-logout-link="true" data-use-continue-as="false" data-width=""></div>
+      <div className="container">
+        <div className="center">
+          <FacebookLogin 
+            appId="596845454274053"
+            autoLoad={true}
+            fields="name,email,picture"
+            onClick={componentClicked}
+            callback={facebookSuccess} />
         </div>
       </div>
     </div>
