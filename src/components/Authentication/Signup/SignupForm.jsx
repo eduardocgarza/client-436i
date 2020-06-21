@@ -5,6 +5,7 @@ import TextField from "material-ui/TextField"
 import PasswordStr from "../../../helpers/PasswordStr"
 import '../style/SignUpStyle.css'
 import { MuiThemeProvider } from "material-ui/styles"
+import { Link } from "react-router-dom"
 
 export default function SignUpForm ({ history, onSubmit, onChange, errors, user, score, btnTxt, type, pwMask, onPwChange}) {
   return (
@@ -67,7 +68,7 @@ export default function SignUpForm ({ history, onSubmit, onChange, errors, user,
       </form>
       <p>
         Aleady have an account? <br />
-        <a href="/">Log in here</a>
+        <Link to="/">Login</Link>
       </p>
       </MuiThemeProvider>
     </div>

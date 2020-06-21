@@ -16,12 +16,11 @@
     "@types/redux-logger": "^3.0.8",
     "@types/styled-components": "^5.1.0",
     "axios": "^0.19.2",
-    "material-ui": "^0.20.2",
+    "bootstrap": "^4.5.0",
     "react": "^16.13.1",
     "react-bootstrap": "^1.0.1",
     "react-dom": "^16.13.1",
     "react-facebook-login": "^4.1.1",
-    "react-login-signup-form": "^1.0.7",
     "react-redux": "^7.2.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
@@ -30,10 +29,7 @@
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
     "styled-components": "^5.1.1",
-    "typescript": "~3.7.2",
-    "validate": "^5.1.0",
-    "validator": "^13.0.0",
-    "zxcvbn": "^4.4.2"
+    "typescript": "~3.7.2"
   },
   "scripts": {
     "start": "react-scripts start",

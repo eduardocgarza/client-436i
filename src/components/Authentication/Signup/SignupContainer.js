@@ -1,15 +1,15 @@
 import React, { Component } from "react"
-import SignUpForm from "./SignUpForm.js"
+import SignUpForm from "./SignupContainer.js"
 import { MuiThemeProvider } from "material-ui/styles"
 import { authenticate, update, updateProfile } from "../../../state/actions/actions"
 import { connect } from "react-redux"
-import { Redirect } from "react-router-dom"
+import axios from "axios"
 
-const axios = require("axios")
 const FormValidators = require("../../validate")
 const validateSignUpForm = FormValidators.validateSignUpForm
 const zxcvbn = require("zxcvbn")
-class SignUpContainer extends Component {
+
+class Signup extends Component {
   constructor(props) {
     super(props)
 
@@ -163,4 +163,4 @@ export default connect(mapStateToProps, {
   authenticate,
   update,
   updateProfile,
-})(SignUpContainer)
+})(Signup)

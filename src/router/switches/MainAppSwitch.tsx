@@ -19,6 +19,7 @@ import { NotFoundRoute, CatchAllRoute, HomeRoute } from "../constants/ClientRout
 import UnauthorizedRoute from "../routes/UnauthorizedRoute"
 import { IRoute } from "../constants/IClientRoute"
 import AuthorizedRoute from "../routes/AuthorizedRoute"
+import { AppContextProvider } from "../../state/context/ApplicationContext"
 
 const AppContent = styled.section`
   min-height: 90vh;
@@ -48,7 +49,7 @@ export default function MainAppSwitch () {
 
         {/* Authenticated Routes : Accessible only to 
           authenticated users */}
-          {/* <AppContextProvider> */}
+          <AppContextProvider>
             {/* Home Component : Renders the Homepage or Dashboard
               whether the user is authenticated or not */}
             <Route exact path={HomeRoute}>
@@ -60,7 +61,7 @@ export default function MainAppSwitch () {
                 <route.component />
               </AuthorizedRoute>
             ))}
-          {/* </AppContextProvider> */}
+          </AppContextProvider>
 
         {/* Not Found Component : Renders on Error when a 
           page cannot be accessed */}

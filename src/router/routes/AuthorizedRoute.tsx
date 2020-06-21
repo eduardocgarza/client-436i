@@ -1,18 +1,17 @@
 import React, { useContext } from "react"
 import { Route, Redirect, RouteProps } from "react-router-dom"
 import { LoginRoute } from "../constants/ClientRoutes"
-// import { SessionContext } from "../../appState/context/SessionContext"
+import { SessionContext } from "../../state/context/SessionContext"
 
 /**
  * @AuthorizedRoute 
  */
 const AuthorizedRoute: React.FC<RouteProps> = ({ children, ...rest }) => {
-  // const [session] = useContext(SessionContext)
-  const isAuthenticated = false
+  const [session] = useContext(SessionContext)
 
   return (
     <Route {...rest} render={({location}) => (
-      isAuthenticated ? (children) : (
+      session.isAuthenticated ? (children) : (
         <Redirect 
           to={{
             pathname: LoginRoute,

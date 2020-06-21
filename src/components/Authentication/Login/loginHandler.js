@@ -20,8 +20,7 @@ function Login(props) {
       email: email,
       password: password,
     }
-    axios
-      .post("https://api.educonnections.ca/auth/login", body)
+    axios.post("https://api.educonnections.ca/auth/login", body)
       .then((res) => {
         if (res.status === 200) {
           props.authenticate()

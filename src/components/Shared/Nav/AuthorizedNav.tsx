@@ -1,27 +1,28 @@
 import React, { useContext } from "react"
 import { useHistory } from "react-router-dom"
-// import handleSessionLogout from "../../appState/helpers/handleSessionLogout"
-// import { SessionContext } from "../../appState/context/SessionContext"
-import { NavContainer, NavLeft, NavItem, NavRight, NavButton } from "./NavStyles"
+import { NavItem, NavButton } from "./NavStyles"
+import handleSessionLogout from "../../../state/handleSessionLogout"
+import { SessionContext } from "../../../state/context/SessionContext"
 import { 
   HomeRoute, 
   ProfileRoute,
   ManageIntegrationsRoute,
 } from "../../../router/constants/ClientRoutes"
 import { ExploreRoute, MyClassesRoute, MyMatchesRoute } from "../../../router/constants/ClientRoutes"
+import { Navbar, Nav } from "react-bootstrap"
 
 export default function AuthNav () {
   const history = useHistory()
-  // const sessionContext = useContext (SessionContext)
-  
+  const sessionContext = useContext (SessionContext)
+
   function handleSignout () {
-    // handleSessionLogout(sessionContext)
+    handleSessionLogout(sessionContext)
     history.push(HomeRoute)
   }
 
   return (
-    <NavContainer>
-      <NavLeft>
+    <Navbar>
+      <Nav className="mr-auto">
         <NavItem to={HomeRoute}>
           Dashboard
         </NavItem>
@@ -34,8 +35,8 @@ export default function AuthNav () {
         <NavItem to={MyMatchesRoute}>
           Matches
         </NavItem>
-      </NavLeft>
-      <NavRight>
+      </Nav>
+      <Nav className="ml-auto">
         <NavItem to={ProfileRoute}>
           Profile
         </NavItem>
@@ -45,7 +46,7 @@ export default function AuthNav () {
         <NavButton onClick={handleSignout}>
           Sign out
         </NavButton>
-      </NavRight>
-    </NavContainer>
+      </Nav>
+    </Navbar>
   )
 }

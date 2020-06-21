@@ -41,19 +41,10 @@ export const NavRight = styled(Nav)`
 `
 
 export const NavItem = styled(Link)`
-  color: white;
   display: block;
-  font-family: "Sen", sans-serif;
-  font-size: 13px;
-  font-weight: bold;
   padding: 8px;
   margin-right: 8px;
   text-decoration: none;
-
-  &:hover {
-    background: ${APP_BLUE};
-    border-radius: 2px;
-  }
 `
 
 export const NavButton = styled.button`

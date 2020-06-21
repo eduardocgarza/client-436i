@@ -1,11 +1,9 @@
 import React, { useContext } from "react"
-// import { SessionContext } from "../../appState/context/SessionContext"
+import { SessionContext } from "../../../state/context/SessionContext"
 import AuthNav from "./AuthorizedNav"
 import UnauthNav from "./UnauthorizedNav"
 
 export default function AppNav () {
-  // const [session] = useContext(SessionContext)
-  const isAuthenticated = false
-
-  return isAuthenticated ? <AuthNav /> : <UnauthNav />
+  const [session] = useContext(SessionContext)
+  return session.isAuthenticated ? <AuthNav /> : <UnauthNav />
 }
