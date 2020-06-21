@@ -1,7 +1,8 @@
 import React from "react"
 import { Nav, Navbar, Container } from "react-bootstrap"
 import { HomeRoute, LoginRoute, SignupRoute } from "../../../router/constants/ClientRoutes"
-import { NavItem } from "./NavStyles"
+import { NavItem, Logo } from "./NavStyles"
+import eduConnectionsLogo from "../../../assets/logo.png"
 
 export default function UnauthorizedNav () { 
   return (
@@ -9,7 +10,7 @@ export default function UnauthorizedNav () {
       <Container>
         <Nav className="mr-auto">
           <NavItem to={HomeRoute}>
-            Navbar
+            <Logo src={eduConnectionsLogo} alt="logo" />
           </NavItem>
         </Nav>
         <Nav className="ml-auto">

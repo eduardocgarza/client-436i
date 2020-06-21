@@ -1,6 +1,7 @@
 import React, { useContext } from "react"
 import { useHistory } from "react-router-dom"
-import { NavItem, NavButton } from "./NavStyles"
+import { Navbar, Nav, Container } from "react-bootstrap"
+import { Logo, NavItem, NavButton } from "./NavStyles"
 import handleSessionLogout from "../../../state/helpers/handleSessionLogout"
 import { SessionContext } from "../../../state/context/SessionContext"
 import { 
@@ -9,7 +10,7 @@ import {
   ManageIntegrationsRoute,
 } from "../../../router/constants/ClientRoutes"
 import { ExploreRoute, MyClassesRoute, MyMatchesRoute } from "../../../router/constants/ClientRoutes"
-import { Navbar, Nav, Container } from "react-bootstrap"
+import eduConnectionsLogo from "../../../assets/logo.png"
 
 export default function AuthNav () {
   const history = useHistory()
@@ -25,7 +26,7 @@ export default function AuthNav () {
       <Container>
         <Nav className="mr-auto">
           <NavItem to={HomeRoute}>
-            Dashboard
+            <Logo src={eduConnectionsLogo} alt="logo" />
           </NavItem>
           <NavItem to={ExploreRoute}>
             Explore
