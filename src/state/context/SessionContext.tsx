@@ -1,10 +1,10 @@
 import React, { createContext, useState, useEffect } from "react"
-import { ISession, TSessionContext } from "../ISession"
+import { ISession, TSessionContext } from "../types/ISession"
 import { LocalStorageData } from "../localStorage/LocalStorageData"
-import verifyServerToken from "../verifyServerToken"
+import verifyServerToken from "../helpers/verifyServerToken"
 
 const initialSession: ISession = {
-  isAuthenticated: true,
+  isAuthenticated: false,
   token: "",
 }
 const DEFAULT_VALUE: TSessionContext = [initialSession, (_session: ISession) => {}]

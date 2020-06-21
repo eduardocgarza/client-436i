@@ -1,5 +1,5 @@
 // import { useSessionContext } from "../context/SessionContext"
-// import { puntipinAPI } from "../network/Route"
+// import { educonnectionsAPI } from "../network/Route"
 // import { VerifySessionRoute } from "../network/ServerRoutes"
 
 // export const LocalStorageData = {
@@ -42,7 +42,7 @@
 //    * Else, check if the token is valid
 //    */
 //   try {
-//     const result = await puntipinAPI.axios.post(VerifySessionRoute.url, { accessToken })
+//     const result = await educonnectionsAPI.axios.post(VerifySessionRoute.url, { accessToken })
 //     if(!result) {
 //       console.log("Token was checked in the server and is not valid")
 //       return ClearClient()

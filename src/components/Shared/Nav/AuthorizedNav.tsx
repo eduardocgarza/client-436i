@@ -1,7 +1,7 @@
 import React, { useContext } from "react"
 import { useHistory } from "react-router-dom"
 import { NavItem, NavButton } from "./NavStyles"
-import handleSessionLogout from "../../../state/handleSessionLogout"
+import handleSessionLogout from "../../../state/helpers/handleSessionLogout"
 import { SessionContext } from "../../../state/context/SessionContext"
 import { 
   HomeRoute, 
@@ -9,7 +9,7 @@ import {
   ManageIntegrationsRoute,
 } from "../../../router/constants/ClientRoutes"
 import { ExploreRoute, MyClassesRoute, MyMatchesRoute } from "../../../router/constants/ClientRoutes"
-import { Navbar, Nav } from "react-bootstrap"
+import { Navbar, Nav, Container } from "react-bootstrap"
 
 export default function AuthNav () {
   const history = useHistory()
@@ -21,32 +21,34 @@ export default function AuthNav () {
   }
 
   return (
-    <Navbar>
-      <Nav className="mr-auto">
-        <NavItem to={HomeRoute}>
-          Dashboard
-        </NavItem>
-        <NavItem to={ExploreRoute}>
-          Explore
-        </NavItem>
-        <NavItem to={MyClassesRoute}>
-          Classes
-        </NavItem>
-        <NavItem to={MyMatchesRoute}>
-          Matches
-        </NavItem>
-      </Nav>
-      <Nav className="ml-auto">
-        <NavItem to={ProfileRoute}>
-          Profile
-        </NavItem>
-        <NavItem to={ManageIntegrationsRoute}>
-          Settings
-        </NavItem>
-        <NavButton onClick={handleSignout}>
-          Sign out
-        </NavButton>
-      </Nav>
+    <Navbar bg="light" variant="light">
+      <Container>
+        <Nav className="mr-auto">
+          <NavItem to={HomeRoute}>
+            Dashboard
+          </NavItem>
+          <NavItem to={ExploreRoute}>
+            Explore
+          </NavItem>
+          <NavItem to={MyClassesRoute}>
+            Classes
+          </NavItem>
+          <NavItem to={MyMatchesRoute}>
+            Matches
+          </NavItem>
+        </Nav>
+        <Nav className="ml-auto">
+          <NavItem to={ProfileRoute}>
+            Profile
+          </NavItem>
+          <NavItem to={ManageIntegrationsRoute}>
+            Settings
+          </NavItem>
+          <NavButton onClick={handleSignout}>
+            Sign out
+          </NavButton>
+        </Nav>
+      </Container>
     </Navbar>
   )
 }
