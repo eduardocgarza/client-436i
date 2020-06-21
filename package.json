@@ -7,21 +7,29 @@
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "@types/jest": "^24.0.0",
+    "@types/material-ui": "^0.21.7",
     "@types/node": "^12.0.0",
     "@types/react": "^16.9.0",
     "@types/react-dom": "^16.9.0",
+    "@types/react-redux": "^7.1.9",
+    "@types/react-router-dom": "^5.1.5",
+    "@types/redux-logger": "^3.0.8",
+    "@types/styled-components": "^5.1.0",
     "axios": "^0.19.2",
     "material-ui": "^0.20.2",
     "react": "^16.13.1",
-    "react-bootstrap": "^0.32.4",
+    "react-bootstrap": "^1.0.1",
     "react-dom": "^16.13.1",
+    "react-facebook-login": "^4.1.1",
     "react-login-signup-form": "^1.0.7",
     "react-redux": "^7.2.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
     "redux": "^4.0.5",
+    "redux-devtools-extension": "^2.13.8",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
+    "styled-components": "^5.1.1",
     "typescript": "~3.7.2",
     "validate": "^5.1.0",
     "validator": "^13.0.0",
@@ -32,6 +40,10 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
+  },
+  "engines": {
+    "npm": "6.x",
+    "node": "10.x"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -47,12 +59,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "@types/material-ui": "^0.21.7",
-    "@types/react-redux": "^7.1.9",
-    "@types/react-router-dom": "^5.1.5",
-    "@types/redux-logger": "^3.0.8",
-    "redux-devtools-extension": "^2.13.8"
   }
 }
