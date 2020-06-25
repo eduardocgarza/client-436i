@@ -29,7 +29,7 @@ export const DashboardRoute = "/"
  * @Account Routes
  */
 export const ProfileRoute = "/profile"
-export const ManageIntegrationsRoute = "/settings"
+export const SettingsRoute = "/settings"
 export const ExploreRoute = "/explore"
 export const MyMatchesRoute = "/matches"
 export const MyClassesRoute = "/classes"
