@@ -2,7 +2,7 @@ import React, { createContext, useContext } from "react"
 import Axios, { AxiosInstance } from "axios"
 import { BASE_URL } from "./types/NetworkConstants"
 
-export class educonnectionsAPI {
+export default class educonnectionsAPI {
   axios: AxiosInstance
 
   constructor() {

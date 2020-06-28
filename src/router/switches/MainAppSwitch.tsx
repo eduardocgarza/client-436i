@@ -20,6 +20,7 @@ import UnauthorizedRoute from "../routes/UnauthorizedRoute"
 import { IRoute } from "../constants/IClientRoute"
 import AuthorizedRoute from "../routes/AuthorizedRoute"
 import { AppContextProvider } from "../../state/context/ApplicationContext"
+import Api from "../Api"
 
 const AppContent = styled.section`
   min-height: 90vh;
@@ -31,6 +32,10 @@ export default function MainAppSwitch () {
   return (
     <AppContent>
       <Switch>
+        <Route path="/api">
+          <Api />
+        </Route>
+        
         {/* Public Routes : Accessible at all times to 
           all users */}
         {PublicSwitch.map((route: IRoute) => (
