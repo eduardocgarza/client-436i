@@ -1,8 +1,8 @@
 import React, { useContext } from "react"
 import { Redirect, useLocation } from "react-router-dom"
 import Axios from "axios"
-import { educonnectionsAPI } from "../network/educonnectionsAPI"
 import { SessionContext } from "../state/context/SessionContext"
+import { useEduconnectionsApi } from "../network/educonnectionsAPI"
 
 function useQuery () {
   return new URLSearchParams (useLocation ().search)
@@ -19,6 +19,9 @@ export default function Api () {
   const refreshToken = query.get ("refreshToken")
   console.log (refreshToken)
 
+  const api = useEduconnectionsApi ()
+  console.log ("Using api: ", api)
+  
   Axios.post ("http://localhost:5000/auth/token", {
     service: "spotify",
     accessToken,
