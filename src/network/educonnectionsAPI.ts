@@ -19,8 +19,9 @@ export default class educonnectionsAPI {
   private axios: AxiosInstance
   private token: string
   private tokenVerified: boolean
+  private static api: educonnectionsAPI
   
-  constructor () {
+  private constructor () {
     const localStorageToken = localStorage.getItem ("token")
     if (!localStorageToken) {
       localStorage.setItem ("token", "")
@@ -33,6 +34,13 @@ export default class educonnectionsAPI {
     this.tokenVerified = false
     this.axios = Axios.create({ baseURL: BASE_URL })
     this.axios.interceptors.response.use (response => response, axiosErrorCallback)
+  }
+
+  public static getApi () {
+    if (!educonnectionsAPI.api) {
+      educonnectionsAPI.api = new educonnectionsAPI ()
+    }
+    return educonnectionsAPI.api
   }
 
   public addAccessToken (accessToken: string) {

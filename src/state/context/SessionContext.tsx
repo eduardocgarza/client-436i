@@ -9,7 +9,7 @@ const initialSession: ISession = {
 }
 
 const DEFAULT_VALUE: TSessionContext = {
-  api: new educonnectionsAPI (),
+  api: educonnectionsAPI.getApi(),
   session: initialSession,
   setSession: (_session: ISession) => {}
 }
@@ -18,7 +18,7 @@ export const SessionContext = createContext<TSessionContext>(DEFAULT_VALUE)
 
 const SessionContextProvider: React.FC = (props) => {
   const [session, setSession] = useState (initialSession)
-  const [api, setApi] = useState (new educonnectionsAPI ())
+  const [api, setApi] = useState (educonnectionsAPI.getApi())
 
   async function verifySession () {
     const localStorageToken = localStorage.getItem ("token")
