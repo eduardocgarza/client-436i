@@ -1,41 +1,38 @@
-import React, { useContext } from "react"
+import React from "react"
 import { Redirect, useLocation } from "react-router-dom"
-import Axios from "axios"
-import { SessionContext } from "../state/context/SessionContext"
-import { useEduconnectionsApi } from "../network/educonnectionsAPI"
+import educonnectionsAPI from "../network/educonnectionsAPI"
+import { AcceptTokenServiceTypes } from "../network/models/token/AcceptTokenRequestModel"
+import AcceptTokenRequestModel from "../network/models/token/AcceptTokenRequestModel"
+import { VerifyTokenRequest } from "../network/NetworkRequests"
+
+const api = educonnectionsAPI.getApi ()
 
 function useQuery () {
   return new URLSearchParams (useLocation ().search)
 }
 
-export default function Api () {
-  const sessionContext = useContext (SessionContext)
-  const query = useQuery ()
-  console.log("Query: ", query)
-  const accessToken = query.get ("accessToken")
-  console.log (accessToken)
-  const expiresIn = query.get ("expiresIn")
-  console.log (expiresIn)
-  const refreshToken = query.get ("refreshToken")
-  console.log (refreshToken)
+async function acceptTokenRequest (data: AcceptTokenRequestModel) {
+  console.log("making request to verify token", api)
+  api.request (VerifyTokenRequest (data))
+}
 
-  const api = useEduconnectionsApi ()
-  console.log ("Using api: ", api)
-  
-  Axios.post ("http://localhost:5000/auth/token", {
-    service: "spotify",
-    accessToken,
-    expiresIn,
-    refreshToken
-  },
-  {
-    headers: {
-      "Authorization": "XAXAS"
+export default function Api () {
+  const query = useQuery ()
+  const accessToken = query.get ("accessToken")
+  const expiresIn = query.get ("expiresIn")
+  const refreshToken = query.get ("refreshToken")
+  const service = query.get ("service")
+
+  if (accessToken && expiresIn && refreshToken && service) {
+    switch (service) {
+      case AcceptTokenServiceTypes.facebook:
+      case AcceptTokenServiceTypes.instagram:
+      case AcceptTokenServiceTypes.spotify: {
+        const data = new AcceptTokenRequestModel (service, accessToken, expiresIn, refreshToken)
+        acceptTokenRequest (data)
+        break
+      }
     }
-  })
-  
+  }
   return <Redirect to="/" />
-  // return (
-  //   <div></div>
-  // )
 }
