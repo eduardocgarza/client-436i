@@ -1,6 +1,7 @@
 import Axios, { AxiosInstance } from "axios"
 import { BASE_URL } from "./types/NetworkConstants"
 import Request from "./types/Request"
+import { VerifySessionRequest } from "./NetworkRequests"
 
 function axiosErrorCallback (error: any) {
   if (
@@ -16,26 +17,22 @@ function axiosErrorCallback (error: any) {
 
 export default class educonnectionsAPI {
   private axios: AxiosInstance
-  private static api: educonnectionsAPI
+  private token: string
+  private tokenVerified: boolean
   
-  private constructor() {
+  constructor () {
+    const localStorageToken = localStorage.getItem ("token")
+    if (!localStorageToken) {
+      localStorage.setItem ("token", "")
+      this.token = ""
+    }
+    else {
+      this.token = localStorageToken
+    }
+    
+    this.tokenVerified = false
     this.axios = Axios.create({ baseURL: BASE_URL })
     this.axios.interceptors.response.use (response => response, axiosErrorCallback)
-  }
-
-  public static getApi (): educonnectionsAPI {
-    console.log ("Getting api. Access token: ")
-    if (!educonnectionsAPI.api) {
-      educonnectionsAPI.initApi ()
-    }
-    return educonnectionsAPI.api
-  }
-  
-  public static initApi () {
-    console.log ("Initializing api")
-    if (!educonnectionsAPI.api) {
-      educonnectionsAPI.api = new educonnectionsAPI ()
-    }
   }
 
   public addAccessToken (accessToken: string) {
@@ -44,21 +41,29 @@ export default class educonnectionsAPI {
       "Authorization": `Bearer: ${accessToken}`
     }
     this.axios.defaults.headers.common = authorizationHeader
+    this.tokenVerified = true
     console.log ("Added accessToken [complete]")
   }
   
   public clearAccessToken () {
     console.log ("Removing access token")
+    this.tokenVerified = false
     delete this.axios.defaults.headers.common["Authorization"]
   }
   
-  public request (req: Request) {
-    console.log ("Making request")
-    console.log ("--------------------------------------------------------------")
-    console.log(this.axios.defaults.headers)
-    console.log ("====")
-    console.log(this.axios(req))
-    console.log ("--------------------------------------------------------------")
+  public async request (req: Request) {
+    if (!this.tokenVerified) {
+      try {
+        console.log ("Verifying request...")
+        await this.axios.request (VerifySessionRequest ({ token: this.token }))
+        this.addAccessToken (this.token)
+        console.log ("Token valid... returning promise")
+        return this.axios (req)
+      }
+      catch (error) {
+        throw new Error ("token is invalid: " + error)
+      }
+    }
     return this.axios (req)
   }
 }

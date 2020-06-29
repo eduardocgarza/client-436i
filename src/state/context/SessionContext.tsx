@@ -1,51 +1,52 @@
 import React, { createContext, useState, useEffect } from "react"
 import { ISession, TSessionContext } from "../types/ISession"
-import verifyServerToken from "../helpers/verifyServerToken"
 import educonnectionsAPI from "../../network/educonnectionsAPI"
+import { VerifySessionRequest } from "../../network/NetworkRequests"
 
 const initialSession: ISession = {
   isAuthenticated: false,
   token: "",
 }
 
-const DEFAULT_VALUE: TSessionContext = [initialSession, (_session: ISession) => {}]
+const DEFAULT_VALUE: TSessionContext = {
+  api: new educonnectionsAPI (),
+  session: initialSession,
+  setSession: (_session: ISession) => {}
+}
+
 export const SessionContext = createContext<TSessionContext>(DEFAULT_VALUE)
 
 const SessionContextProvider: React.FC = (props) => {
   const [session, setSession] = useState (initialSession)
-  const api = educonnectionsAPI.getApi ()
+  const [api, setApi] = useState (new educonnectionsAPI ())
 
-  useEffect(() => {
-    console.log ("Running useEffect in SessionContext")
+  async function verifySession () {
     const localStorageToken = localStorage.getItem ("token")
-    console.log ("Storage: ", localStorageToken)
-    /**
-     * If no token exists in Session Storage [browser],
-     *  add an empty token field there.
-     */
-    if(!localStorageToken) {
-      localStorage.setItem("token", "")
+    if (localStorageToken) {
+      try {
+        await api.request (VerifySessionRequest ({ token: localStorageToken }))
+        console.log ("Verified token")
+        setSession ({
+          isAuthenticated: true,
+          token: localStorageToken
+        })
+        api.addAccessToken (localStorageToken)
+        setApi (api)
+      }
+      catch (error) {
+        console.log ("Error: ", error)
+      }
     }
-    /**
-     * Else, verify the token was initialized from the 
-     *  server through /api/verify
-     */
-    else {
-      verifyServerToken (localStorageToken, setSession)
-      .then (isValid => {
-        if (isValid) {
-          api.addAccessToken (localStorageToken)
-        } 
-        else {
-          api.clearAccessToken ()
-        }
-      })
-    }
+  }
+  
+  useEffect (() => {
+    verifySession ()
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+  const sessionContextValue = { api, session, setSession }
   return (
-    <SessionContext.Provider value={[session, setSession]}>
+    <SessionContext.Provider value={sessionContextValue}>
       {props.children}
     </SessionContext.Provider>
   )

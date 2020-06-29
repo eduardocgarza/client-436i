@@ -4,7 +4,7 @@ import Home from "../../components/Public/Home/Home"
 import { SessionContext } from "../../state/context/SessionContext"
 
 const HomeRouter: React.FC = () => {
-  const [session] = useContext (SessionContext)
+  const { session } = useContext (SessionContext)
   return session.isAuthenticated ? <Dashboard /> : <Home />
 }
 

@@ -1,6 +1,5 @@
 import React from "react"
 import { Button } from "react-bootstrap"
-import educonnectionsAPI from "../../../network/educonnectionsAPI"
 
 function redirectToSpotifyAuth () {
   const PRODUCTION_URI = "https://api.educonnections.ca:5000/spotify/authorize"
@@ -19,9 +18,6 @@ async function authorizeSpotify () {
 }
 
 export default function Spotify () {
-  const api = educonnectionsAPI.getApi ()
-  console.log ("APi: ", api)
-  
   async function handleAuthorize () {
     console.log ("Beginning authorize...")
     authorizeSpotify ()
