@@ -1,6 +1,7 @@
 import React, { FormEvent, useState, ChangeEvent } from "react"
 import { Form, Button } from "react-bootstrap"
-
+import './SignUp.css'
+import { FacebookLoginButton } from "react-social-login-buttons";
 export default function Signup () {
   const [name, setName] = useState ("")
   const [email, setEmail] = useState ("")
@@ -30,9 +31,10 @@ export default function Signup () {
 
   return (
     <>
-    <Form onSubmit={handleSubmit}>
+    <Form className="SignUp" onSubmit={handleSubmit}>
+    <FacebookLoginButton  className="facebookButton">Sign up using Facebook</FacebookLoginButton>
+    <hr ></hr>
       <Form.Group controlId="formBasicEmail">
-        <Form.Label>Name</Form.Label>
         <Form.Control 
             onChange={handleName}
             placeholder="Enter name" 
@@ -41,7 +43,6 @@ export default function Signup () {
           />
       </Form.Group>
       <Form.Group controlId="formBasicEmail">
-        <Form.Label>Email address</Form.Label>
         <Form.Control 
             onChange={handleEmail}
             placeholder="Enter email" 
@@ -50,16 +51,16 @@ export default function Signup () {
           />
       </Form.Group>
       <Form.Group controlId="formBasicPassword">
-          <Form.Label>Password</Form.Label>
+
           <Form.Control 
             onChange={handlePassword}
-            placeholder="Password" 
+            placeholder="Enter Password" 
             type="password" 
             value={password}
           />
         </Form.Group>
         <Form.Group controlId="formBasicPasswordConfirmation">
-          <Form.Label>Confirm password</Form.Label>
+
           <Form.Control 
             onChange={handlePasswordConfirmation}
             placeholder="Confirm password" 
@@ -67,11 +68,12 @@ export default function Signup () {
             value={passwordConfirmation}
           />
         </Form.Group>
-      <Button variant="primary" type="submit">
+      <Button className="signUpButton" variant="primary" type="submit">
         Sign up
       </Button>
+      <a href="\login">Already have an account?</a>
     </Form>
-    <a href="\login">Already have an account?</a>
+    
   </>
   )
 }
