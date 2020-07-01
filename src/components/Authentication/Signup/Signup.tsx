@@ -71,6 +71,7 @@ export default function Signup () {
         Sign up
       </Button>
     </Form>
+    <a href="\login">Already have an account?</a>
   </>
   )
 }

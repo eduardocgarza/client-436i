@@ -1,6 +1,7 @@
 import React, { FormEvent, useState, ChangeEvent } from "react"
 import { Form, Button } from "react-bootstrap"
-
+import './Login.css'
+import { FacebookLoginButton } from "react-social-login-buttons";
 export default function Login () {
   const [email, setEmail] = useState ("")
   const [password, setPassword] = useState ("")
@@ -14,15 +15,20 @@ export default function Login () {
   }
 
   function handleSubmit (e: FormEvent<HTMLFormElement>) {
-    e.preventDefault ()
+    e.preventDefault()
     console.log("submitting form")
+    
+    //LoginRequest();
+
   }
 
   return (
     <>
-      <Form onSubmit={handleSubmit}>
-        <Form.Group controlId="formBasicEmail">
-          <Form.Label>Email address</Form.Label>
+      <Form className="Login"  onSubmit={handleSubmit}>
+
+        <Form.Group className="emailBox" controlId="formBasicEmail">
+        <FacebookLoginButton  className="facebookButton"></FacebookLoginButton>
+        <hr></hr>
           <Form.Control 
             onChange={handleEmail}
             placeholder="Enter email" 
@@ -30,19 +36,21 @@ export default function Login () {
             value={email}
           />
         </Form.Group>
-        <Form.Group controlId="formBasicPassword">
-          <Form.Label>Password</Form.Label>
+        <Form.Group className="passwordBox" controlId="formBasicPassword">
+          
           <Form.Control 
             onChange={handlePassword}
-            placeholder="Password" 
+            placeholder="Enter Password" 
             type="password" 
             value={password}
           />
         </Form.Group>
-        <Button variant="primary" type="submit">
+        <Button className="loginButton" variant="primary" type="submit">
           Log in
         </Button>
+        <a href="\forgot">Forgot Password?</a>
       </Form>
+    
     </>
   )
 }

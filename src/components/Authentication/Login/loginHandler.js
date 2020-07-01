@@ -3,6 +3,7 @@ import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap"
 import "../style/Login.css"
 import { connect } from "react-redux"
 import { authenticate, update, updateProfile } from "../../../state/actions/actions"
+import { MDBIcon, MDBContainer, MDBBtn } from 'mdbreact';
 const axios = require("axios")
 
 function Login(props) {
@@ -40,6 +41,7 @@ function Login(props) {
               console.log(res)
               if (res.status === 200) {
                 props.update(res.data.name)
+                
               } else {
                 this.setState({
                   errors: { message: res.data.message },

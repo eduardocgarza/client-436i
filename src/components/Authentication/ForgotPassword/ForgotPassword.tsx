@@ -28,6 +28,7 @@ export default function ForgotPassword () {
         <Button variant="primary" type="submit">
           Send verification code
         </Button>
+        
       </Form>
     </>
   )
