@@ -1,6 +1,6 @@
 import React, { FormEvent, useState, ChangeEvent } from "react"
 import { Form, Button } from "react-bootstrap"
-
+import './Forgot.css'
 export default function ForgotPassword () {
   const [email, setEmail] = useState ("")
 
@@ -15,9 +15,9 @@ export default function ForgotPassword () {
 
   return (
     <>
-      <Form onSubmit={handleSubmit}>
+      <Form className="main" onSubmit={handleSubmit}>
         <Form.Group controlId="formBasicEmail">
-          <Form.Label>Email address</Form.Label>
+          <Form.Label>Forgot Password</Form.Label>
           <Form.Control 
             onChange={handleEmail}
             placeholder="Enter email" 
