@@ -20,22 +20,21 @@ export default function ResetPassword () {
 
   return (
     <>
-    <Form onSubmit={handleSubmit}>
+    <Form className="main" onSubmit={handleSubmit}>
       <Form.Group controlId="formBasicPassword">
-          <Form.Label>Password</Form.Label>
+      <Form.Label>Reset Password</Form.Label>
           <Form.Control 
             onChange={handlePassword}
-            placeholder="Password" 
+            placeholder="Enter Password" 
             type="password" 
             value={password}
           />
         </Form.Group>
         <Form.Group controlId="formBasicPasswordConfirmation">
-          <Form.Label>Confirm password</Form.Label>
           <Form.Control 
             onChange={handlePasswordConfirmation}
             placeholder="Confirm password" 
-            type="password" 
+            type="Password" 
             value={passwordConfirmation}
           />
         </Form.Group>

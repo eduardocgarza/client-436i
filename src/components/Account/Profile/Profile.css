@@ -1,0 +1,12 @@
+.profile-main
+{
+  background-color: rgba(192, 192, 192, 0.384);
+  margin: 20px auto;
+  width: 75%;
+  
+  border: thin solid black;
+
+  height:  300px ;
+ 
+  padding: 10px;
+}

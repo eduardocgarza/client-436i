@@ -15,7 +15,7 @@ export default function VerifyToken () {
 
   return (
     <>
-      <Form onSubmit={handleSubmit}>
+      <Form className="main" onSubmit={handleSubmit}>
         <Form.Group controlId="formBasicToken">
           <Form.Label>Verification Code</Form.Label>
           <Form.Control 

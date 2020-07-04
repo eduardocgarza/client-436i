@@ -4,7 +4,7 @@ import { LocalStorageData } from "../localStorage/LocalStorageData"
 import verifyServerToken from "../helpers/verifyServerToken"
 
 const initialSession: ISession = {
-  isAuthenticated: false,
+  isAuthenticated: true,
   token: "",
 }
 const DEFAULT_VALUE: TSessionContext = [initialSession, (_session: ISession) => {}]

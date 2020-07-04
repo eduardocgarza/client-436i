@@ -26,7 +26,7 @@ export default function Login () {
     <>
       <Form className="Login"  onSubmit={handleSubmit}>
 
-        <Form.Group className="emailBox" controlId="formBasicEmail">
+        <Form.Group  controlId="formBasicEmail">
         <FacebookLoginButton  className="facebookButton"></FacebookLoginButton>
         <hr></hr>
           <Form.Control 
@@ -36,7 +36,7 @@ export default function Login () {
             value={email}
           />
         </Form.Group>
-        <Form.Group className="passwordBox" controlId="formBasicPassword">
+        <Form.Group controlId="formBasicPassword">
           
           <Form.Control 
             onChange={handlePassword}
