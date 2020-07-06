@@ -1,4 +1,4 @@
-import Axios, { AxiosInstance } from "axios"
+import Axios, { AxiosInstance, AxiosRequestConfig } from "axios"
 import { BASE_URL } from "./types/NetworkConstants"
 import Request from "./types/Request"
 import { VerifySessionRequest } from "./NetworkRequests"
@@ -59,13 +59,19 @@ export default class educonnectionsAPI {
     delete this.axios.defaults.headers.common["Authorization"]
   }
   
-  public async request (req: Request) {
+  public async request (req: Request, config?: AxiosRequestConfig) {
     if (!this.tokenVerified) {
       try {
         console.log ("Verifying request...")
         await this.axios.request (VerifySessionRequest ({ token: this.token }))
         this.addAccessToken (this.token)
         console.log ("Token valid... returning promise")
+        if (config) {
+          this.axios.defaults.headers.common = {
+            'Content-Type': 'multipart/form-data'
+          }
+          return this.axios (req)
+        }
         return this.axios (req)
       }
       catch (error) {
@@ -73,5 +79,21 @@ export default class educonnectionsAPI {
       }
     }
     return this.axios (req)
+  }
+
+  public async requestWithConfig (config: AxiosRequestConfig) {
+    if (!this.tokenVerified) {
+      try {
+        console.log ("Verifying request...")
+        await this.axios.request (VerifySessionRequest ({ token: this.token }))
+        this.addAccessToken (this.token)
+        console.log ("Token valid... returning promise")
+        return this.axios (config)
+      }
+      catch (error) {
+        throw new Error ("token is invalid: " + error)
+      }
+    }
+    return this.axios (config)
   }
 }
