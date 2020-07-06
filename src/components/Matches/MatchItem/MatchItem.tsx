@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {  CardBody, Card, Collapse, CardImg } from 'reactstrap';
+import {  CardBody, Card, Collapse} from 'reactstrap';
 import "../MatchItem/MatchItem.css"
 // import "../../../assets/logo.png"
 
