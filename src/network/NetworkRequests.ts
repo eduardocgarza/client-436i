@@ -1,9 +1,5 @@
 import Request from "./types/Request"
 import { HttpMethodTypes as Http } from "./types/HttpMethodTypes"
-
-/**
- * @Models
- */
 import UpdateAccountRequestModel from "./models/accounts/UpdateAccountRequestModel"
 import ForgotPasswordRequestModel from "./models/authentication/ForgotPasswordRequestModel"
 import LoginRequestModel from "./models/authentication/LoginRequestModel"
@@ -11,10 +7,12 @@ import SignupRequestModel from "./models/authentication/SignupRequestModel"
 import VerifySessionRequestModel from "./models/authentication/VerifySessionRequestModel"
 import ResetPasswordRequestModel from "./models/authentication/ResetPasswordRequestModel"
 import VerifyResetPasswordTokenRequestModel from "./models/authentication/VerifyResetPasswordTokenRequestModel"
+import AcceptTokenRequestModel from "./models/token/AcceptTokenRequestModel"
 
 const AuthRequests = "/auth"
 const AccountRequests = "/account"
 const SessionRequests = "/session"
+const TokenRequests = "/token"
 
 /**
  * @Account
@@ -61,4 +59,11 @@ export function SignupRequest (data: SignupRequestModel) {
 
 export function VerifySessionRequest (data: VerifySessionRequestModel) {
   return new Request(Http.POST, `${SessionRequests}/verify`, data)
+}
+
+/**
+ * @Token
+ */
+export function VerifyTokenRequest (data: AcceptTokenRequestModel) {
+  return new Request (Http.POST, TokenRequests, data)
 }

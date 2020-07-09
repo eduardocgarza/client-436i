@@ -7,7 +7,7 @@ import { SessionContext } from "../../../state/context/SessionContext"
 import { 
   HomeRoute, 
   ProfileRoute,
-  ManageIntegrationsRoute,
+  SettingsRoute,
 } from "../../../router/constants/ClientRoutes"
 import { ExploreRoute, MyClassesRoute, MyMatchesRoute } from "../../../router/constants/ClientRoutes"
 import eduConnectionsLogo from "../../../assets/logo.png"
@@ -42,7 +42,7 @@ export default function AuthNav () {
           <NavItem to={ProfileRoute}>
             Profile
           </NavItem>
-          <NavItem to={ManageIntegrationsRoute}>
+          <NavItem to={SettingsRoute}>
             Settings
           </NavItem>
           <NavButton onClick={handleSignout}>

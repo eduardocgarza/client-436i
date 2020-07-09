@@ -7,7 +7,7 @@ import { SessionContext } from "../../state/context/SessionContext"
  * @AuthorizedRoute 
  */
 const AuthorizedRoute: React.FC<RouteProps> = ({ children, ...rest }) => {
-  const [session] = useContext(SessionContext)
+  const { session } = useContext(SessionContext)
 
   return (
     <Route {...rest} render={({location}) => (

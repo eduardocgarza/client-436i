@@ -1,7 +1,7 @@
 import React, { FormEvent, useState, ChangeEvent } from "react"
-import { Form, Button } from "react-bootstrap"
-import './Login.css'
-import { FacebookLoginButton } from "react-social-login-buttons";
+import { AppWrapper, AppContainer } from "../../../assets/styles/AppContainer"
+import { Button, Form, Row } from "react-bootstrap"
+
 export default function Login () {
   const [email, setEmail] = useState ("")
   const [password, setPassword] = useState ("")
@@ -23,34 +23,36 @@ export default function Login () {
   }
 
   return (
-    <>
-      <Form className="Login"  onSubmit={handleSubmit}>
-
-        <Form.Group  controlId="formBasicEmail">
-        <FacebookLoginButton  className="facebookButton"></FacebookLoginButton>
-        <hr></hr>
-          <Form.Control 
-            onChange={handleEmail}
-            placeholder="Enter email" 
-            type="email" 
-            value={email}
-          />
-        </Form.Group>
-        <Form.Group controlId="formBasicPassword">
-          
-          <Form.Control 
-            onChange={handlePassword}
-            placeholder="Enter Password" 
-            type="password" 
-            value={password}
-          />
-        </Form.Group>
-        <Button className="loginButton" variant="primary" type="submit">
-          Log in
-        </Button>
-        <a href="\forgot">Forgot Password?</a>
-      </Form>
-    
-    </>
+    <AppWrapper>
+      <AppContainer>
+        <Form onSubmit={handleSubmit}>
+          <Form.Group controlId="formBasicEmail">
+            <Form.Label>Email address</Form.Label>
+            <Form.Control 
+              onChange={handleEmail}
+              placeholder="Enter email" 
+              size="sm"
+              type="email" 
+              value={email}
+            />
+          </Form.Group>
+          <Form.Group controlId="formBasicPassword">
+            <Form.Label>Password</Form.Label>
+            <Form.Control 
+              onChange={handlePassword}
+              placeholder="Password" 
+              size="sm"
+              type="password" 
+              value={password}
+            />
+          </Form.Group>
+          <Row className="d-flex justify-content-center">
+            <Button variant="primary" type="submit">
+              Log in
+            </Button>
+          </Row>
+        </Form>
+      </AppContainer>
+    </AppWrapper>
   )
 }

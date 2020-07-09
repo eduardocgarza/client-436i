@@ -1,46 +1,52 @@
 import React, { createContext, useState, useEffect } from "react"
 import { ISession, TSessionContext } from "../types/ISession"
-import { LocalStorageData } from "../localStorage/LocalStorageData"
-import verifyServerToken from "../helpers/verifyServerToken"
+import educonnectionsAPI from "../../network/educonnectionsAPI"
+import { VerifySessionRequest } from "../../network/NetworkRequests"
 
 const initialSession: ISession = {
   isAuthenticated: true,
   token: "",
 }
-const DEFAULT_VALUE: TSessionContext = [initialSession, (_session: ISession) => {}]
 
-/**
- * @SessionContext 
- */
+const DEFAULT_VALUE: TSessionContext = {
+  api: educonnectionsAPI.getApi(),
+  session: initialSession,
+  setSession: (_session: ISession) => {}
+}
+
 export const SessionContext = createContext<TSessionContext>(DEFAULT_VALUE)
 
-/**
- * Wrapper Provider Component for the SessionContext
- */
 const SessionContextProvider: React.FC = (props) => {
-  const [session, setSession] = useState(initialSession)
+  const [session, setSession] = useState (initialSession)
+  const [api, setApi] = useState (educonnectionsAPI.getApi())
 
-  useEffect(() => {
-    const localStorageToken = localStorage.getItem(LocalStorageData.Session.token)
-    /**
-     * If no token exists in Session Storage [browser],
-     *  add an empty token field there.
-     */
-    if(!localStorageToken) {
-      localStorage.setItem(LocalStorageData.Session.token, session.token)
+  async function verifySession () {
+    const localStorageToken = localStorage.getItem ("token")
+    if (localStorageToken) {
+      try {
+        await api.request (VerifySessionRequest ({ token: localStorageToken }))
+        console.log ("Verified token")
+        setSession ({
+          isAuthenticated: true,
+          token: localStorageToken
+        })
+        api.addAccessToken (localStorageToken)
+        setApi (api)
+      }
+      catch (error) {
+        console.log ("Error: ", error)
+      }
     }
-    /**
-     * Else, verify the token was initialized from the 
-     *  server through /api/verify
-     */
-    else {
-      verifyServerToken(localStorageToken, setSession)
-    }
+  }
+  
+  useEffect (() => {
+    verifySession ()
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+  const sessionContextValue = { api, session, setSession }
   return (
-    <SessionContext.Provider value={[session, setSession]}>
+    <SessionContext.Provider value={sessionContextValue}>
       {props.children}
     </SessionContext.Provider>
   )

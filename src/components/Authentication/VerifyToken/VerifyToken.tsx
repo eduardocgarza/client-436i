@@ -1,5 +1,6 @@
 import React, { FormEvent, useState, ChangeEvent } from "react"
-import { Form, Button } from "react-bootstrap"
+import { Form, Button, Row } from "react-bootstrap"
+import { AppWrapper, AppContainer } from "../../../assets/styles/AppContainer"
 
 export default function VerifyToken () {
   const [token, setToken] = useState ("")
@@ -14,21 +15,25 @@ export default function VerifyToken () {
   }
 
   return (
-    <>
-      <Form className="main" onSubmit={handleSubmit}>
-        <Form.Group controlId="formBasicToken">
-          <Form.Label>Verification Code</Form.Label>
-          <Form.Control 
-            onChange={handleToken}
-            placeholder="Enter code" 
-            type="text" 
-            value={token}
-          />
-        </Form.Group>
-        <Button variant="primary" type="submit">
-          Submit
-        </Button>
-      </Form>
-    </>
+    <AppWrapper>
+      <AppContainer>
+        <Form onSubmit={handleSubmit}>
+          <Form.Group controlId="formBasicToken">
+            <Form.Label>Verification Code</Form.Label>
+            <Form.Control 
+              onChange={handleToken}
+              placeholder="Enter code" 
+              type="text" 
+              value={token}
+            />
+          </Form.Group>
+          <Row className="d-flex justify-content-center">
+            <Button variant="primary" type="submit">
+              Submit
+            </Button>
+          </Row>
+        </Form>
+      </AppContainer>
+    </AppWrapper>
   )
 }

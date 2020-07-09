@@ -2,7 +2,6 @@ import React, { useContext } from "react"
 import { Route, Redirect, RouteProps } from "react-router-dom"
 import { HomeRoute } from "../constants/ClientRoutes"
 import { SessionContext } from "../../state/context/SessionContext"
-// import { SessionContext } from "../../appState/context/SessionContext"
 
 /**
  * @UnauthorizedRoute 
@@ -15,7 +14,7 @@ import { SessionContext } from "../../state/context/SessionContext"
  *  they are redirected to "/", which is where the Dashboard page sits.
  */
 const UnauthorizedRoute: React.FC<RouteProps> = ({ children, ...rest }) => {
-  const [session] = useContext(SessionContext)
+  const { session } = useContext(SessionContext)
 
   return (
     <Route {...rest} render={({location}) => (
