@@ -59,19 +59,13 @@ export default class educonnectionsAPI {
     delete this.axios.defaults.headers.common["Authorization"]
   }
   
-  public async request (req: Request, config?: AxiosRequestConfig) {
+  public async request (req: Request) {
     if (!this.tokenVerified) {
       try {
         console.log ("Verifying request...")
         await this.axios.request (VerifySessionRequest ({ token: this.token }))
         this.addAccessToken (this.token)
         console.log ("Token valid... returning promise")
-        if (config) {
-          this.axios.defaults.headers.common = {
-            'Content-Type': 'multipart/form-data'
-          }
-          return this.axios (req)
-        }
         return this.axios (req)
       }
       catch (error) {
