@@ -58,20 +58,21 @@ export default class educonnectionsAPI {
     this.tokenVerified = false
     delete this.axios.defaults.headers.common["Authorization"]
   }
+
   
   public async request (req: Request) {
-    if (!this.tokenVerified) {
-      try {
-        console.log ("Verifying request...")
-        await this.axios.request (VerifySessionRequest ({ token: this.token }))
-        this.addAccessToken (this.token)
-        console.log ("Token valid... returning promise")
-        return this.axios (req)
-      }
-      catch (error) {
-        throw new Error ("token is invalid: " + error)
-      }
-    }
+    // if (!this.tokenVerified) {
+    //   try {
+    //     console.log ("Verifying request...")
+    //     await this.axios.request (VerifySessionRequest ({ token: this.token }))
+    //     this.addAccessToken (this.token)
+    //     console.log ("Token valid... returning promise")
+    //     return this.axios (req)
+    //   }
+    //   catch (error) {
+    //     throw new Error ("token is invalid: " + error)
+    //   }
+    // }
     return this.axios (req)
   }
 
