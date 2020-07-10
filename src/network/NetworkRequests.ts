@@ -13,6 +13,7 @@ const AuthRequests = "/auth"
 const AccountRequests = "/account"
 const SessionRequests = "/session"
 const TokenRequests = "/token"
+const calendarRequests = "/calendar"
 
 /**
  * @Account
