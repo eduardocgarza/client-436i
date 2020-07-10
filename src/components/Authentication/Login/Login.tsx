@@ -15,8 +15,11 @@ export default function Login () {
   }
 
   function handleSubmit (e: FormEvent<HTMLFormElement>) {
-    e.preventDefault ()
+    e.preventDefault()
     console.log("submitting form")
+    
+    //LoginRequest();
+
   }
 
   return (
