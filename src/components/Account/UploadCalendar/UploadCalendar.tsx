@@ -6,7 +6,7 @@ import { AxiosRequestConfig } from "axios"
 // import { FloatingActionButton } from "material-ui/FloatingActionButton"
 
 export default function UploadCalendar () {
-  const { register , handleSubmit } = useForm();
+  const { register , errors, handleSubmit } = useForm();
   const [api] = useState (educonnectionsAPI.getApi())
 
 
@@ -21,7 +21,9 @@ export default function UploadCalendar () {
     }
     
     const x = await api.requestWithConfig(config);
-    console.log(x)
+    if (x) {
+      console.log(x);
+    }
   }
   
   return (
@@ -30,7 +32,8 @@ export default function UploadCalendar () {
       <p> You have not yet uploaded your calendar. To display your courses and classmates, go to your UBC SSC and <Redirect href="https://courses.students.ubc.ca/" target="_blank" rel="noopener noreferrer" style={{display: "inline"}}>download your schedule</Redirect>. </p>
       {/* <FloatingActionButton> Hello </FloatingActionButton> */}
       <form onSubmit={handleSubmit(onSubmit)} encType="multipart/form-data">
-        <input ref={register} type='file' name ='calendar' />
+        <input ref={register({required: true})} type='file' name ='calendar' />
+        {errors.calendar && "A file is required"}
         <button> Upload </button>   
       </form>
     </div>
