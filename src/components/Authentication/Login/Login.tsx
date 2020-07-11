@@ -1,8 +1,13 @@
 import React, { FormEvent, useState, ChangeEvent } from "react"
 import { AppWrapper, AppContainer } from "../../../assets/styles/AppContainer"
 import { Button, Form, Row } from "react-bootstrap"
+import educonnectionsAPI from '../../../network/educonnectionsAPI';
+import {GetAccountRequest, LoginRequest, VerifySessionRequest} from '../../../network/NetworkRequests'
+import LoginRequestModel from '../../../network/models/authentication/LoginRequestModel'
+import SessionContextProvider from '../../../state/context/SessionContext'
 
 export default function Login () {
+
   const [email, setEmail] = useState ("")
   const [password, setPassword] = useState ("")
 
@@ -14,12 +19,16 @@ export default function Login () {
     setPassword (e.target.value)
   }
 
-  function handleSubmit (e: FormEvent<HTMLFormElement>) {
+  async function handleSubmit (e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
-    console.log("submitting form")
     
-    //LoginRequest();
-
+    const loginRequest = new LoginRequestModel(email, password);
+    const api = educonnectionsAPI.getApi();
+    const request = LoginRequest(loginRequest);
+    const instance =  await api.request(request);
+    api.addAccessToken(instance.data.token);
+    console.log(localStorage.getItem("token"));
+    
   }
 
   return (

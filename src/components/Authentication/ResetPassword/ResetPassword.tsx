@@ -20,32 +20,6 @@ export default function ResetPassword () {
   }
 
   return (
-<<<<<<< HEAD
-    <>
-    <Form className="main" onSubmit={handleSubmit}>
-      <Form.Group controlId="formBasicPassword">
-      <Form.Label>Reset Password</Form.Label>
-          <Form.Control 
-            onChange={handlePassword}
-            placeholder="Enter Password" 
-            type="password" 
-            value={password}
-          />
-        </Form.Group>
-        <Form.Group controlId="formBasicPasswordConfirmation">
-          <Form.Control 
-            onChange={handlePasswordConfirmation}
-            placeholder="Confirm password" 
-            type="Password" 
-            value={passwordConfirmation}
-          />
-        </Form.Group>
-      <Button variant="primary" type="submit">
-        Reset password
-      </Button>
-    </Form>
-  </>
-=======
     <AppWrapper>
       <AppContainer>
         <Form onSubmit={handleSubmit}>
@@ -75,6 +49,5 @@ export default function ResetPassword () {
         </Form>
       </AppContainer>
     </AppWrapper>
->>>>>>> origin/ftr-apis
   )
 }

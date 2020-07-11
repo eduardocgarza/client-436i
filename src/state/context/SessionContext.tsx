@@ -4,7 +4,7 @@ import educonnectionsAPI from "../../network/educonnectionsAPI"
 import { VerifySessionRequest } from "../../network/NetworkRequests"
 
 const initialSession: ISession = {
-  isAuthenticated: true,
+  isAuthenticated: false,
   token: "",
 }
 
