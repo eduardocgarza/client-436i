@@ -1,40 +1,42 @@
-import React, { FormEvent, useState, ChangeEvent,useContext } from "react"
+import React, { FormEvent, useState, ChangeEvent, useContext } from "react"
 import { AppWrapper, AppContainer } from "../../../assets/styles/AppContainer"
 import { Button, Form, Row } from "react-bootstrap"
-import educonnectionsAPI from '../../../network/educonnectionsAPI';
-import {GetAccountRequest, LoginRequest, VerifySessionRequest} from '../../../network/NetworkRequests'
-import LoginRequestModel from '../../../network/models/authentication/LoginRequestModel'
+import educonnectionsAPI from "../../../network/educonnectionsAPI"
+import {
+  GetAccountRequest,
+  LoginRequest,
+  VerifySessionRequest,
+} from "../../../network/NetworkRequests"
+import LoginRequestModel from "../../../network/models/authentication/LoginRequestModel"
 import { SessionContext } from "../../../state/context/SessionContext"
 
-export default function Login () {
+export default function Login() {
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const sessionContext = useContext(SessionContext)
 
-  const [email, setEmail] = useState ("")
-  const [password, setPassword] = useState ("")
-  const sessionContext = useContext (SessionContext)
-
-  function handleEmail (e: ChangeEvent<HTMLInputElement>) {
-    setEmail (e.target.value)
+  function handleEmail(e: ChangeEvent<HTMLInputElement>) {
+    setEmail(e.target.value)
   }
 
-  function handlePassword (e: ChangeEvent<HTMLInputElement>) {
-    setPassword (e.target.value)
+  function handlePassword(e: ChangeEvent<HTMLInputElement>) {
+    setPassword(e.target.value)
   }
 
-  async function handleSubmit (e: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
-    console.log("handling submit");
-    const loginRequest = new LoginRequestModel(email, password);
-    const api = educonnectionsAPI.getApi();
-    const request = LoginRequest(loginRequest);
-    console.log("this is the request:", request);
-    const instance =  await api.request(request);
-    console.log(instance);
+    console.log("handling submit")
+    const loginRequest = new LoginRequestModel(email, password)
+    const api = educonnectionsAPI.getApi()
+    const request = LoginRequest(loginRequest)
+    console.log("this is the request:", request)
+    const instance = await api.request(request)
+    console.log(instance)
     sessionContext.setSession({
       isAuthenticated: true,
-      token: instance.data.token
+      token: instance.data.token,
     })
-    
-    
+    localStorage.setItem("token", sessionContext.session.token)
   }
 
   return (
@@ -43,21 +45,21 @@ export default function Login () {
         <Form onSubmit={handleSubmit}>
           <Form.Group controlId="formBasicEmail">
             <Form.Label>Email address</Form.Label>
-            <Form.Control 
+            <Form.Control
               onChange={handleEmail}
-              placeholder="Enter email" 
+              placeholder="Enter email"
               size="sm"
-              type="email" 
+              type="email"
               value={email}
             />
           </Form.Group>
           <Form.Group controlId="formBasicPassword">
             <Form.Label>Password</Form.Label>
-            <Form.Control 
+            <Form.Control
               onChange={handlePassword}
-              placeholder="Password" 
+              placeholder="Password"
               size="sm"
-              type="password" 
+              type="password"
               value={password}
             />
           </Form.Group>
