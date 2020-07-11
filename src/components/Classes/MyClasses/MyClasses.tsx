@@ -14,6 +14,7 @@ export default function MyClasses () {
       </div>
       <div>
         <ClassInfo/>
+        <ClassInfo/>
       </div>
     </body>
   )

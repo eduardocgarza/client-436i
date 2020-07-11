@@ -15,7 +15,7 @@ export default function Facebook() {
     } else {
       setLogin(false);
     }
-    const payload =  response.accessToken
+    const payload =  response.accessToken //TODO: also send username
     // TODO
     // await api.insertMessage(payload).then(res: => {
     //   console.log(res)
