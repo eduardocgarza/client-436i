@@ -23,6 +23,7 @@ const SessionContextProvider: React.FC = (props) => {
   async function verifySession () {
     const localStorageToken = localStorage.getItem ("token")
     if (localStorageToken) {
+      console.log("sessionContext object: ", SessionContext)
       try {
         await api.request (VerifySessionRequest ({ token: localStorageToken }))
         console.log ("Verified token")

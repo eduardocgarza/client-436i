@@ -25,18 +25,20 @@ export default function Login() {
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
-    console.log("handling submit")
+
     const loginRequest = new LoginRequestModel(email, password)
     const api = educonnectionsAPI.getApi()
+
     const request = LoginRequest(loginRequest)
-    console.log("this is the request:", request)
-    const instance = await api.request(request)
-    console.log(instance)
+    const instance = await api.requestWithoutAuth(request)
+    
     sessionContext.setSession({
       isAuthenticated: true,
       token: instance.data.token,
     })
-    localStorage.setItem("token", sessionContext.session.token)
+    
+    api.addAccessToken(instance.data.token);
+    localStorage.setItem("token", instance.data.token);
   }
 
   return (
