@@ -1,10 +1,5 @@
 import React, { createContext, useContext } from "react"
 
-/**
- * @Network
- */
-// import { useAPI } from "../../network/educonnectionsAPI"
-
 export interface IApplicationContext {
   // friends: Friend[];
 }
@@ -31,9 +26,6 @@ export const AppContextProvider: React.FC = (props) => {
   )
 }
 
-/**
- * @Consumer
- */
 export default function useAppContext () {
   return useContext (AppContext)
 }

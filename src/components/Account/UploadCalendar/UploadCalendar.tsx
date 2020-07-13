@@ -1,22 +1,20 @@
-import React, { createContext, useState, useEffect } from "react"
-import styled from "styled-components"
-import { useForm } from "react-hook-form"
-import educonnectionsAPI from '../../../network/educonnectionsAPI'
+import React from "react"
 import { AxiosRequestConfig } from "axios"
-// import { FloatingActionButton } from "material-ui/FloatingActionButton"
+import { useForm } from "react-hook-form"
+import useSessionContext from "../../../state/context/SessionContext"
+import { Redirect, Title } from "./UploadCalendarStyles"
 
 export default function UploadCalendar () {
-  const { register , errors, handleSubmit } = useForm();
-  const [api] = useState (educonnectionsAPI.getApi())
+  const { register, errors, handleSubmit } = useForm()
+  const { api } = useSessionContext()
 
-
-  const onSubmit = async (data: any) => {
+  async function onSubmit(data: any) {
     let fd = new FormData();
-    fd.append('calendar', data.calendar[0])
+    fd.append("calendar", data.calendar[0])
 
     const config: AxiosRequestConfig = {
-      method: 'POST',
-      url: '/calendar',
+      method: "POST",
+      url: "/calendar",
       data: fd
     }
     
@@ -29,21 +27,19 @@ export default function UploadCalendar () {
   return (
     <div className="calendarUpload">
       <Title>My Classes</Title>
-      <p> You have not yet uploaded your calendar. To display your courses and classmates, go to your UBC SSC and <Redirect href="https://courses.students.ubc.ca/" target="_blank" rel="noopener noreferrer" style={{display: "inline"}}>download your schedule</Redirect>. </p>
-      {/* <FloatingActionButton> Hello </FloatingActionButton> */}
+      <p>
+        You have not yet uploaded your calendar. To display your courses and classmates, go to your UBC SSC and <Redirect href="https://courses.students.ubc.ca/" target="_blank" rel="noopener noreferrer" style={{ display: "inline" }}>download your schedule</Redirect>. 
+      </p>
       <form onSubmit={handleSubmit(onSubmit)} encType="multipart/form-data">
-        <input ref={register({required: true})} type='file' name ='calendar' />
+        <input 
+          ref={register({ required: true })} 
+          type="file" 
+          name ="calendar"
+        />
         {errors.calendar && "A file is required"}
-        <button> Upload </button>   
+        <button>Upload</button>   
       </form>
     </div>
   )
 }
 
-const Title = styled.h1`
-  padding: 1em;
-`;
-
-const Redirect = styled.a`
-  display: inline;
-`

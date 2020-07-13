@@ -1,20 +1,16 @@
-import React, { FormEvent, useState, ChangeEvent, useContext } from "react"
+import React, { FormEvent, useState, ChangeEvent } from "react"
 import { Form, Button, Row } from "react-bootstrap"
 import { AppWrapper, AppContainer } from "../../../assets/styles/AppContainer"
 import SignupRequestModel from "../../../network/models/authentication/SignupRequestModel"
-import { SessionContext } from "../../../state/context/SessionContext"
+import useSessionContext from "../../../state/context/SessionContext"
 import educonnectionsAPI from "../../../network/educonnectionsAPI"
-import {
-  GetAccountRequest,
-  SignupRequest,
-  VerifySessionRequest,
-} from "../../../network/NetworkRequests"
+import { SignupRequest } from "../../../network/NetworkRequests"
 export default function Signup() {
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [passwordConfirmation, setPasswordConfirmation] = useState("")
-  const sessionContext = useContext(SessionContext)
+  const { setSession } = useSessionContext()
 
   function handleName(e: ChangeEvent<HTMLInputElement>) {
     setName(e.target.value)
@@ -49,11 +45,11 @@ export default function Signup() {
     console.log("this is the request:", request)
     const instance = await api.request(request)
     console.log(instance)
-    sessionContext.setSession({
+    setSession({
       isAuthenticated: true,
       token: instance.data.token,
     })
-    localStorage.setItem("token", sessionContext.session.token)
+    localStorage.setItem("token", instance.data.token)
   }
 
   return (

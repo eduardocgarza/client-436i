@@ -1,19 +1,15 @@
-import React, { FormEvent, useState, ChangeEvent, useContext } from "react"
+import React, { FormEvent, useState, ChangeEvent } from "react"
 import { AppWrapper, AppContainer } from "../../../assets/styles/AppContainer"
 import { Button, Form, Row } from "react-bootstrap"
 import educonnectionsAPI from "../../../network/educonnectionsAPI"
-import {
-  GetAccountRequest,
-  LoginRequest,
-  VerifySessionRequest,
-} from "../../../network/NetworkRequests"
+import { LoginRequest } from "../../../network/NetworkRequests"
 import LoginRequestModel from "../../../network/models/authentication/LoginRequestModel"
-import { SessionContext } from "../../../state/context/SessionContext"
+import useSessionContext from "../../../state/context/SessionContext"
 
 export default function Login() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
-  const sessionContext = useContext(SessionContext)
+  const { setSession } = useSessionContext()
 
   function handleEmail(e: ChangeEvent<HTMLInputElement>) {
     setEmail(e.target.value)
@@ -32,7 +28,7 @@ export default function Login() {
     const request = LoginRequest(loginRequest)
     const instance = await api.requestWithoutAuth(request)
     
-    sessionContext.setSession({
+    setSession({
       isAuthenticated: true,
       token: instance.data.token,
     })
