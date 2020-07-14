@@ -1,17 +1,14 @@
 import React from "react"
-import { Jumbotron, Button } from "react-bootstrap"
+import { PageWrapper } from "../../../assets/styles/PageWrapper"
+import homeJumbotron from "../../../assets/images/home.jpg"
+import PageHeader from "../../_Shared/PageHeader/PageHeader"
+import { HomeJumbotron } from "./HomeStyles"
 
 export default function Home () {
   return (
-    <Jumbotron>
-      <h1>eduConnections</h1>
-      <p>
-        This is a simple hero unit, a simple jumbotron-style component for calling
-        extra attention to featured content or information.
-      </p>
-      <p>
-        <Button variant="primary">Learn more</Button>
-      </p>
-    </Jumbotron>
+    <PageWrapper>
+      <PageHeader text="Welcome to educonnections" />
+      <HomeJumbotron src={homeJumbotron} />
+    </PageWrapper>
   )
 }

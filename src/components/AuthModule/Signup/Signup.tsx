@@ -7,7 +7,8 @@ import educonnectionsAPI from "../../../network/educonnectionsAPI"
 import { SignupRequest } from "../../../network/NetworkRequests"
 import ValidationError from "../../_Shared/ValidationError/ValidationError"
 import { useHistory } from "react-router-dom"
-import { DashboardRoute } from "../../../router/constants/ClientRoutes"
+import { ExploreRoute } from "../../../router/constants/ClientRoutes"
+import PageHeader from "../../_Shared/PageHeader/PageHeader"
 
 export default function Signup() {
   const history = useHistory()
@@ -91,7 +92,7 @@ export default function Signup() {
         token: response.data.token,
       })
       localStorage.setItem("token", response.data.token)
-      history.push(DashboardRoute)
+      history.push(ExploreRoute)
     }
     catch (error) {
       setFormError(error.message)
@@ -101,6 +102,7 @@ export default function Signup() {
   return (
     <AppWrapper>
       <AppContainer>
+        <PageHeader text="Signup" />
         <Form onSubmit={handleSubmit}>
           <Form.Group controlId="formBasicEmail">
             <Form.Label>Name</Form.Label>

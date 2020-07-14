@@ -6,8 +6,9 @@ import { LoginRequest } from "../../../network/NetworkRequests"
 import { LoginRequestModel } from "../../../network/models/authentication/LoginRequestModel"
 import useSessionContext from "../../../state/context/SessionContext"
 import { useHistory } from "react-router-dom"
-import { DashboardRoute } from "../../../router/constants/ClientRoutes"
+import { ExploreRoute } from "../../../router/constants/ClientRoutes"
 import ValidationError from "../../_Shared/ValidationError/ValidationError"
+import PageHeader from "../../_Shared/PageHeader/PageHeader"
 
 export default function Login() {
   const history = useHistory()
@@ -61,7 +62,7 @@ export default function Login() {
       })
       api.addAccessToken(response.data.token);
       localStorage.setItem("token", response.data.token);
-      history.push(DashboardRoute)
+      history.push(ExploreRoute)
 
     }
     catch (error) {
@@ -72,6 +73,7 @@ export default function Login() {
   return (
     <AppWrapper>
       <AppContainer>
+        <PageHeader text="Login" />
         <Form onSubmit={handleSubmit}>
           <Form.Group controlId="formBasicEmail">
             <Form.Control

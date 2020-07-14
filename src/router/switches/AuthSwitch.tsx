@@ -3,13 +3,11 @@ import {
   ProfileRoute, 
   SettingsRoute,
   MyMatchesRoute,
-  ExploreRoute,
   MyCoursesRoute
 } from "../constants/ClientRoutes"
 import Profile from "../../components/AccountModule/Profile/Profile"
 import Settings from "../../components/AccountModule/Settings/Settings"
 import MyMatches from "../../components/MyMatches/MyMatches"
-import Explore from "../../components/Explore/Explore"
 import MyCourses from "../../components/CoursesModule/MyCourses/MyCourses/MyCourses"
 
 const AuthSwitch: IRoute[] = [
@@ -27,10 +25,6 @@ const AuthSwitch: IRoute[] = [
   {
     path: MyMatchesRoute,
     component: MyMatches
-  },
-  {
-    path: ExploreRoute,
-    component: Explore
   },
   {
     path: MyCoursesRoute,

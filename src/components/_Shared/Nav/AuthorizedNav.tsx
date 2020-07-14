@@ -32,7 +32,7 @@ export default function AuthNav () {
             Explore
           </NavItem>
           <NavItem to={MyCoursesRoute}>
-            Classes
+            Courses
           </NavItem>
           <NavItem to={MyMatchesRoute}>
             Matches

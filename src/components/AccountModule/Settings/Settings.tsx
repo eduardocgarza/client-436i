@@ -5,7 +5,6 @@ import { IFacebook, IInstagram, ISpotify } from "./IntegrationItem/IntegrationIc
 import { Link } from "react-router-dom"
 import { ProfileRoute } from "../../../router/constants/ClientRoutes"
 import { Row } from "react-bootstrap"
-import UploadCalendar from '../UploadCalendar/UploadCalendar'
 import { PageWrapper } from "../../../assets/styles/PageWrapper"
 
 export default function Settings () {
@@ -20,7 +19,6 @@ export default function Settings () {
         <IntegrationItem icon={IFacebook} service="facebook"/>
         <IntegrationItem icon={IInstagram} service="instagram"/>
         <IntegrationItem icon={ISpotify} service="spotify"/>
-        <UploadCalendar/>
       </AppContainer>
     </PageWrapper>
   )
