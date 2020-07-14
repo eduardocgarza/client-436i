@@ -3,7 +3,7 @@ import { Redirect, useLocation } from "react-router-dom"
 import { SpotifyAuthDataModel } from "../../network/models/apis/SpotifyAuthDataModel"
 import { SendSpotifyDataRequest } from "../../network/NetworkRequests"
 import useSessionContext from "../../state/context/SessionContext"
-import { ProfileRoute } from "../constants/ClientRoutes"
+import { SettingsRoute } from "../constants/ClientRoutes"
 
 function useQuery () {
   return new URLSearchParams (useLocation ().search)
@@ -32,5 +32,5 @@ export default function SpotifyAPI () {
     const data: SpotifyAuthDataModel = { accessToken, expiresIn, refreshToken }
     sendSpotifyAuthData(data)
   }
-  return <Redirect to={ProfileRoute} />
+  return <Redirect to={SettingsRoute} />
 }

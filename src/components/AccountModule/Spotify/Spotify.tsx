@@ -7,7 +7,8 @@ function redirectToSpotifyAuth () {
   window.location.href = window.location.href.includes ("localhost") ? DEVELOPMENT_URI : PRODUCTION_URI
 }
 
-async function authorizeSpotify () {
+export async function authorizeSpotify () {
+  console.log('trying redirect')
   try {
     redirectToSpotifyAuth ()
   }
@@ -17,11 +18,13 @@ async function authorizeSpotify () {
   }
 }
 
+async function handleAuthorize () {
+  console.log ("Beginning authorize...")
+  authorizeSpotify ()
+}
+
 export default function Spotify () {
-  async function handleAuthorize () {
-    console.log ("Beginning authorize...")
-    authorizeSpotify ()
-  }
+
   
   return (
     <div>

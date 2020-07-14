@@ -14,7 +14,7 @@ export default function UploadCalendar () {
 
     const config: AxiosRequestConfig = {
       method: "POST",
-      url: "/calendar",
+      url: "/courses",
       data: fd
     }
     

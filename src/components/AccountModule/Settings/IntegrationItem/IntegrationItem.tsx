@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import { Row, Col, Button } from "react-bootstrap"
 import styled from "styled-components"
 import { IntegrationIcon } from "./IntegrationIcon.model"
+import { authorizeSpotify } from "../../Spotify/Spotify"
 
 const ItemContainer = styled (Row)`
   border: 1px solid #DDD;
@@ -30,13 +31,19 @@ export const ItemNameDisable = styled(ItemName)`
 
 interface IntegrationItemProps {
   icon: IntegrationIcon
+  service: string;
 }
 
 export default function IntegrationItem (props: IntegrationItemProps) {
   const [isConnected, setConnected] = useState (false)
 
-  function handleConnect () {
-    setConnected (!isConnected)
+  async function handleConnect () {
+    switch(props.service) {
+      case "spotify": {
+        await authorizeSpotify ()
+        setConnected (!isConnected) // TODO: read the flag returned from the /GET profile endpoint's Object
+      }
+    }
   }
 
   const UsernameText = (
@@ -49,7 +56,7 @@ export default function IntegrationItem (props: IntegrationItemProps) {
   
   const DisconnectButton = (
     <Button onClick={handleConnect} variant="light">
-      Disconnected
+      Disconnect
     </Button>
   )
   

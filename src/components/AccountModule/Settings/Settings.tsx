@@ -17,9 +17,9 @@ export default function Settings () {
             Back to Profile
           </Link>
         </Row>
-        <IntegrationItem icon={IFacebook} />
-        <IntegrationItem icon={IInstagram} />
-        <IntegrationItem icon={ISpotify} />
+        <IntegrationItem icon={IFacebook} service="facebook"/>
+        <IntegrationItem icon={IInstagram} service="instagram"/>
+        <IntegrationItem icon={ISpotify} service="spotify"/>
         <UploadCalendar/>
       </AppContainer>
     </PageWrapper>
