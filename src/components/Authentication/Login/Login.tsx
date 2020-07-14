@@ -15,13 +15,8 @@ export default function Login() {
   const [email, setEmail] = useState("")
   const [emailError, setEmailError] = useState("")
   const [password, setPassword] = useState("")
-<<<<<<< HEAD
   const [passwordError, setPasswordError] = useState("")
   const [formError, setFormError] = useState("")
-=======
-  const { setSession } = useSessionContext()
-  const [error, setError] = useState("")
->>>>>>> 09936e6417ecd8c7eeb6f1e1c0a47da2657e1bd3
 
   function handleEmail(e: ChangeEvent<HTMLInputElement>) {
     setEmail(e.target.value)
