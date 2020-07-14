@@ -64,6 +64,10 @@ export default class educonnectionsAPI {
   }
   
   public async request (req: Request) {
+    return this.axios (req)
+  }
+
+  public async apiRequest(req: Request) {
     if (!this.tokenVerified) {
       try {
         console.log ("Verifying request...")
@@ -76,7 +80,7 @@ export default class educonnectionsAPI {
         throw new Error ("token is invalid: " + error)
       }
     }
-    return this.axios (req)
+    return this.axios(req)
   }
 
   public async requestWithConfig (config: AxiosRequestConfig) {

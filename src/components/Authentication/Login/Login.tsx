@@ -3,13 +3,20 @@ import { AppWrapper, AppContainer } from "../../../assets/styles/AppContainer"
 import { Button, Form, Row } from "react-bootstrap"
 import educonnectionsAPI from "../../../network/educonnectionsAPI"
 import { LoginRequest } from "../../../network/NetworkRequests"
-import LoginRequestModel from "../../../network/models/authentication/LoginRequestModel"
+import { LoginRequestModel } from "../../../network/models/authentication/LoginRequestModel"
 import useSessionContext from "../../../state/context/SessionContext"
+import { useHistory } from "react-router-dom"
+import { DashboardRoute } from "../../../router/constants/ClientRoutes"
+import ValidationError from "../../Shared/ValidationError/ValidationError"
 
 export default function Login() {
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
+  const history = useHistory()
   const { setSession } = useSessionContext()
+  const [email, setEmail] = useState("")
+  const [emailError, setEmailError] = useState("")
+  const [password, setPassword] = useState("")
+  const [passwordError, setPasswordError] = useState("")
+  const [formError, setFormError] = useState("")
 
   function handleEmail(e: ChangeEvent<HTMLInputElement>) {
     setEmail(e.target.value)
@@ -19,22 +26,47 @@ export default function Login() {
     setPassword(e.target.value)
   }
 
+  function validateForm () {
+    let formIsValid = true
+    if (!email) {
+      setEmailError("Please enter an email")
+      formIsValid = false
+    } else {
+      setEmailError("")
+    }
+    if (!password) {
+      setPasswordError("Please enter a password")
+      formIsValid = false
+    } else {
+      setPasswordError("")
+    }
+    return formIsValid
+  }
+
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
-
-    const loginRequest = new LoginRequestModel(email, password)
+    const formIsValid = validateForm()
+    if (!formIsValid) {
+      return
+    }
+    const loginRequest: LoginRequestModel = { email, password }
     const api = educonnectionsAPI.getApi()
-
     const request = LoginRequest(loginRequest)
-    const instance = await api.requestWithoutAuth(request)
-    
-    setSession({
-      isAuthenticated: true,
-      token: instance.data.token,
-    })
-    
-    api.addAccessToken(instance.data.token);
-    localStorage.setItem("token", instance.data.token);
+
+    try {
+      const response = await api.requestWithoutAuth(request)
+      setSession({
+        isAuthenticated: true,
+        token: response.data.token,
+      })
+      api.addAccessToken(response.data.token);
+      localStorage.setItem("token", response.data.token);
+      history.push(DashboardRoute)
+
+    }
+    catch (error) {
+      setFormError(error.message)
+    }
   }
 
   return (
@@ -50,6 +82,7 @@ export default function Login() {
               type="email"
               value={email}
             />
+            {emailError ? <ValidationError text={emailError} /> : null}
           </Form.Group>
           <Form.Group controlId="formBasicPassword">
             <Form.Label>Password</Form.Label>
@@ -60,6 +93,8 @@ export default function Login() {
               type="password"
               value={password}
             />
+            {passwordError ? <ValidationError text={passwordError} /> : null}
+            {formError ? <ValidationError text={formError} /> : null}
           </Form.Group>
           <Row className="d-flex justify-content-center">
             <Button variant="primary" type="submit">

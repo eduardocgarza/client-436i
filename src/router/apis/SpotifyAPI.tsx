@@ -18,7 +18,7 @@ export default function SpotifyAPI () {
   
   async function sendSpotifyAuthData(data: SpotifyAuthDataModel) {
     try {
-      const res = await api.request(SendSpotifyDataRequest(data)) 
+      const res = await api.apiRequest(SendSpotifyDataRequest(data)) 
       console.log("Response: ", res)
     }
     catch (error) {
