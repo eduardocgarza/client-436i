@@ -15,8 +15,13 @@ export default function Login() {
   const [email, setEmail] = useState("")
   const [emailError, setEmailError] = useState("")
   const [password, setPassword] = useState("")
+<<<<<<< HEAD
   const [passwordError, setPasswordError] = useState("")
   const [formError, setFormError] = useState("")
+=======
+  const { setSession } = useSessionContext()
+  const [error, setError] = useState("")
+>>>>>>> 09936e6417ecd8c7eeb6f1e1c0a47da2657e1bd3
 
   function handleEmail(e: ChangeEvent<HTMLInputElement>) {
     setEmail(e.target.value)
@@ -74,10 +79,10 @@ export default function Login() {
       <AppContainer>
         <Form onSubmit={handleSubmit}>
           <Form.Group controlId="formBasicEmail">
-            <Form.Label>Email address</Form.Label>
+            <h6>{error}</h6>
             <Form.Control
               onChange={handleEmail}
-              placeholder="Enter email"
+              placeholder="Enter email address"
               size="sm"
               type="email"
               value={email}
@@ -85,10 +90,10 @@ export default function Login() {
             {emailError ? <ValidationError text={emailError} /> : null}
           </Form.Group>
           <Form.Group controlId="formBasicPassword">
-            <Form.Label>Password</Form.Label>
+            <h6>{error}</h6>
             <Form.Control
               onChange={handlePassword}
-              placeholder="Password"
+              placeholder="Enter Password"
               size="sm"
               type="password"
               value={password}
