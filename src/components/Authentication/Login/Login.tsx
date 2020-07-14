@@ -74,7 +74,6 @@ export default function Login() {
       <AppContainer>
         <Form onSubmit={handleSubmit}>
           <Form.Group controlId="formBasicEmail">
-            <h6>{error}</h6>
             <Form.Control
               onChange={handleEmail}
               placeholder="Enter email address"
@@ -85,7 +84,6 @@ export default function Login() {
             {emailError ? <ValidationError text={emailError} /> : null}
           </Form.Group>
           <Form.Group controlId="formBasicPassword">
-            <h6>{error}</h6>
             <Form.Control
               onChange={handlePassword}
               placeholder="Enter Password"
