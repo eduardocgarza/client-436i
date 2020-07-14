@@ -8,8 +8,6 @@ export default function Profile() {
       <hr/>
       <FacebookLogin />
       <hr/>
-      <Spotify />
-      <hr/>
     </div>
   )
 }

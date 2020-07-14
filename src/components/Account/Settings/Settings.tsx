@@ -6,6 +6,7 @@ import { IFacebook, IInstagram, ISpotify } from "./IntegrationItem/IntegrationIc
 import { Link } from "react-router-dom"
 import { ProfileRoute } from "../../../router/constants/ClientRoutes"
 import { Row } from "react-bootstrap"
+import Spotify from "../Spotify/Spotify"
 import UploadCalendar from '..//UploadCalendar/UploadCalendar'
 
 const SettingsHeader = styled.h1`
@@ -27,9 +28,9 @@ export default function Settings () {
             Back to Profile
           </Link>
         </Row>
-        <IntegrationItem icon={IFacebook} />
-        <IntegrationItem icon={IInstagram} />
-        <IntegrationItem icon={ISpotify} />
+        <IntegrationItem icon={IFacebook} service="facebook"/>
+        <IntegrationItem icon={IInstagram} service="instagram"/>
+        <IntegrationItem icon={ISpotify} service="spotify"/>
         <UploadCalendar/>
       </AppContainer>
     </AppWrapper>
