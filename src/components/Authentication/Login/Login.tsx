@@ -10,6 +10,7 @@ export default function Login() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const { setSession } = useSessionContext()
+  const [error, setError] = useState("")
 
   function handleEmail(e: ChangeEvent<HTMLInputElement>) {
     setEmail(e.target.value)
@@ -21,20 +22,23 @@ export default function Login() {
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
+    try {
+      const loginRequest = new LoginRequestModel(email, password)
+      const api = educonnectionsAPI.getApi()
 
-    const loginRequest = new LoginRequestModel(email, password)
-    const api = educonnectionsAPI.getApi()
+      const request = LoginRequest(loginRequest)
+      const instance = await api.requestWithoutAuth(request)
 
-    const request = LoginRequest(loginRequest)
-    const instance = await api.requestWithoutAuth(request)
-    
-    setSession({
-      isAuthenticated: true,
-      token: instance.data.token,
-    })
-    
-    api.addAccessToken(instance.data.token);
-    localStorage.setItem("token", instance.data.token);
+      setSession({
+        isAuthenticated: true,
+        token: instance.data.token,
+      })
+      console.log("success")
+      api.addAccessToken(instance.data.token)
+      localStorage.setItem("token", instance.data.token)
+    } catch (e) {
+      setError("Email and password do not match our records")
+    }
   }
 
   return (
@@ -42,20 +46,20 @@ export default function Login() {
       <AppContainer>
         <Form onSubmit={handleSubmit}>
           <Form.Group controlId="formBasicEmail">
-            <Form.Label>Email address</Form.Label>
+            <h6>{error}</h6>
             <Form.Control
               onChange={handleEmail}
-              placeholder="Enter email"
+              placeholder="Enter email address"
               size="sm"
               type="email"
               value={email}
             />
           </Form.Group>
           <Form.Group controlId="formBasicPassword">
-            <Form.Label>Password</Form.Label>
+            <h6>{error}</h6>
             <Form.Control
               onChange={handlePassword}
-              placeholder="Password"
+              placeholder="Enter Password"
               size="sm"
               type="password"
               value={password}
