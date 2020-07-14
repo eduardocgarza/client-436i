@@ -6,7 +6,7 @@ import { Switch, Route } from "react-router-dom"
  * @Components
  */
 import RedirectRoute from "../routes/RedirectRoute"
-import NotFound from "../../components/Shared/NotFound/NotFound"
+import NotFound from "../../components/_Shared/NotFound/NotFound"
 
 /**
  * @Routers
