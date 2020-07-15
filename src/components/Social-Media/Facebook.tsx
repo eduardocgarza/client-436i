@@ -36,7 +36,7 @@ export default function Facebook() {
             autoLoad={true}
             fields="name,email"
             onClick={componentClicked}
-            scope="public_profile,user_friends, user_gender, user_birthday, user_age_range, user_hometown"
+            scope="public_profile, user_gender, user_birthday, user_age_range, user_hometown, user_likes"
             callback={facebookSuccess}
             icon="fa-facebook-f"
           />}
