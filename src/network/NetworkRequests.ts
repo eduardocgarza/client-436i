@@ -2,18 +2,17 @@ import Request from "./types/Request"
 import { HttpMethodTypes as Http } from "./types/HttpMethodTypes"
 import UpdateAccountRequestModel from "./models/accounts/UpdateAccountRequestModel"
 import ForgotPasswordRequestModel from "./models/authentication/ForgotPasswordRequestModel"
-import LoginRequestModel from "./models/authentication/LoginRequestModel"
-import SignupRequestModel from "./models/authentication/SignupRequestModel"
+import { LoginRequestModel } from "./models/authentication/LoginRequestModel"
+import { SignupRequestModel } from "./models/authentication/SignupRequestModel"
 import VerifySessionRequestModel from "./models/authentication/VerifySessionRequestModel"
 import ResetPasswordRequestModel from "./models/authentication/ResetPasswordRequestModel"
 import VerifyResetPasswordTokenRequestModel from "./models/authentication/VerifyResetPasswordTokenRequestModel"
-import AcceptTokenRequestModel from "./models/token/AcceptTokenRequestModel"
+import { SpotifyAuthDataModel } from "./models/apis/SpotifyAuthDataModel"
 
 const AuthRequests = "/auth"
 const AccountRequests = "/account"
 const SessionRequests = "/session"
-const TokenRequests = "/token"
-const calendarRequests = "/calendar"
+const SpotifyRequests = "/spotify"
 
 /**
  * @Account
@@ -63,8 +62,8 @@ export function VerifySessionRequest (data: VerifySessionRequestModel) {
 }
 
 /**
- * @Token
+ * @APIs Requests
  */
-export function VerifyTokenRequest (data: AcceptTokenRequestModel) {
-  return new Request (Http.POST, TokenRequests, data)
+export function SendSpotifyDataRequest (data: SpotifyAuthDataModel) {
+  return new Request (Http.POST, SpotifyRequests, data)
 }

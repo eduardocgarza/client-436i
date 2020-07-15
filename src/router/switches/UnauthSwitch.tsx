@@ -6,11 +6,11 @@ import {
   ResetPasswordRoute, 
   ForgotPasswordRoute 
 } from "../constants/ClientRoutes"
-import ResetPassword from "../../components/Authentication/ResetPassword/ResetPassword"
-import VerifyToken from "../../components/Authentication/VerifyToken/VerifyToken"
-import ForgotPassword from "../../components/Authentication/ForgotPassword/ForgotPassword"
-import Login from "../../components/Authentication/Login/Login"
-import Signup from "../../components/Authentication/Signup/Signup"
+import ResetPassword from "../../components/AuthModule/ResetPassword/ResetPassword"
+import VerifyToken from "../../components/AuthModule/VerifyToken/VerifyToken"
+import ForgotPassword from "../../components/AuthModule/ForgotPassword/ForgotPassword"
+import Login from "../../components/AuthModule/Login/Login"
+import Signup from "../../components/AuthModule/Signup/Signup"
 
 const UnauthSwitch: IRoute[] = [
   {

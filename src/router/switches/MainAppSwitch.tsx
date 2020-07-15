@@ -6,7 +6,7 @@ import { Switch, Route } from "react-router-dom"
  * @Components
  */
 import RedirectRoute from "../routes/RedirectRoute"
-import NotFound from "../../components/Shared/NotFound/NotFound"
+import NotFound from "../../components/_Shared/NotFound/NotFound"
 
 /**
  * @Routers
@@ -20,7 +20,7 @@ import UnauthorizedRoute from "../routes/UnauthorizedRoute"
 import { IRoute } from "../constants/IClientRoute"
 import AuthorizedRoute from "../routes/AuthorizedRoute"
 import { AppContextProvider } from "../../state/context/ApplicationContext"
-import Api from "../Api"
+import SpotifyAPI from "../apis/SpotifyAPI"
 
 const AppContent = styled.section`
   min-height: 90vh;
@@ -32,8 +32,8 @@ export default function MainAppSwitch () {
   return (
     <AppContent>
       <Switch>
-        <Route path="/api">
-          <Api />
+        <Route path="/spotify">
+          <SpotifyAPI />
         </Route>
         
         {/* Public Routes : Accessible at all times to 

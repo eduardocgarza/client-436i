@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect } from "react"
+import React, { createContext, useState, useEffect, useContext } from "react"
 import { ISession, TSessionContext } from "../types/ISession"
 import educonnectionsAPI from "../../network/educonnectionsAPI"
 import { VerifySessionRequest } from "../../network/NetworkRequests"
@@ -16,16 +16,17 @@ const DEFAULT_VALUE: TSessionContext = {
 
 export const SessionContext = createContext<TSessionContext>(DEFAULT_VALUE)
 
-const SessionContextProvider: React.FC = (props) => {
+export const SessionContextProvider: React.FC = (props) => {
   const [session, setSession] = useState (initialSession)
   const [api, setApi] = useState (educonnectionsAPI.getApi())
 
   async function verifySession () {
     const localStorageToken = localStorage.getItem ("token")
     if (localStorageToken) {
+      console.log("sessionContext object: ", SessionContext)
       try {
-        await api.request (VerifySessionRequest ({ token: localStorageToken }))
-        console.log ("Verified token")
+        const result = await api.request (VerifySessionRequest ({ token: localStorageToken }))
+        console.log ("Verified token: ", result)
         setSession ({
           isAuthenticated: true,
           token: localStorageToken
@@ -52,4 +53,6 @@ const SessionContextProvider: React.FC = (props) => {
   )
 }
 
-export default SessionContextProvider
+export default function useSessionContext() {
+  return useContext(SessionContext)
+}

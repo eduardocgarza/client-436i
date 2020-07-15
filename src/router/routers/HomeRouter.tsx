@@ -1,11 +1,9 @@
-import React, { useContext } from "react"
-import Dashboard from "../../components/Dashboard/Dashboard"
-import Home from "../../components/Public/Home/Home"
-import { SessionContext } from "../../state/context/SessionContext"
+import React from "react"
+import Explore from "../../components/Explore/Explore"
+import Home from "../../components/PublicModule/Home/Home"
+import useSessionContext from "../../state/context/SessionContext"
 
-const HomeRouter: React.FC = () => {
-  const { session } = useContext (SessionContext)
-  return session.isAuthenticated ? <Dashboard /> : <Home />
+export default function HomeRouter() {
+  const { session } = useSessionContext()
+  return session.isAuthenticated ? <Explore /> : <Home />
 }
-
-export default HomeRouter

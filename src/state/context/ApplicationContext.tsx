@@ -1,27 +1,34 @@
-import React, { createContext, useContext } from "react"
+import React, { createContext, useContext, useState } from "react"
+import { classmatesTestData, coursesTestData } from "../test/testData"
 
-/**
- * @Network
- */
-// import { useAPI } from "../../network/educonnectionsAPI"
+interface Student {
+  id: number
+  name: string
+}
+
+interface Course {
+  id: number
+  courseDept: string
+  courseNumber: string
+  students: Student[]
+}
 
 export interface IApplicationContext {
-  // friends: Friend[];
+  courses: Course[]
+  matches: Student[]
 }
 
 const initialState = {} as IApplicationContext
 
 const AppContext = createContext<IApplicationContext> (initialState)
 
-/**
- * @Provider
- */
 export const AppContextProvider: React.FC = (props) => {
-  // const [friends, setFriends] = useState<Friend[]> ([])
-  // const api = useAPI ()
+  const [courses, setCourses] = useState<Course[]>(coursesTestData)
+  const [matches, setMatches] = useState<Student[]>(classmatesTestData)
 
   const appContextValue = {
-    // friends, 
+    courses,
+    matches
   }
   
   return (
@@ -31,9 +38,6 @@ export const AppContextProvider: React.FC = (props) => {
   )
 }
 
-/**
- * @Consumer
- */
 export default function useAppContext () {
   return useContext (AppContext)
 }

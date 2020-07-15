@@ -6,11 +6,11 @@ import {
   PrivacyRoute,
   TermsRoute
 } from "../constants/ClientRoutes"
-import About from "../../components/Public/About/About"
-import Contact from "../../components/Public/Contact/Contact"
-import FAQs from "../../components/Public/FAQs/FAQs"
-import PrivacyPolicy from "../../components/Public/PrivacyPolicy/PrivacyPolicy"
-import Terms from "../../components/Public/Terms/Terms"
+import About from "../../components/PublicModule/About/About"
+import Contact from "../../components/PublicModule/Contact/Contact"
+import FAQs from "../../components/PublicModule/FAQs/FAQs"
+import PrivacyPolicy from "../../components/PublicModule/PrivacyPolicy/PrivacyPolicy"
+import Terms from "../../components/PublicModule/Terms/Terms"
 
 const PublicSwitch: IRoute[] = [
   {

@@ -36,3 +36,9 @@ export const COLOR_WARNING_LIGHT          = "#FFEF66"
 export const COLOR_INFO_LIGHT             = "#5D83BF"
 export const COLOR_LIGHT_LIGHT            = "#E5EBFF"
 export const COLOR_DARK_LIGHT             = "#3C3E3F"
+
+/**
+ * @UBC
+ */
+export const UBC_DARK                     = "#002145"
+export const UBC_GRAY                     = "#e6e6e6"

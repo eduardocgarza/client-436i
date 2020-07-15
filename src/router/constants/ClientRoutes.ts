@@ -23,16 +23,15 @@ export const ResetPasswordRoute = "/reset"
  * @Authenticated Routes
  *  All the routes below are authenticated routes
  */
-export const DashboardRoute = "/"
+export const ExploreRoute = "/"
 
 /**
  * @Account Routes
  */
 export const ProfileRoute = "/profile"
 export const SettingsRoute = "/settings"
-export const ExploreRoute = "/explore"
 export const MyMatchesRoute = "/matches"
-export const MyClassesRoute = "/classes"
+export const MyCoursesRoute = "/courses"
 
 /**
  * @Error Routes
