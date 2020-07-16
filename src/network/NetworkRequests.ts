@@ -13,6 +13,7 @@ const AuthRequests = "/auth"
 const AccountRequests = "/account"
 const SessionRequests = "/session"
 const SpotifyRequests = "/spotify"
+const courseRequests = "/courses"
 
 /**
  * @Account
@@ -66,4 +67,11 @@ export function VerifySessionRequest (data: VerifySessionRequestModel) {
  */
 export function SendSpotifyDataRequest (data: SpotifyAuthDataModel) {
   return new Request (Http.POST, SpotifyRequests, data)
+}
+
+/**
+ * @Course Requests
+ */
+export function GetCourseRequest () {
+  return new Request (Http.GET, courseRequests)
 }
