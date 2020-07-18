@@ -5,6 +5,7 @@ import { GetAccountRequest } from "../../../network/NetworkRequests"
 import useSessionContext from "../../../state/context/SessionContext"
 import useAppContext from "../../../state/context/ApplicationContext"
 import { Card, Container, Row, Col, Image, ListGroup, CardDeck } from "react-bootstrap"
+import { AxiosResponse } from "axios"
 
 
 export default function Profile() {
@@ -12,11 +13,19 @@ export default function Profile() {
   const { account, setAccount } = useAppContext()
 
   async function fetchProfileData() {
-    const x = await api.request(GetAccountRequest())
-    console.log("profile: ", x)
-    setAccount({
-      ...x.data
-    })
+    try {
+      const x: AxiosResponse = await api.request(GetAccountRequest())
+  
+      if (!x) {
+        alert("something went wrong with the API call")
+      }
+      
+      setAccount({
+        ...x.data
+      })
+    } catch (e) {
+      console.log(e.errorClientMessage)
+    }
   }
 
   useEffect(() => {
