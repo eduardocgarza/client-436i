@@ -1,6 +1,5 @@
 import Request from "./types/Request"
 import { HttpMethodTypes as Http } from "./types/HttpMethodTypes"
-import UpdateAccountRequestModel from "./models/accounts/UpdateAccountRequestModel"
 import ForgotPasswordRequestModel from "./models/authentication/ForgotPasswordRequestModel"
 import { LoginRequestModel } from "./models/authentication/LoginRequestModel"
 import { SignupRequestModel } from "./models/authentication/SignupRequestModel"
@@ -11,6 +10,7 @@ import { SpotifyAuthDataModel } from "./models/apis/SpotifyAuthDataModel"
 
 const AuthRequests = "/auth"
 const AccountRequests = "/account"
+const MatchesRequests = "/matches"
 const SessionRequests = "/session"
 const SpotifyRequests = "/spotify"
 
@@ -21,12 +21,12 @@ export function GetAccountRequest () {
   return new Request (Http.GET, AccountRequests)
 }
 
-export function UpdateAccountRequest (data: UpdateAccountRequestModel) {
-  return new Request (Http.PATCH, AccountRequests, data)
-}
-
 export function DeleteAccountRequest () {
   return new Request (Http.DELETE, AccountRequests)
+}
+
+export function GetMatchesRequest () {
+  return new Request (Http.GET, MatchesRequests)
 }
 
 /**

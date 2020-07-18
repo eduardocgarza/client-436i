@@ -15,16 +15,26 @@ interface Course {
 
 export interface IApplicationContext {
   courses: Course[]
-  matches: Student[]
+  matches: IMatches
 }
 
 const initialState = {} as IApplicationContext
 
 const AppContext = createContext<IApplicationContext> (initialState)
 
+interface IMatches {
+  matches: Student[]
+  setMatches: (s: Student[]) => void
+}
+
+function useMatches() {
+  const [matches, setMatches] = useState<Student[]>(classmatesTestData)
+  return { matches, setMatches }
+}
+
 export const AppContextProvider: React.FC = (props) => {
   const [courses, setCourses] = useState<Course[]>(coursesTestData)
-  const [matches, setMatches] = useState<Student[]>(classmatesTestData)
+  const matches = useMatches()
 
   const appContextValue = {
     courses,

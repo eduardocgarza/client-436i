@@ -8,7 +8,7 @@ import UploadCalendar from "../../../AccountModule/UploadCalendar/UploadCalendar
 
 export default function MyCourses() {
   const { courses } = useAppContext()
-  const tempShowCourses = false
+  const tempShowCourses = true
   return (
     <PageWrapper>
       <PageHeader text="My Courses" />
