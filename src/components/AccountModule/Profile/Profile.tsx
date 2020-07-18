@@ -97,7 +97,7 @@ export default function Profile() {
       <hr/>
       <Card key='profile' border="primary" style={{ width: '100%', padding:'2em'}}>
         <Container>
-          <Card.Img variant="top" src={account ? account.spotify.image.url: null} />
+          <Card.Img variant="top" src={account ? account.spotify.image ? account.spotify.image.url : null : null} />
           <Card.Body>
             <Card.Title>{account ? account.name: null}</Card.Title>
               <ListGroup variant="flush">
