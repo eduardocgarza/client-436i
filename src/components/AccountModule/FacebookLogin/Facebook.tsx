@@ -1,13 +1,17 @@
 import React, { useState } from "react"
 import FacebookLogin from "react-facebook-login"
 import { Card} from 'react-bootstrap';
+import axios from 'axios'
 
 export default function Facebook() {
 
   const [login, setLogin] = useState(false);
   const [data, setData] = useState({});
+  const api = axios.create({
+    baseURL: 'http://localhost:5000/', //TODO: change to prod 
+  })
 
-  function facebookSuccess(response: any) {
+  async function facebookSuccess(response: any) {
     console.log("Facebook Response: ", response)
     setData(response);
     if (response.accessToken) {
@@ -15,11 +19,17 @@ export default function Facebook() {
     } else {
       setLogin(false);
     }
-    const payload =  response.accessToken //TODO: also send username
-    // TODO
-    // await api.insertMessage(payload).then(res: => {
-    //   console.log(res)
-    // })
+    const payload =  {
+      accessToken: response.accessToken,
+      username: "username", //TODO: username of the account
+      id: response.id,
+      email: response.email,
+      name: response.name
+    }
+    
+    await api.post("/facebook/connect",payload).then(res => {
+        console.log(res)
+    })
   }
 
   function componentClicked() {
