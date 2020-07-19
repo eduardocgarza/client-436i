@@ -25,11 +25,20 @@ export interface Account {
   facebookVerified: boolean;
 }
 
+const initialAccount: Account = {
+  accountId: '',
+  name: '',
+  email: '',
+  spotifyVerified: false,
+  spotify: {},
+  facebookVerified: false
+}
+
 export interface IApplicationContext {
   courses: Course[]
   matches: Student[]
   account: Account
-  setAccount: (account: Account) => {}
+  setAccount: (account: Account) => void;
 }
 
 const initialState = {} as IApplicationContext
@@ -39,8 +48,7 @@ const AppContext = createContext<IApplicationContext> (initialState)
 export const AppContextProvider: React.FC = (props) => {
   const [courses, setCourses] = useState<Course[]>(coursesTestData)
   const [matches, setMatches] = useState<Student[]>(classmatesTestData)
-  const [account, setAccount] = useState<Account>()
-  const [api, setApi] = useState (educonnectionsAPI.getApi())
+  const [account, setAccount] = useState<Account>(initialAccount)
 
 
   const appContextValue = {
