@@ -1,11 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from "react"
-import FacebookLogin from "../FacebookLogin/FacebookLogin"
 import { GetAccountRequest } from "../../../network/NetworkRequests"
 import useSessionContext from "../../../state/context/SessionContext"
-import useAppContext from "../../../state/context/ApplicationContext"
-import { Card, Container, Row, Col, Image, ListGroup, CardDeck } from "react-bootstrap"
+import useAppContext, { Account } from "../../../state/context/ApplicationContext"
+import { Card, Container, ListGroup, CardDeck } from "react-bootstrap"
 import { AxiosResponse } from "axios"
+import { Track , Artist } from "../../../models/spotifyInterfaces"
 
 
 export default function Profile() {
@@ -19,9 +19,11 @@ export default function Profile() {
       if (!x) {
         alert("something went wrong with the API call")
       }
+
+      const y = x.data as Account
       
       setAccount({
-        ...x.data
+        ...y
       })
     } catch (e) {
       console.log(e.errorClientMessage)
@@ -32,7 +34,7 @@ export default function Profile() {
     fetchProfileData()
   }, [])
 
-  function renderCard(item) {
+  function renderCard(item: Track | Artist) {
     return <Card style={{width: '15%'}} key={item._id}>
       <Card.Img variant="top" src={item.image.url}/>
       <Card.Body>
@@ -73,7 +75,7 @@ export default function Profile() {
   function renderTopArtists() {
     let limit = 5;
     let counter = 0;
-    return account.spotify.artists.map(artist => {
+    return account.spotify.artists.map((artist: Artist) => {
       while(counter<limit) {
         counter++
         return renderCard(artist)
@@ -84,7 +86,7 @@ export default function Profile() {
   function renderTopTracks() {
     let limit = 5;
     let counter = 0;
-    return account.spotify.tracks.map(track => {
+    return account.spotify.tracks.map((track: Track) => {
       while(counter<limit) {
         counter++
         return renderCard(track)
@@ -97,7 +99,7 @@ export default function Profile() {
       <hr/>
       <Card border="primary" style={{ width: '100%', padding:'2em'}}>
       <Container>
-        <Card.Img variant="top" src={account ? account.spotifyVerified ? account.spotify.image.url: null : null} />
+        <Card.Img variant="top" src={account.spotifyVerified ? account.spotify.image.url: null } />
         <Card.Body>
           <Card.Title>{account ? account.name: ""}</Card.Title>
           <Card.Text>
@@ -114,8 +116,10 @@ export default function Profile() {
       
       </Card>
       <hr/>
-      { account ? account.spotifyVerified ? spotifyWrapper(): null: null}
+      {/* Spotify Stuff */}
+      {account.spotifyVerified ? spotifyWrapper() : null}
       <hr/>
+      {/* Facebook Stuff */}
     </div>
   )
 }
