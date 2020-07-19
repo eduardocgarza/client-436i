@@ -15,11 +15,9 @@ export default function Profile() {
   async function fetchProfileData() {
     try {
       const x: AxiosResponse = await api.request(GetAccountRequest())
-  
       if (!x) {
         alert("something went wrong with the API call")
       }
-
       const y = x.data as Account
       
       setAccount({
@@ -47,17 +45,15 @@ export default function Profile() {
     return <Card key='spotify' style={{ width: '100%', padding:'2em'}}>
       <Card.Title>Spotify</Card.Title>
       <hr/>
-      <Card.Subtitle className='text-muted'> Top Artists </Card.Subtitle>
-      
-      {spotifyArtistWrapper()}
-      <Card.Subtitle className='text-muted'> Top Tracks </Card.Subtitle>
-      {spotifyTrackWrapper()}
+      {account.spotify.artists.length > 0 ? spotifyArtistWrapper() : null }
+      {account.spotify.tracks.length > 0 ? spotifyTrackWrapper() : null}
     </Card>
   }
 
   function spotifyArtistWrapper() {
     return <div>
       <CardDeck style={{width: '100%'}}>
+        <Card.Subtitle className='text-muted'> Top Artists </Card.Subtitle>
         {renderTopArtists()}
       </CardDeck>
       <hr/>
@@ -67,6 +63,7 @@ export default function Profile() {
   function spotifyTrackWrapper() {
     return <div>
       <CardDeck style={{width: '100%'}}>
+        <Card.Subtitle className='text-muted'> Top Tracks </Card.Subtitle>
         {renderTopTracks()}
         </CardDeck>
     </div>
