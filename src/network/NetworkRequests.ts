@@ -67,3 +67,7 @@ export function VerifySessionRequest (data: VerifySessionRequestModel) {
 export function SendSpotifyDataRequest (data: SpotifyAuthDataModel) {
   return new Request (Http.POST, SpotifyRequests, data)
 }
+
+export function FacebookRequest (data: any) {
+  return new Request (Http.POST, "/facebook/connect", data)
+}
