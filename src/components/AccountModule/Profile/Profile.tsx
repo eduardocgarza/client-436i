@@ -96,7 +96,7 @@ export default function Profile() {
       <hr/>
       <Card border="primary" style={{ width: '100%', padding:'2em'}}>
       <Container>
-        <Card.Img variant="top" src={account.spotifyVerified ? account.spotify.image.url: null } />
+        <Card.Img variant="top" src={account.spotifyVerified ? account.spotify.image ? account.spotify.image.url : null : null } />
         <Card.Body>
           <Card.Title>{account ? account.name: ""}</Card.Title>
           <Card.Text>
