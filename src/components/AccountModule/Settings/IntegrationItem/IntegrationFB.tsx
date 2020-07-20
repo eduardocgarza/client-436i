@@ -53,7 +53,8 @@ export default function IntegrationFB(props: IntegrationItemProps) {
       accessToken: response.accessToken,
       id: response.id,
       email: response.email,
-      name: response.name
+      name: response.name,
+      profilePicURL: response.picture.data.url
     }
     
     await api.apiRequest(FacebookRequest(payload))
