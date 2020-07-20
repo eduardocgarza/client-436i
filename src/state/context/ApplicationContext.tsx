@@ -1,5 +1,8 @@
-import React, { createContext, useContext, useState } from "react"
+import React, { createContext, useContext, useState, useEffect } from "react"
 import { classmatesTestData, coursesTestData } from "../test/testData"
+import { GetAccountRequest } from "../../network/NetworkRequests"
+import educonnectionsAPI from "../../network/educonnectionsAPI"
+
 
 interface Student {
   id: number
@@ -13,9 +16,29 @@ interface Course {
   students: Student[]
 }
 
+export interface Account {
+  accountId: string;
+  name: string;
+  email: string;
+  spotifyVerified: boolean;
+  spotify: Record<string, any>; // need to make a spotify type here? object has two keys (artists, tracks)
+  facebookVerified: boolean;
+}
+
+const initialAccount: Account = {
+  accountId: '',
+  name: '',
+  email: '',
+  spotifyVerified: false,
+  spotify: {},
+  facebookVerified: false
+}
+
 export interface IApplicationContext {
   courses: Course[]
   matches: Student[]
+  account: Account
+  setAccount: (account: Account) => void;
 }
 
 const initialState = {} as IApplicationContext
@@ -25,11 +48,16 @@ const AppContext = createContext<IApplicationContext> (initialState)
 export const AppContextProvider: React.FC = (props) => {
   const [courses, setCourses] = useState<Course[]>(coursesTestData)
   const [matches, setMatches] = useState<Student[]>(classmatesTestData)
+  const [account, setAccount] = useState<Account>(initialAccount)
+
 
   const appContextValue = {
     courses,
-    matches
+    matches,
+    account,
+    setAccount
   }
+
   
   return (
     <AppContext.Provider value={appContextValue}>

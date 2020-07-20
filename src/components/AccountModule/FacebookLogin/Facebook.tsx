@@ -1,13 +1,16 @@
 import React, { useState } from "react"
 import FacebookLogin from "react-facebook-login"
-import { Card} from 'react-bootstrap';
+import { Button} from 'react-bootstrap';
+import useSessionContext from "../../../state/context/SessionContext"
+import { FacebookRequest } from "../../../network/NetworkRequests";
 
 export default function Facebook() {
 
   const [login, setLogin] = useState(false);
   const [data, setData] = useState({});
+  const { api } = useSessionContext()
 
-  function facebookSuccess(response: any) {
+  async function facebookSuccess(response: any) {
     console.log("Facebook Response: ", response)
     setData(response);
     if (response.accessToken) {
@@ -15,11 +18,14 @@ export default function Facebook() {
     } else {
       setLogin(false);
     }
-    const payload =  response.accessToken //TODO: also send username
-    // TODO
-    // await api.insertMessage(payload).then(res: => {
-    //   console.log(res)
-    // })
+    const payload =  {
+      accessToken: response.accessToken,
+      id: response.id,
+      email: response.email,
+      name: response.name
+    }
+    
+    await api.apiRequest(FacebookRequest(payload))
   }
 
   function componentClicked() {
@@ -33,15 +39,15 @@ export default function Facebook() {
           { !login &&
           <FacebookLogin
             appId="596845454274053"
-            autoLoad={true}
+            autoLoad={false}
             fields="name,email"
             onClick={componentClicked}
-            scope="public_profile,user_friends, user_gender, user_birthday, user_age_range, user_hometown"
+            scope="public_profile, user_gender, user_birthday, user_age_range, user_hometown, user_likes"
             callback={facebookSuccess}
-            icon="fa-facebook-f"
+            textButton = "Connect"  
           />}
-          {login && <Card>Log Out button</Card>} 
-          {/* TODO */}
+          {login && <Button>Disconnect</Button>} 
+          {/* TODO: delete FB data */}
         </div>
       </div>
     </div>
