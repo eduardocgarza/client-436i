@@ -53,7 +53,8 @@ export default function IntegrationFB(props: IntegrationItemProps) {
       accessToken: response.accessToken,
       id: response.id,
       email: response.email,
-      name: response.name
+      name: response.name,
+      profilePicURL: response.picture.data.url
     }
     
     await api.apiRequest(FacebookRequest(payload))
@@ -78,7 +79,7 @@ export default function IntegrationFB(props: IntegrationItemProps) {
     <FacebookLogin
         appId="596845454274053"
         autoLoad={false}
-        fields="name,email"
+        fields="name,email,picture"
         onClick={componentClicked}
         scope="public_profile, user_gender, user_birthday, user_age_range, user_hometown, user_likes"
         callback={facebookSuccess}
