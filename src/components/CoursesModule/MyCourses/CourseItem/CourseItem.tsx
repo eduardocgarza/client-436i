@@ -9,16 +9,16 @@ import {
 } from "./CourseItemStyles"
 
 interface Student {
-  id: number
+  accountId: string
   name: string
 }
 
 interface CourseItemProps {
   course: {
-    id: number
+    courseId: number
     courseDept: string
     courseNumber: string
-    students: Student[]
+    accounts: Student[]
   }
 }
 
@@ -31,9 +31,9 @@ export default function CourseItem(props: CourseItemProps) {
       <StudentsContainer>
         <StudentsHeader>Classmates</StudentsHeader>
         <StudentsContent>
-          {course.students.map(student => (
+          {course.accounts.map(student => (
             <StudentItem 
-              key={student.id} 
+              key={student.accountId} 
               student={student}
             />
           ))}

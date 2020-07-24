@@ -47,7 +47,7 @@ const initialState = {} as IApplicationContext
 const AppContext = createContext<IApplicationContext> (initialState)
 
 export const AppContextProvider: React.FC = (props) => {
-  const [courses, setCourses] = useState<Course[]>()
+  const [courses, setCourses] = useState<Course[]>([])
   const [matches, setMatches] = useState<Student[]>(classmatesTestData)
   const [account, setAccount] = useState<Account>(initialAccount)
 

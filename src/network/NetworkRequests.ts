@@ -70,6 +70,13 @@ export function SendSpotifyDataRequest (data: SpotifyAuthDataModel) {
 }
 
 /**
+ * @Facebook Requests
+ */
+export function FacebookRequest (data: any) {
+  return new Request (Http.POST, "/facebook/connect", data)
+}
+
+/**
  * @Course Requests
  */
 export function GetCourseRequest () {

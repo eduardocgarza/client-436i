@@ -7,38 +7,42 @@ import useAppContext from "../../../../state/context/ApplicationContext"
 import UploadCalendar from "../../../AccountModule/UploadCalendar/UploadCalendar"
 import { GetCourseRequest } from "../../../../network/NetworkRequests"
 import useSessionContext from "../../../../state/context/SessionContext"
+import { AxiosResponse } from "axios"
 
 export default function MyCourses() {
   const { api } = useSessionContext()
   const { courses, setCourses } = useAppContext()
 
 
-  async function fetchCoursesData() {
-    const x = await api.request(GetCourseRequest())
-    console.log("courses: ", x)
-    setCourses({
-      ...x.data
-    })
+  async function fetchCoursesData() {    
+    try {
+      const x: AxiosResponse = await api.request(GetCourseRequest())
+      if (!x) {
+        alert("something went wrong with the API call")
+      }
+      const courses = x.data.courses
+      
+      setCourses([...courses])
+    } catch (e) {
+      console.log(e.errorClientMessage)
+    }
+
   }
 
   useEffect(() => {
     fetchCoursesData()
   }, [])
 
-  const tempShowCourses = false
   return (
     <PageWrapper>
       <PageHeader text="My Courses" />
-      {/* {courses.length > 0 ? ( */}
-      {tempShowCourses ? (
-        <>
+      {courses.length > 0 ? (
+      // {tempShowCourses ? (
+        <div>
         <CoursesHeader />
         <CoursesContent />
-        </>
-      ) : null}
-      {!tempShowCourses ? (
-        <UploadCalendar />
-      ) : null}
+        </div>
+      ) : <UploadCalendar /> }
     </PageWrapper>
   )
 }
