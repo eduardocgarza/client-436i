@@ -8,7 +8,7 @@ export default function CoursesContent() {
   return (
     <ContentContainer>
       {courses.map(course => (
-        <CourseItem key={course.id} course={course} />
+        <CourseItem key={course.courseId} course={course} />
       ))}
     </ContentContainer>
   )

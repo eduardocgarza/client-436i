@@ -23,7 +23,7 @@ export default function CoursesHeader() {
           } else {
             color = CourseButtonTypes.YELLOW
           }
-          return <CourseButton key={course.id} course={course} color={color} />
+          return <CourseButton key={course.courseId} course={course} color={color} />
         })}
       </HeaderContent>
     </HeaderContainer>
