@@ -38,7 +38,8 @@ export interface IApplicationContext {
   courses: Course[]
   matches: Student[]
   account: Account
-  setAccount: (account: Account) => void;
+  setAccount: (account: Account) => {}
+  setCourses: (courses: Course[]) => {}
 }
 
 const initialState = {} as IApplicationContext
@@ -46,7 +47,7 @@ const initialState = {} as IApplicationContext
 const AppContext = createContext<IApplicationContext> (initialState)
 
 export const AppContextProvider: React.FC = (props) => {
-  const [courses, setCourses] = useState<Course[]>(coursesTestData)
+  const [courses, setCourses] = useState<Course[]>()
   const [matches, setMatches] = useState<Student[]>(classmatesTestData)
   const [account, setAccount] = useState<Account>(initialAccount)
 
@@ -55,7 +56,8 @@ export const AppContextProvider: React.FC = (props) => {
     courses,
     matches,
     account,
-    setAccount
+    setAccount,
+    setCourses
   }
 
   
