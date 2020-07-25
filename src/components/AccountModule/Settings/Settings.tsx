@@ -6,6 +6,7 @@ import { Link } from "react-router-dom"
 import { ProfileRoute } from "../../../router/constants/ClientRoutes"
 import { Row } from "react-bootstrap"
 import { PageWrapper } from "../../../assets/styles/PageWrapper"
+import IntegrationFB from "./IntegrationItem/IntegrationFB"
 
 export default function Settings () {
   return (
@@ -16,7 +17,7 @@ export default function Settings () {
             Back to Profile
           </Link>
         </Row>
-        <IntegrationItem icon={IFacebook} service="facebook"/>
+        <IntegrationFB icon={IFacebook} service="facebook"/>
         <IntegrationItem icon={IInstagram} service="instagram"/>
         <IntegrationItem icon={ISpotify} service="spotify"/>
       </AppContainer>

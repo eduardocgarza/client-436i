@@ -1,44 +1,18 @@
-import React, { createContext, useContext, useState } from "react"
-import { classmatesTestData, coursesTestData } from "../test/testData"
-
-interface Student {
-  id: number
-  name: string
-}
-
-interface Course {
-  id: number
-  courseDept: string
-  courseNumber: string
-  students: Student[]
-}
-
-export interface IApplicationContext {
-  courses: Course[]
-  matches: IMatches
-}
-
-const initialState = {} as IApplicationContext
-
-const AppContext = createContext<IApplicationContext> (initialState)
-
-interface IMatches {
-  matches: Student[]
-  setMatches: (s: Student[]) => void
-}
-
-function useMatches() {
-  const [matches, setMatches] = useState<Student[]>(classmatesTestData)
-  return { matches, setMatches }
-}
+import React, { useContext } from "react"
+import useAccount from "../hooks/useAccount"
+import useCourses from "../hooks/useCourses"
+import useMatches from "../hooks/useMatches"
+import { AppContext } from "../types/state/IApplicationState"
 
 export const AppContextProvider: React.FC = (props) => {
-  const [courses, setCourses] = useState<Course[]>(coursesTestData)
-  const matches = useMatches()
+  const accountState = useAccount()
+  const coursesState = useCourses()
+  const matchesState = useMatches()
 
   const appContextValue = {
-    courses,
-    matches
+    accountState,
+    coursesState,
+    matchesState,
   }
   
   return (

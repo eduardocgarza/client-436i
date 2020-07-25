@@ -4,12 +4,15 @@ import CourseItem from "../CourseItem/CourseItem"
 import { ContentContainer } from "./CoursesContentStyles"
 
 export default function CoursesContent() {
-  const { courses } = useAppContext()
+  const { coursesState } = useAppContext()
+  const { courses } = coursesState
   return (
     <ContentContainer>
-      {courses.map(course => (
-        <CourseItem key={course.id} course={course} />
-      ))}
+      {courses.length > 0 ? (
+        courses.map(course => (
+          <CourseItem key={course.courseId} course={course} />
+        ))
+      ) : null}
     </ContentContainer>
   )
 }

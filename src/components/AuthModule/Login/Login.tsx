@@ -27,7 +27,7 @@ export default function Login() {
     setPassword(e.target.value)
   }
 
-  function validateForm () {
+  function validateForm() {
     let formIsValid = true
     if (!email) {
       setEmailError("Please enter an email")
@@ -60,13 +60,11 @@ export default function Login() {
         isAuthenticated: true,
         token: response.data.token,
       })
-      api.addAccessToken(response.data.token);
-      localStorage.setItem("token", response.data.token);
+      api.addAccessToken(response.data.token)
+      localStorage.setItem("token", response.data.token)
       history.push(ExploreRoute)
-
-    }
-    catch (error) {
-      setFormError(error.message)
+    } catch (error) {
+      setFormError(error.errorClientMessage)
     }
   }
 

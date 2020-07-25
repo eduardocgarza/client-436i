@@ -1,27 +1,49 @@
-import React from "react"
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect } from "react"
 import CoursesContent from "../CoursesContent/CoursesContent"
 import CoursesHeader from "../CoursesHeader/CoursesHeader"
 import PageHeader from "../../../_Shared/PageHeader/PageHeader"
 import { PageWrapper } from "../../../../assets/styles/PageWrapper"
 import useAppContext from "../../../../state/context/ApplicationContext"
 import UploadCalendar from "../../../AccountModule/UploadCalendar/UploadCalendar"
+import { GetCourseRequest } from "../../../../network/NetworkRequests"
+import useSessionContext from "../../../../state/context/SessionContext"
+import { AxiosResponse } from "axios"
 
 export default function MyCourses() {
-  const { courses } = useAppContext()
+  const { api } = useSessionContext()
+  const { coursesState } = useAppContext()
+  const { courses } = coursesState
   const tempShowCourses = true
+
+  async function fetchCoursesData() {    
+    try {
+      const x: AxiosResponse = await api.request(GetCourseRequest())
+      if (!x) {
+        alert("something went wrong with the API call")
+      }
+      const courses = x.data.courses
+      courses.setCourses([...courses])
+    } catch (e) {
+      console.log(e.errorClientMessage)
+    }
+
+  }
+
+  useEffect(() => {
+    fetchCoursesData()
+  }, [])
+
   return (
     <PageWrapper>
       <PageHeader text="My Courses" />
-      {/* {courses.length > 0 ? ( */}
-      {tempShowCourses ? (
+      {courses.length > 0 ? (
+      // {tempShowCourses ? (
         <>
         <CoursesHeader />
         <CoursesContent />
         </>
-      ) : null}
-      {!tempShowCourses ? (
-        <UploadCalendar />
-      ) : null}
+      ) : <UploadCalendar /> }
     </PageWrapper>
   )
 }

@@ -1,12 +1,14 @@
-import React, { useContext } from "react"
+import React from "react"
 import { useHistory } from "react-router-dom"
 import { Navbar, Nav, Container } from "react-bootstrap"
 import { Logo, NavItem, NavButton } from "./NavStyles"
 import handleSessionLogout from "../../../state/helpers/handleSessionLogout"
-import { SessionContext } from "../../../state/context/SessionContext"
 import eduConnectionsLogo from "../../../assets/icons/logo.png"
-import { ExploreRoute, MyCoursesRoute, MyMatchesRoute } from "../../../router/constants/ClientRoutes"
+import useSessionContext from "../../../state/context/SessionContext"
 import { 
+  ExploreRoute, 
+  MyCoursesRoute, 
+  MyMatchesRoute, 
   HomeRoute, 
   ProfileRoute,
   SettingsRoute,
@@ -14,7 +16,7 @@ import {
 
 export default function AuthNav () {
   const history = useHistory()
-  const sessionContext = useContext (SessionContext)
+  const sessionContext = useSessionContext()
 
   function handleSignout () {
     handleSessionLogout(sessionContext)

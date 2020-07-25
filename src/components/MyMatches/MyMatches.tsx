@@ -11,14 +11,16 @@ import {
 
 export default function MyMatches() {
   const { api } = useSessionContext()
-  const { matches } = useAppContext()
+  const { matchesState } = useAppContext()
+  const { matches } = matchesState
+
   async function fetchMatches() {
     const route = GetMatchesRequest()
     try {
       const response = await api.request(route)
       console.log("Matches fetched: ", response)
       if (route.data) {
-        matches.setMatches(route.data)
+        // matches.setMatches(route.data)
       }
     }
     catch (error) {
@@ -31,7 +33,7 @@ export default function MyMatches() {
   return (
     <MyMatchesContainer>
       <PageHeader text="My Matches" />
-      {matches.matches.map(match => <StudentItem key={match.id} student={match} />)}
+      {matches.map(match => <StudentItem key={match.accountId} student={match} />)}
     </MyMatchesContainer>
   )
 }
