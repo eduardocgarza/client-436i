@@ -22,8 +22,9 @@ export default function MyCourses() {
       if (!x) {
         alert("something went wrong with the API call")
       }
-      const courses = x.data.courses
-      courses.setCourses([...courses])
+      const courseData = x.data.courses
+      // console.log(courseData)
+      coursesState.setCourses([...courseData])
     } catch (e) {
       console.log(e.errorClientMessage)
     }

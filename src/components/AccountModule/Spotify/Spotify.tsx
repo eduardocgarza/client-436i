@@ -2,7 +2,7 @@ import React from "react"
 import { Button } from "react-bootstrap"
 
 function redirectToSpotifyAuth () {
-  const PRODUCTION_URI = "https://api.educonnections.ca:5000/spotify/authorize"
+  const PRODUCTION_URI = "https://api.educonnections.ca/spotify/authorize"
   const DEVELOPMENT_URI = "http://localhost:5000/spotify/authorize"
   window.location.href = window.location.href.includes ("localhost") ? DEVELOPMENT_URI : PRODUCTION_URI
 }
