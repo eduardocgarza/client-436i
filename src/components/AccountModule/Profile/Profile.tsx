@@ -20,10 +20,10 @@ export default function Profile() {
       if (!x) {
         alert("something went wrong with the API call")
       }
-      // const y = x.data as IAccount
-      // setAccount({
-      //   ...y
-      // })
+      const y = x.data as IAccount
+      setAccount({
+        ...y
+      })
     } catch (e) {
       console.log(e.errorClientMessage)
     }
