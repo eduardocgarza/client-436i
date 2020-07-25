@@ -14,7 +14,7 @@ import {
 
 interface StudentItemProps {
   student: {
-    id: number
+    accountId: string
     name: string
   }
 }

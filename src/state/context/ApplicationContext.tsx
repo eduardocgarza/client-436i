@@ -1,19 +1,17 @@
-import React, { createContext, useContext, useState, useEffect } from "react"
-import { classmatesTestData, coursesTestData } from "../test/testData"
-import { GetAccountRequest } from "../../network/NetworkRequests"
-import educonnectionsAPI from "../../network/educonnectionsAPI"
-
+import React, { createContext, useContext, useState } from "react"
+import { classmatesTestData } from "../test/testData"
 
 interface Student {
-  id: number
+  accountId: string
   name: string
 }
 
 interface Course {
-  id: number
+  courseId: string
   courseDept: string
   courseNumber: string
   students: Student[]
+  accounts: Student[]
 }
 
 export interface Account {
@@ -38,8 +36,8 @@ export interface IApplicationContext {
   courses: Course[]
   matches: Student[]
   account: Account
-  setAccount: (account: Account) => {}
-  setCourses: (courses: Course[]) => {}
+  setAccount: (account: Account) => void
+  setCourses: (courses: Course[]) => void
 }
 
 const initialState = {} as IApplicationContext

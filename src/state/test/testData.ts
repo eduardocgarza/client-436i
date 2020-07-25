@@ -1,45 +1,45 @@
 export const classmatesTestData = [
   {
-    id: 1,
+    accountId: "1",
     name: "Martha Piper"
   },
   {
-    id: 2,
+    accountId: "2",
     name: "Bonnie Henry"
   },
   {
-    id: 3,
+    accountId: "3",
     name: "Elon Musk"
   }
 ]
 
 export const coursesTestData = [
   {
-    id: 1,
+    courseId: "1",
     courseDept: "CPSC",
     courseNumber: "304",
     students: classmatesTestData
   },
   {
-    id: 2,
+    courseId: "2",
     courseDept: "CPSC",
     courseNumber: "304",
     students: classmatesTestData
   },
   {
-    id: 3,
+    courseId: "3",
     courseDept: "CPSC",
     courseNumber: "304",
     students: classmatesTestData
   },
   {
-    id: 4,
+    courseId: "4",
     courseDept: "CPSC",
     courseNumber: "304",
     students: classmatesTestData
   },
   {
-    id: 5,
+    courseId: "5",
     courseDept: "CPSC",
     courseNumber: "304",
     students: classmatesTestData

@@ -11,7 +11,7 @@ export default function MyMatches() {
   return (
     <MyMatchesContainer>
       <PageHeader text="My Matches" />
-      {matches.map(match => <StudentItem key={match.id} student={match} />)}
+      {matches.map(match => <StudentItem key={match.accountId} student={match} />)}
     </MyMatchesContainer>
   )
 }

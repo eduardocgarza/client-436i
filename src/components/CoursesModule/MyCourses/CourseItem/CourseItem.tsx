@@ -15,7 +15,7 @@ interface Student {
 
 interface CourseItemProps {
   course: {
-    courseId: number
+    courseId: string
     courseDept: string
     courseNumber: string
     accounts: Student[]
