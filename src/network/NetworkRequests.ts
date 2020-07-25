@@ -1,6 +1,5 @@
 import Request from "./types/Request"
 import { HttpMethodTypes as Http } from "./types/HttpMethodTypes"
-import UpdateAccountRequestModel from "./models/accounts/UpdateAccountRequestModel"
 import ForgotPasswordRequestModel from "./models/authentication/ForgotPasswordRequestModel"
 import { LoginRequestModel } from "./models/authentication/LoginRequestModel"
 import { SignupRequestModel } from "./models/authentication/SignupRequestModel"
@@ -11,8 +10,10 @@ import { SpotifyAuthDataModel } from "./models/apis/SpotifyAuthDataModel"
 
 const AuthRequests = "/auth"
 const AccountRequests = "/account"
+const MatchesRequests = "/matches"
 const SessionRequests = "/session"
 const SpotifyRequests = "/spotify"
+const courseRequests = "/courses"
 
 /**
  * @Account
@@ -21,12 +22,12 @@ export function GetAccountRequest () {
   return new Request (Http.GET, AccountRequests)
 }
 
-export function UpdateAccountRequest (data: UpdateAccountRequestModel) {
-  return new Request (Http.PATCH, AccountRequests, data)
-}
-
 export function DeleteAccountRequest () {
   return new Request (Http.DELETE, AccountRequests)
+}
+
+export function GetMatchesRequest () {
+  return new Request (Http.GET, MatchesRequests)
 }
 
 /**
@@ -68,6 +69,16 @@ export function SendSpotifyDataRequest (data: SpotifyAuthDataModel) {
   return new Request (Http.POST, SpotifyRequests, data)
 }
 
+/**
+ * @Facebook Requests
+ */
 export function FacebookRequest (data: any) {
   return new Request (Http.POST, "/facebook/connect", data)
+}
+
+/**
+ * @Course Requests
+ */
+export function GetCourseRequest () {
+  return new Request (Http.GET, courseRequests)
 }

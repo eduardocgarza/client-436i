@@ -55,7 +55,7 @@ export default function Login() {
     const request = LoginRequest(loginRequest)
 
     try {
-      const response = await api.requestWithoutAuth(request)
+      const response = await api.request(request)
       setSession({
         isAuthenticated: true,
         token: response.data.token,

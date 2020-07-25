@@ -59,10 +59,6 @@ export default class educonnectionsAPI {
     delete this.axios.defaults.headers.common["Authorization"]
   }
 
-  public async requestWithoutAuth (req: Request) {
-    return this.axios (req)
-  }
-  
   public async request (req: Request) {
     return this.axios (req)
   }

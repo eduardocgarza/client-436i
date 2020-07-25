@@ -4,7 +4,7 @@ import { CourseButtonTypes } from "./CourseButtonTypes"
 
 interface CourseButtonProps {
   course: {
-    id: number
+    courseId: string
     courseDept: string
     courseNumber: string
   }
