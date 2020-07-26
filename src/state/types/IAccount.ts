@@ -11,6 +11,13 @@ export interface IAccount {
     tracks: ITrack[]
   } 
   facebookVerified: boolean;
+  facebook: {
+    likes: Record<string, any>[],
+    facebookId: string;
+    name: string;
+    hometown: string;
+    profilePicURL: string;
+  }
 }
 
 export const INITIAL_ACCOUNT: IAccount = {
@@ -22,7 +29,14 @@ export const INITIAL_ACCOUNT: IAccount = {
     artists: [],
     tracks: []
   },
-  facebookVerified: false
+  facebookVerified: false,
+  facebook: {
+    likes: [],
+    facebookId: '',
+    name: '',
+    hometown: '',
+    profilePicURL: ''
+  }
 }
 
 export default interface IAccountState {

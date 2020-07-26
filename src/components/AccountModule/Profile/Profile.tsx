@@ -8,6 +8,13 @@ import useAppContext from "../../../state/context/ApplicationContext"
 import { IAccount } from "../../../state/types/IAccount"
 import IArtist from "../../../state/types/IArtist"
 import ITrack from "../../../state/types/ITrack"
+import styled from "styled-components"
+
+export const ProfileWrapper = styled.div`
+  align-items: center;
+  justify-content: center;
+  display: flex;
+`
 
 export default function Profile() {
   const { api } = useSessionContext()
@@ -49,6 +56,27 @@ export default function Profile() {
       {account.spotify.artists.length > 0 ? spotifyArtistWrapper() : null }
       {account.spotify.tracks.length > 0 ? spotifyTrackWrapper() : null}
     </Card>
+  }
+
+  function facebookLikesWrapper() {
+    let limit = 5;
+    let counter = 0;
+    return <ListGroup variant="flush">
+      {account.facebook.likes.map((like: any) => {
+        while(counter < limit ) {
+          counter++;
+          return renderLike(like)
+        }
+      })}
+    </ListGroup>
+
+  }
+
+  function renderLike(like: any) {
+    return <ListGroup.Item key={like.likeId}>
+      {like.description}
+    </ListGroup.Item>
+
   }
 
   function spotifyArtistWrapper() {
@@ -96,32 +124,30 @@ export default function Profile() {
     })
   }
 
+  // look into CSS: object-fit
   return (
     <div className="profile-main">
       <hr/>
-      <Card border="primary" style={{ width: "100%", padding: "2em" }}>
+      <ProfileWrapper>
+      <Card border="primary" style={{ width: "50%", padding: "2em" }}>
+
       <Container>
-        {/* <Card.Img variant="top" src={account.spotifyVerified ? account.spotify.image ? account.spotify.image.url : null : null } /> */}
+        <Card.Img variant="top" src={account.facebookVerified ? account.facebook.profilePicURL : undefined} />
         <Card.Body>
-          <Card.Title>{account ? account.name: ""}</Card.Title>
-          <Card.Text>
-            Some quick example text to build on the card title and make up the bulk
-            of the card"s content.
-          </Card.Text>
-          <ListGroup variant="flush">
-            <ListGroup.Item>Cras justo odio</ListGroup.Item>
-            <ListGroup.Item>Dapibus ac facilisis in</ListGroup.Item>
-            <ListGroup.Item>Vestibulum at eros</ListGroup.Item>
-          </ListGroup>
+          {/* Facebook Stuff */}
+          <Card.Title>{account.facebookVerified ? account.facebook.name : account.name}</Card.Title>
+          <Card.Text>{account ? account.email: null}</Card.Text>
+          <Card.Text>{account.facebookVerified ? account.facebook.hometown ? "Hometown: " + account.facebook.hometown : null : null}</Card.Text>
+          {account.facebookVerified ? account.facebook.likes.length > 0 ? facebookLikesWrapper() : null : null}
         </Card.Body>
       </Container>        
       
       </Card>
+      </ProfileWrapper>
       <hr/>
       {/* Spotify Stuff */}
       {account.spotifyVerified ? spotifyWrapper() : null}
       <hr/>
-      {/* Facebook Stuff */}
     </div>
   )
 }
