@@ -62,6 +62,7 @@ export default function Profile() {
     let limit = 5;
     let counter = 0;
     return <ListGroup variant="flush">
+      <Card.Subtitle>Top Likes</Card.Subtitle>
       {account.facebook.likes.map((like: any) => {
         while(counter < limit ) {
           counter++;
@@ -132,11 +133,11 @@ export default function Profile() {
       <Card border="primary" style={{ width: "50%", padding: "2em" }}>
 
       <Container>
-        <Card.Img variant="top" src={account.facebookVerified ? account.facebook.profilePicURL : undefined} />
+        <Card.Img variant="top" src={account.facebookVerified ? account.facebook.profilePicURL ? account.facebook.profilePicURL : undefined : undefined} />
         <Card.Body>
           {/* Facebook Stuff */}
           <Card.Title>{account.facebookVerified ? account.facebook.name : account.name}</Card.Title>
-          <Card.Text>{account ? account.email: null}</Card.Text>
+          <Card.Text>{account.facebookVerified ? account.facebook.email ? account.facebook.email : account.email : null}</Card.Text>
           <Card.Text>{account.facebookVerified ? account.facebook.hometown ? "Hometown: " + account.facebook.hometown : null : null}</Card.Text>
           {account.facebookVerified ? account.facebook.likes.length > 0 ? facebookLikesWrapper() : null : null}
         </Card.Body>

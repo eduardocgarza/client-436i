@@ -17,6 +17,7 @@ export interface IAccount {
     name: string;
     hometown: string;
     profilePicURL: string;
+    email: string;
   }
 }
 
@@ -35,7 +36,8 @@ export const INITIAL_ACCOUNT: IAccount = {
     facebookId: '',
     name: '',
     hometown: '',
-    profilePicURL: ''
+    profilePicURL: '',
+    email: ''
   }
 }
 
