@@ -40,11 +40,11 @@ export default function Profile() {
     fetchProfileData()
   }, [])
 
-  function renderCard(item: ITrack | IArtist) {
-    return <Card style={{width: "15%"}} key={item._id}>
-      <Card.Img variant="top" src={item.image.url}/>
+  function renderCard(spotifyItem: ITrack | IArtist) {
+    return <Card style={{width: "15%"}} key={spotifyItem._id}>
+      <Card.Img variant="top" src={spotifyItem.image ? spotifyItem.image.url : undefined}/>
       <Card.Body>
-        <Card.Title>{item.name}</Card.Title>
+        <Card.Title>{spotifyItem.name}</Card.Title>
       </Card.Body>
     </Card>
   }
@@ -75,7 +75,7 @@ export default function Profile() {
 
   function renderLike(like: any) {
     return <ListGroup.Item key={like.likeId}>
-      {like.description}
+      {like.name}
     </ListGroup.Item>
 
   }
@@ -100,7 +100,7 @@ export default function Profile() {
   }
 
   function renderTopArtists() {
-    let limit = 5;
+    let limit = Math.min(5 , account.spotify.tracks.length);
     let counter = 0;
     if (account.spotify.artists.length < 1) return []
     return account.spotify.artists.map((artist: IArtist) => {
@@ -113,7 +113,7 @@ export default function Profile() {
   }
 
   function renderTopTracks() {
-    let limit = 5;
+    let limit = Math.min(5 , account.spotify.tracks.length);
     let counter = 0;
     if (account.spotify.tracks.length < 1) return []
     return account.spotify.tracks.map((track: ITrack) => {
