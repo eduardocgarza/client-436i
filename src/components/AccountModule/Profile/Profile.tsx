@@ -5,7 +5,7 @@ import useSessionContext from "../../../state/context/SessionContext"
 import { Card, Container, ListGroup, CardDeck } from "react-bootstrap"
 import { AxiosResponse } from "axios"
 import useAppContext from "../../../state/context/ApplicationContext"
-import { IAccount } from "../../../state/types/IAccount"
+import { IAccount, FacebookLike } from "../../../state/types/IAccount"
 import IArtist from "../../../state/types/IArtist"
 import ITrack from "../../../state/types/ITrack"
 import styled from "styled-components"
@@ -63,7 +63,7 @@ export default function Profile() {
     let counter = 0;
     return <ListGroup variant="flush">
       <Card.Subtitle>Top Likes</Card.Subtitle>
-      {account.facebook.likes.map((like: any) => {
+      {account.facebook.likes.map((like: FacebookLike) => {
         while(counter < limit ) {
           counter++;
           return renderLike(like)
@@ -73,7 +73,7 @@ export default function Profile() {
 
   }
 
-  function renderLike(like: any) {
+  function renderLike(like: FacebookLike) {
     return <ListGroup.Item key={like.likeId}>
       {like.name}
     </ListGroup.Item>

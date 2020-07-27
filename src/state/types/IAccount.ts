@@ -1,6 +1,11 @@
 import IArtist from "./IArtist";
 import ITrack from "./ITrack";
 
+export interface FacebookLike {
+  likeId: string;
+  name: string;
+}
+
 export interface IAccount {
   accountId: string;
   name: string;
@@ -12,7 +17,7 @@ export interface IAccount {
   } 
   facebookVerified: boolean;
   facebook: {
-    likes: Record<string, any>[],
+    likes: FacebookLike[],
     facebookId: string;
     name: string;
     hometown: string;
