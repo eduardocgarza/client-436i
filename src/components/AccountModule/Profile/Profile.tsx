@@ -59,7 +59,7 @@ export default function Profile() {
   }
 
   function facebookLikesWrapper() {
-    let limit = 5;
+    let limit = Math.min(5 , account.facebook.likes.length);
     let counter = 0;
     return <ListGroup variant="flush">
       <Card.Subtitle>Top Likes</Card.Subtitle>
