@@ -66,7 +66,7 @@ export default function IntegrationInstagram(props: IntegrationItemProps) {
     <ItemContainer>
       <Col>
         <IconContainer className="d-flex align-items-center">
-          {isConnected ? DisableIcon : ActivateIcon}
+          {isConnected ? ActivateIcon : DisableIcon}
           {isConnected ? UsernameText : ConnectText}
         </IconContainer>
       </Col>

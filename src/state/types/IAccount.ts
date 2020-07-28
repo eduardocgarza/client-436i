@@ -12,6 +12,7 @@ export interface IAccount {
   email: string;
   spotifyVerified: boolean;
   spotify: {
+    spotifyId: string;
     artists: IArtist[]
     tracks: ITrack[]
   } 
@@ -32,6 +33,7 @@ export const INITIAL_ACCOUNT: IAccount = {
   email: "",
   spotifyVerified: false,
   spotify: {
+    spotifyId: "",
     artists: [],
     tracks: []
   },

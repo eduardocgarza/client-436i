@@ -48,16 +48,10 @@ export default function IntegrationItem(props: IntegrationItemProps) {
         await authorizeSpotify()
         setConnected(!isConnected) // TODO: read the flag returned from the /GET profile endpoint's Object
       }
-      case "facebook": {
-        setConnected(!isConnected)
-      }
-      case "instagram": {
-        setConnected(!isConnected)
-      }
     }
   }
 
-  const UsernameText = <ItemName>@eduardo</ItemName>
+  const UsernameText = <ItemName>{account.spotifyVerified ? account.spotify.spotifyId : null} </ItemName>
 
   const ConnectText = <ItemNameDisable>Connect Profile</ItemNameDisable>
 
@@ -80,7 +74,7 @@ export default function IntegrationItem(props: IntegrationItemProps) {
     <ItemContainer>
       <Col>
         <IconContainer className="d-flex align-items-center">
-          {account.spotifyVerified ? DisableIcon : ActivateIcon}
+          {account.spotifyVerified ? ActivateIcon : DisableIcon }
           {account.spotifyVerified ? UsernameText : ConnectText}
         </IconContainer>
       </Col>

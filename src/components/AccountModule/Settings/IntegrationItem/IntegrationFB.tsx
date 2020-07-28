@@ -50,6 +50,10 @@ export default function IntegrationFB(props: IntegrationItemProps) {
     }
   }
 
+  function refreshPage() {
+    window.location.reload(false);
+  }
+
   async function facebookSuccess(response: any) {
     console.log("Facebook Response: ", response)
     const payload =  {
@@ -62,13 +66,13 @@ export default function IntegrationFB(props: IntegrationItemProps) {
 
     await api.apiRequest(FacebookRequest(payload))
     setConnected(!isConnected)
+    refreshPage()  
   }
 
   function componentClicked() {
-    console.log("also clicked")
   }
 
-  const UsernameText = <ItemName>@eduardo</ItemName>
+  const UsernameText = <ItemName>{account.facebookVerified ? account.facebook.name : null}</ItemName>
 
   const ConnectText = <ItemNameDisable>Connect Profile</ItemNameDisable>
 
@@ -98,7 +102,7 @@ export default function IntegrationFB(props: IntegrationItemProps) {
     <ItemContainer>
       <Col>
         <IconContainer className="d-flex align-items-center">
-          {account.facebookVerified ? DisableIcon : ActivateIcon}
+          {account.facebookVerified ? ActivateIcon : DisableIcon}
           {account.facebookVerified ? UsernameText : ConnectText}
         </IconContainer>
       </Col>
