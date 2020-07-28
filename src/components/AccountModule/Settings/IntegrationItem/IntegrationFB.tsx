@@ -43,6 +43,7 @@ export default function IntegrationFB(props: IntegrationItemProps) {
   const [isConnected, setConnected] = useState(account.facebookVerified)
 
   async function handleConnect() {
+    // console.log(account)
     switch (props.service) {
       case "facebook": {
         setConnected(!isConnected)
@@ -72,8 +73,8 @@ export default function IntegrationFB(props: IntegrationItemProps) {
   function componentClicked() {
   }
 
-  const UsernameText = <ItemName> hello </ItemName>
-
+  const UsernameText =  <ItemName>{account.facebookVerified ? account.facebook.name : null} </ItemName>
+  // const UsernameText =  <ItemName>ff </ItemName>
   const ConnectText = <ItemNameDisable>Connect Profile</ItemNameDisable>
 
   const DisconnectButton = (
