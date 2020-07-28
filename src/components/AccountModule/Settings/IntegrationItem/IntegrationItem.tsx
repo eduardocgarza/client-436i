@@ -51,7 +51,7 @@ export default function IntegrationItem(props: IntegrationItemProps) {
     }
   }
 
-  const UsernameText = <ItemName>{account.spotifyVerified ? account.spotify.spotifyId : null} </ItemName>
+  const UsernameText = <ItemName>{account.spotifyVerified ? account.spotify.displayName : null} </ItemName>
 
   const ConnectText = <ItemNameDisable>Connect Profile</ItemNameDisable>
 
