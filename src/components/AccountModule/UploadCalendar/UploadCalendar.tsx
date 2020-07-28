@@ -14,6 +14,10 @@ export default function UploadCalendar () {
   const { register, errors, handleSubmit } = useForm()
   const { api } = useSessionContext()
 
+  function refreshPage() {
+    window.location.reload(false);
+  }
+
   async function onSubmit(data: any) {
     let fd = new FormData();
     fd.append("calendar", data.calendar[0])
@@ -28,6 +32,7 @@ export default function UploadCalendar () {
     if (x) {
       console.log(x);
     }
+    refreshPage()
   }
   
   return (
