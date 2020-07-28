@@ -72,7 +72,7 @@ export default function IntegrationFB(props: IntegrationItemProps) {
   function componentClicked() {
   }
 
-  const UsernameText = <ItemName>{account.facebookVerified ? account.facebook.name ? account.facebook.name : null : null}</ItemName>
+  const UsernameText = <ItemName> hello </ItemName>
 
   const ConnectText = <ItemNameDisable>Connect Profile</ItemNameDisable>
 
