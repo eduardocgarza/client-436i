@@ -11,8 +11,8 @@ import ITrack from "../../../state/types/ITrack"
 import styled from "styled-components"
 
 export const ProfileWrapper = styled.div`
-  align-items: center;
-  justify-content: center;
+  align-items: left;
+  justify-content: left;
   display: flex;
 `
 
@@ -130,20 +130,23 @@ export default function Profile() {
     <div className="profile-main">
       <hr/>
       <ProfileWrapper>
-      <Card border="primary" style={{ width: "50%", padding: "2em" }}>
-
-      <Container>
-        <Card.Img variant="top" src={account.facebookVerified ? account.facebook.profilePicURL ? account.facebook.profilePicURL : undefined : undefined} />
-        <Card.Body>
-          {/* Facebook Stuff */}
-          <Card.Title>{account.facebookVerified ? account.facebook.name : account.name}</Card.Title>
-          <Card.Text>{account.facebookVerified ? account.facebook.email ? account.facebook.email : account.email : null}</Card.Text>
-          <Card.Text>{account.facebookVerified ? account.facebook.hometown ? "Hometown: " + account.facebook.hometown : null : null}</Card.Text>
-          {account.facebookVerified ? account.facebook.likes.length > 0 ? facebookLikesWrapper() : null : null}
-        </Card.Body>
-      </Container>        
       
+      <Card border="light" style={{ width: "25%", padding: "2em" }}>
+        <Card.Img variant="top" src={account.facebookVerified ? account.facebook.profilePicURL ? account.facebook.profilePicURL : undefined : undefined} />
       </Card>
+
+      <Card border='light' style={{ width: '75%'}}>
+        <Container>
+          <Card.Body>
+            {/* Facebook Stuff */}
+            <Card.Title>{account.facebookVerified ? account.facebook.name : account.name}</Card.Title>
+            <Card.Text>{account.facebookVerified ? account.facebook.email ? account.facebook.email : null : account.email}</Card.Text>
+            <Card.Text>{account.facebookVerified ? account.facebook.hometown ? "Hometown: " + account.facebook.hometown : null : null}</Card.Text>
+            {account.facebookVerified ? account.facebook.likes.length > 0 ? facebookLikesWrapper() : null : null}
+          </Card.Body>
+        </Container>          
+      </Card>
+
       </ProfileWrapper>
       <hr/>
       {/* Spotify Stuff */}
