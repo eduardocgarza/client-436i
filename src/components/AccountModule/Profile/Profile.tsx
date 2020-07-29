@@ -9,6 +9,7 @@ import { IAccount, FacebookLike } from "../../../state/types/IAccount"
 import IArtist from "../../../state/types/IArtist"
 import ITrack from "../../../state/types/ITrack"
 import styled from "styled-components"
+import { spotifyArtistWrapper, spotifyTrackWrapper } from "./SpotifyComponentHelpers/spotifyComponentHelpers"
 
 export const ProfileWrapper = styled.div`
   align-items: left;
@@ -19,7 +20,6 @@ export const ProfileWrapper = styled.div`
 export const SubtitleWrapper = styled.div`
   font-weight: bold;
   padding-bottom: 1em;
-  
 `
 
 export default function Profile() {
@@ -45,18 +45,6 @@ export default function Profile() {
   useEffect(() => {
     fetchProfileData()
   }, [])
-
-  function renderCard(spotifyItem: ITrack | IArtist) {
-    if (!spotifyItem.image || !spotifyItem.image.url) {
-      return null;
-    }
-    return <Card style={{width: "15%"}} key={spotifyItem._id}>
-      <Card.Img variant="top" src={spotifyItem.image ? spotifyItem.image.url : undefined}/>
-      <Card.Body>
-        <Card.Title>{spotifyItem.name}</Card.Title>
-      </Card.Body>
-    </Card>
-  }
   
   function profilePicWrapper() {
     if (account.facebookVerified && account.facebook.profilePicURL) {
@@ -76,8 +64,8 @@ export default function Profile() {
     return <div> <hr/> <Card key="spotify" style={{ width: "100%", padding:"2em"}}>
         <Card.Title>Spotify</Card.Title>
         <hr/>
-        {account.spotify.artists.length > 0 ? spotifyArtistWrapper() : null }
-        {account.spotify.tracks.length > 0 ? spotifyTrackWrapper() : null}
+        {account.spotify.artists.length > 0 ? spotifyArtistWrapper(account) : null }
+        {account.spotify.tracks.length > 0 ? spotifyTrackWrapper(account) : null}
       </Card>
     </div>
   }
@@ -89,7 +77,7 @@ export default function Profile() {
       let limit = Math.min(5 , account.facebook.likes.length);
       let counter = 0;
       return <ListGroup variant="flush">
-        <Card.Subtitle>Top Likes</Card.Subtitle>
+        <SubtitleWrapper>Top Likes</SubtitleWrapper>
         {account.facebook.likes.map((like: FacebookLike) => {
           while(counter < limit ) {
             counter++;
@@ -107,81 +95,28 @@ export default function Profile() {
 
   }
 
-  function spotifyArtistWrapper() {
-    return <div>
-      <SubtitleWrapper>Top Artists </SubtitleWrapper>
-      <CardDeck style={{width: "100%"}}>
-        <Card.Subtitle className="text-muted">  </Card.Subtitle>
-        {renderTopArtists()}
-      </CardDeck>
-      <hr/>
-    </div>
+  function facebookDetailsWrapper() {
+    return <Card border='light' style={{ width: '75%'}}>
+      <Container>
+        <Card.Body>
+          <Card.Title>{account.facebookVerified ? account.facebook.name : account.name}</Card.Title>
+          <Card.Text>{account.facebookVerified ? account.facebook.email ? "Email: " + account.facebook.email : null : "Email: " + account.email}</Card.Text>
+          <Card.Text>{account.facebookVerified ? account.facebook.hometown ? "Hometown: " + account.facebook.hometown : null : null}</Card.Text>
+          {facebookLikesWrapper()}
+        </Card.Body>
+      </Container>          
+    </Card>
   }
 
-  function spotifyTrackWrapper() {
-    return <div>
-      <SubtitleWrapper>Top Tracks </SubtitleWrapper>
-      <CardDeck style={{width: "100%"}}>
-        <Card.Subtitle className="text-muted">  </Card.Subtitle>
-        {renderTopTracks()}
-        </CardDeck>
-    </div>
-  }
-
-  function renderTopArtists() {
-    let limit = Math.min(5 , account.spotify.tracks.length);
-    let counter = 0;
-    if (account.spotify.artists.length < 1) return []
-    return account.spotify.artists.map((artist: IArtist) => {
-      while(counter<limit) {
-        const artistCard = renderCard(artist)
-        if (artistCard) {
-          counter++
-        }
-        return artistCard
-      }
-      return null
-    })
-  }
-
-  function renderTopTracks() {
-    let limit = Math.min(5 , account.spotify.tracks.length);
-    let counter = 0;
-    if (account.spotify.tracks.length < 1) return []
-    return account.spotify.tracks.map((track: ITrack) => {
-      while(counter<limit) {
-        const trackCard = renderCard(track)
-        if (trackCard) {
-          counter++
-        }
-        return trackCard
-      }
-      return null
-    })
-  }
-
-  // look into CSS: object-fit
   return (
     <div className="profile-main">
       <hr/>
       <ProfileWrapper>
-      
-      {profilePicWrapper()}
-
-      <Card border='light' style={{ width: '75%'}}>
-        <Container>
-          <Card.Body>
-            {/* Facebook Stuff */}
-            <Card.Title>{account.facebookVerified ? account.facebook.name : account.name}</Card.Title>
-            <Card.Text>{account.facebookVerified ? account.facebook.email ? account.facebook.email : null : account.email}</Card.Text>
-            <Card.Text>{account.facebookVerified ? account.facebook.hometown ? "Hometown: " + account.facebook.hometown : null : null}</Card.Text>
-            {facebookLikesWrapper()}
-          </Card.Body>
-        </Container>          
-      </Card>
-
+        {profilePicWrapper()}
+        {/* Facebook Stuff */}
+        {facebookDetailsWrapper()}
       </ProfileWrapper>
-      
+
       {/* Spotify Stuff */}
       {account.spotifyVerified ? spotifyWrapper() : null}
       <hr/>
