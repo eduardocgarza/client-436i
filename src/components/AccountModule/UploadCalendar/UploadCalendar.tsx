@@ -23,11 +23,15 @@ export default function UploadCalendar () {
       url: "/courses",
       data: fd
     }
-    
-    const x = await api.requestWithConfig(config);
-    if (x) {
-      console.log(x);
+
+    try {
+      const response = await api.requestWithConfig(config)
+      console.log("Response from upload: ", response)
     }
+    catch (error) {
+      console.log("Error: ", error)
+    }
+    
   }
   
   return (

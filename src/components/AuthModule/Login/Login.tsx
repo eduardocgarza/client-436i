@@ -65,7 +65,6 @@ export default function Login() {
       localStorage.setItem("token", response.data.token)
       history.push(ExploreRoute)
     } catch (error) {
-      console.log(Object.entries(error))
       if(!error.errorClientMessage) {
         return setFormError("Sorry, there was a server error. Try again.")
       }

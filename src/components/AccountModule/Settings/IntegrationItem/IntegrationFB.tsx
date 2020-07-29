@@ -77,14 +77,14 @@ export default function IntegrationFB(props: IntegrationItemProps) {
 
   const ConnectButton = (
     <FacebookLogin
-        appId="596845454274053"
-        autoLoad={false}
-        fields="name,email,picture"
-        onClick={componentClicked}
-        scope="public_profile, user_gender, user_birthday, user_age_range, user_hometown, user_likes"
-        callback={facebookSuccess}
-        textButton = "Connect"  
-        cssClass="btnFacebook"
+      appId="596845454274053"
+      autoLoad={false}
+      fields="name,email,picture"
+      onClick={componentClicked}
+      scope="public_profile, user_gender, user_birthday, user_age_range, user_hometown, user_likes"
+      callback={facebookSuccess}
+      textButton="Connect"  
+      cssClass="btnFacebook"
     />
   )
 

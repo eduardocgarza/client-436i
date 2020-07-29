@@ -8,25 +8,24 @@ import useAppContext from "../../../../state/context/ApplicationContext"
 import UploadCalendar from "../../../AccountModule/UploadCalendar/UploadCalendar"
 import { GetCourseRequest } from "../../../../network/NetworkRequests"
 import useSessionContext from "../../../../state/context/SessionContext"
-import { AxiosResponse } from "axios"
 
 export default function MyCourses() {
   const { api } = useSessionContext()
   const { coursesState } = useAppContext()
-  const { courses } = coursesState
-  const tempShowCourses = true
+  const { courses, setCourses } = coursesState
 
   async function fetchCoursesData() {    
     try {
-      const x: AxiosResponse = await api.request(GetCourseRequest())
-      if (!x) {
-        alert("something went wrong with the API call")
+      const response = await api.request(GetCourseRequest())
+      const courseData = response.data.courses
+      setCourses([...courseData])
+    } 
+    catch (error) {
+      if (!error.errorClientMessage) {
+        console.log(error)
+        return
       }
-      const courseData = x.data.courses
-      // console.log(courseData)
-      coursesState.setCourses([...courseData])
-    } catch (e) {
-      console.log(e.errorClientMessage)
+      console.log(error.errorClientMessage)
     }
 
   }
@@ -39,7 +38,6 @@ export default function MyCourses() {
     <PageWrapper>
       <PageHeader text="My Courses" />
       {courses.length > 0 ? (
-      // {tempShowCourses ? (
         <>
         <CoursesHeader />
         <CoursesContent />
