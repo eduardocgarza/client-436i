@@ -48,7 +48,7 @@ export function facebookDetailsWrapper(account: IAccount) {
     <Container>
       <Card.Body>
         <Card.Title>{account.facebookVerified ? account.facebook.name : account.name}</Card.Title>
-        <Card.Text>{account.facebookVerified ? account.facebook.email ? "Email: " + account.facebook.email : null : "Email: " + account.email}</Card.Text>
+        <Card.Text>{account.facebookVerified ? account.facebook.email ? "Email: " + account.facebook.email : "Email: " + account.email : "Email: " + account.email}</Card.Text>
         <Card.Text>{account.facebookVerified ? account.facebook.hometown ? "Hometown: " + account.facebook.hometown : null : null}</Card.Text>
         {facebookLikesWrapper(account)}
       </Card.Body>
