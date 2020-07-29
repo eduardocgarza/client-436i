@@ -102,6 +102,7 @@ export default function Signup() {
         isAuthenticated: true,
         token: response.data.token,
       })
+      api.addAccessToken(response.data.token)
       localStorage.setItem("token", response.data.token)
       history.push(ExploreRoute)
     }

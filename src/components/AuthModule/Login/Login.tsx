@@ -64,7 +64,8 @@ export default function Login() {
       api.addAccessToken(response.data.token)
       localStorage.setItem("token", response.data.token)
       history.push(ExploreRoute)
-    } catch (error) {
+    } 
+    catch (error) {
       if(!error.errorClientMessage) {
         return setFormError("Sorry, there was a server error. Try again.")
       }
