@@ -41,6 +41,9 @@ export default function Profile() {
   }, [])
 
   function renderCard(spotifyItem: ITrack | IArtist) {
+    if (!spotifyItem.image || !spotifyItem.image.url) {
+      return null;
+    }
     return <Card style={{width: "15%"}} key={spotifyItem._id}>
       <Card.Img variant="top" src={spotifyItem.image ? spotifyItem.image.url : undefined}/>
       <Card.Body>
@@ -105,8 +108,11 @@ export default function Profile() {
     if (account.spotify.artists.length < 1) return []
     return account.spotify.artists.map((artist: IArtist) => {
       while(counter<limit) {
-        counter++
-        return renderCard(artist)
+        const artistCard = renderCard(artist)
+        if (artistCard) {
+          counter++
+        }
+        return artistCard
       }
       return null
     })
@@ -118,8 +124,11 @@ export default function Profile() {
     if (account.spotify.tracks.length < 1) return []
     return account.spotify.tracks.map((track: ITrack) => {
       while(counter<limit) {
-        counter++
-        return renderCard(track)
+        const trackCard = renderCard(track)
+        if (trackCard) {
+          counter++
+        }
+        return trackCard
       }
       return null
     })
