@@ -1,7 +1,7 @@
 import React, { useEffect } from "react"
 import { AppContainer } from "../../../assets/styles/AppContainer"
-import IntegrationItem from "./IntegrationItem/IntegrationItem"
-import { IFacebook, IInstagram, ISpotify } from "./IntegrationItem/IntegrationIcon.model"
+import IntegrationSpotify from "./IntegrationItem/IntegrationSpotify"
+import { IFacebook, ISpotify } from "./IntegrationItem/IntegrationIcon.model"
 import { Link } from "react-router-dom"
 import { ProfileRoute } from "../../../router/constants/ClientRoutes"
 import { Row } from "react-bootstrap"
@@ -12,7 +12,6 @@ import { AxiosResponse } from "axios"
 import { GetAccountRequest } from "../../../network/NetworkRequests"
 import useAppContext from "../../../state/context/ApplicationContext"
 import { IAccount } from "../../../state/types/IAccount"
-import IntegrationInstagram from "./IntegrationItem/IntegrationInstagram"
 
 export default function Settings () {
   const { accountState } = useAppContext()
@@ -47,8 +46,7 @@ export default function Settings () {
           </Link>
         </Row>
         <IntegrationFB icon={IFacebook} service="facebook"/>
-        <IntegrationInstagram icon={IInstagram} service="instagram"/>
-        <IntegrationItem icon={ISpotify} service="spotify"/>
+        <IntegrationSpotify icon={ISpotify} service="spotify"/>
       </AppContainer>
     </PageWrapper>
   )
