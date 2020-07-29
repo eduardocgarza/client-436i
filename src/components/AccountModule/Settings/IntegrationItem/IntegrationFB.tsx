@@ -5,6 +5,7 @@ import { IntegrationIcon } from "./IntegrationIcon.model"
 import FacebookLogin from "react-facebook-login"
 import useSessionContext from "../../../../state/context/SessionContext"
 import { FacebookRequest } from "../../../../network/NetworkRequests"
+import useAppContext from "../../../../state/context/ApplicationContext"
 
 const ItemContainer = styled(Row)`
   border: 1px solid #ddd;
@@ -36,15 +37,22 @@ interface IntegrationItemProps {
 }
 
 export default function IntegrationFB(props: IntegrationItemProps) {
-  const [isConnected, setConnected] = useState(false)
   const { api } = useSessionContext()
+  const { accountState } = useAppContext()
+  const { account, setAccount } = accountState
+  const [isConnected, setConnected] = useState(account.facebookVerified)
 
   async function handleConnect() {
+    // console.log(account)
     switch (props.service) {
       case "facebook": {
         setConnected(!isConnected)
       }
     }
+  }
+
+  function refreshPage() {
+    window.location.reload(false);
   }
 
   async function facebookSuccess(response: any) {
@@ -56,17 +64,17 @@ export default function IntegrationFB(props: IntegrationItemProps) {
       name: response.name,
       profilePicURL: response.picture.data.url
     }
-    
+
     await api.apiRequest(FacebookRequest(payload))
     setConnected(!isConnected)
+    refreshPage()  
   }
 
   function componentClicked() {
-    console.log("also clicked")
   }
 
-  const UsernameText = <ItemName>@eduardo</ItemName>
-
+  const UsernameText =  <ItemName>{account.facebookVerified ? account.facebook.name : null} </ItemName>
+  // const UsernameText =  <ItemName>ff </ItemName>
   const ConnectText = <ItemNameDisable>Connect Profile</ItemNameDisable>
 
   const DisconnectButton = (
@@ -95,11 +103,11 @@ export default function IntegrationFB(props: IntegrationItemProps) {
     <ItemContainer>
       <Col>
         <IconContainer className="d-flex align-items-center">
-          {isConnected ? DisableIcon : ActivateIcon}
-          {isConnected ? UsernameText : ConnectText}
+          {account.facebookVerified ? ActivateIcon : DisableIcon}
+          {account.facebookVerified ? UsernameText : ConnectText}
         </IconContainer>
       </Col>
-      <Col md="auto">{isConnected ? DisconnectButton : ConnectButton}</Col>
+      <Col md="auto">{account.facebookVerified ? DisconnectButton : ConnectButton}</Col>
     </ItemContainer>
   )
 }

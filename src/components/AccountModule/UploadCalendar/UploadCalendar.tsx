@@ -9,10 +9,13 @@ import {
   Redirect, 
   Title 
 } from "./UploadCalendarStyles"
+import { useHistory } from "react-router-dom"
+import { MyCoursesRoute } from "../../../router/constants/ClientRoutes"
 
 export default function UploadCalendar () {
   const { register, errors, handleSubmit } = useForm()
   const { api } = useSessionContext()
+  const history = useHistory()
 
   async function onSubmit(data: any) {
     let fd = new FormData();
@@ -31,7 +34,7 @@ export default function UploadCalendar () {
     catch (error) {
       console.log("Error: ", error)
     }
-    
+    history.push(MyCoursesRoute)
   }
   
   return (

@@ -2,9 +2,6 @@ import React, { useState } from "react"
 import { Row, Col, Button } from "react-bootstrap"
 import styled from "styled-components"
 import { IntegrationIcon } from "./IntegrationIcon.model"
-import { authorizeSpotify } from "../../Spotify/Spotify"
-import useAppContext from "../../../../state/context/ApplicationContext"
-import useSessionContext from "../../../../state/context/SessionContext"
 
 const ItemContainer = styled(Row)`
   border: 1px solid #ddd;
@@ -35,23 +32,18 @@ interface IntegrationItemProps {
   service: string
 }
 
-export default function IntegrationItem(props: IntegrationItemProps) {
-  // const [isConnected, setConnected] = useState(false)
-  const { api } = useSessionContext()
-  const { accountState } = useAppContext()
-  const { account, setAccount } = accountState
-  const [isConnected, setConnected] = useState(account.spotifyVerified)
+export default function IntegrationInstagram(props: IntegrationItemProps) {
+  const [isConnected, setConnected] = useState(false)
 
   async function handleConnect() {
     switch (props.service) {
-      case "spotify": {
-        await authorizeSpotify()
-        setConnected(!isConnected) // TODO: read the flag returned from the /GET profile endpoint's Object
+      case "instagram": {
+        setConnected(!isConnected)
       }
     }
   }
 
-  const UsernameText = <ItemName>{account.spotifyVerified ? account.spotify.displayName : null} </ItemName>
+  const UsernameText = <ItemName>@eduardo</ItemName>
 
   const ConnectText = <ItemNameDisable>Connect Profile</ItemNameDisable>
 
@@ -74,11 +66,11 @@ export default function IntegrationItem(props: IntegrationItemProps) {
     <ItemContainer>
       <Col>
         <IconContainer className="d-flex align-items-center">
-          {account.spotifyVerified ? ActivateIcon : DisableIcon }
-          {account.spotifyVerified ? UsernameText : ConnectText}
+          {isConnected ? ActivateIcon : DisableIcon}
+          {isConnected ? UsernameText : ConnectText}
         </IconContainer>
       </Col>
-      <Col md="auto">{account.spotifyVerified ? DisconnectButton : ConnectButton}</Col>
+      <Col md="auto">{isConnected ? DisconnectButton : ConnectButton}</Col>
     </ItemContainer>
   )
 }
