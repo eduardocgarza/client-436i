@@ -10,6 +10,7 @@ import IArtist from "../../../state/types/IArtist"
 import ITrack from "../../../state/types/ITrack"
 import styled from "styled-components"
 import { spotifyArtistWrapper, spotifyTrackWrapper } from "./SpotifyComponentHelpers/spotifyComponentHelpers"
+import { profilePicWrapper, facebookDetailsWrapper } from "./FacebookComponentHelpers/facebookComponentHelpers"
 
 export const ProfileWrapper = styled.div`
   align-items: left;
@@ -45,20 +46,6 @@ export default function Profile() {
   useEffect(() => {
     fetchProfileData()
   }, [])
-  
-  function profilePicWrapper() {
-    if (account.facebookVerified && account.facebook.profilePicURL) {
-      return <Card border="light" style={{ width: "25%", padding: "2em" }}>
-        <Card.Img variant="top" src={account.facebook.profilePicURL} />
-      </Card>
-    } else if (account.spotifyVerified && account.spotify.image) {
-      return <Card border="light" style={{ width: "25%", padding: "2em" }}>
-      <Card.Img variant="top" src={account.spotify.image.url} />
-    </Card>
-    } else {
-      return null
-    }
-  }
 
   function spotifyWrapper() {
     return <div> <hr/> <Card key="spotify" style={{ width: "100%", padding:"2em"}}>
@@ -70,53 +57,18 @@ export default function Profile() {
     </div>
   }
 
-  function facebookLikesWrapper() {
-    if (!account.facebookVerified || account.facebook.likes.length <= 0) {
-      return null
-    } else {
-      let limit = Math.min(5 , account.facebook.likes.length);
-      let counter = 0;
-      return <ListGroup variant="flush">
-        <SubtitleWrapper>Top Likes</SubtitleWrapper>
-        {account.facebook.likes.map((like: FacebookLike) => {
-          while(counter < limit ) {
-            counter++;
-            return renderLike(like)
-          }
-        })}
-      </ListGroup>
-    }
-  }
-
-  function renderLike(like: FacebookLike) {
-    return <ListGroup.Item key={like.likeId}>
-      {like.name}
-    </ListGroup.Item>
-
-  }
-
-  function facebookDetailsWrapper() {
-    return <Card border='light' style={{ width: '75%'}}>
-      <Container>
-        <Card.Body>
-          <Card.Title>{account.facebookVerified ? account.facebook.name : account.name}</Card.Title>
-          <Card.Text>{account.facebookVerified ? account.facebook.email ? "Email: " + account.facebook.email : null : "Email: " + account.email}</Card.Text>
-          <Card.Text>{account.facebookVerified ? account.facebook.hometown ? "Hometown: " + account.facebook.hometown : null : null}</Card.Text>
-          {facebookLikesWrapper()}
-        </Card.Body>
-      </Container>          
-    </Card>
+  function profileWrapper() {
+    return <ProfileWrapper>
+      {profilePicWrapper(account)}
+      {/* Facebook Stuff */}
+      {facebookDetailsWrapper(account)}
+    </ProfileWrapper>
   }
 
   return (
     <div className="profile-main">
       <hr/>
-      <ProfileWrapper>
-        {profilePicWrapper()}
-        {/* Facebook Stuff */}
-        {facebookDetailsWrapper()}
-      </ProfileWrapper>
-
+      {profileWrapper()}
       {/* Spotify Stuff */}
       {account.spotifyVerified ? spotifyWrapper() : null}
       <hr/>
