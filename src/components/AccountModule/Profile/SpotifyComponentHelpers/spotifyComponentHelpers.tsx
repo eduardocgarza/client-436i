@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect } from "react"
-import { Card, Container, ListGroup, CardDeck } from "react-bootstrap"
-import { IAccount, FacebookLike } from "../../../../state/types/IAccount"
+import React from "react"
+import { Card, CardDeck } from "react-bootstrap"
+import { IAccount } from "../../../../state/types/IAccount"
 import IArtist from "../../../../state/types/IArtist"
 import ITrack from "../../../../state/types/ITrack"
 import { SubtitleWrapper } from "../Profile"
