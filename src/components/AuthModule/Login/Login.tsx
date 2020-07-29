@@ -5,8 +5,8 @@ import educonnectionsAPI from "../../../network/educonnectionsAPI"
 import { LoginRequest } from "../../../network/NetworkRequests"
 import { LoginRequestModel } from "../../../network/models/authentication/LoginRequestModel"
 import useSessionContext from "../../../state/context/SessionContext"
-import { useHistory } from "react-router-dom"
-import { ExploreRoute } from "../../../router/constants/ClientRoutes"
+import { Link, useHistory } from "react-router-dom"
+import { ExploreRoute, SignupRoute } from "../../../router/constants/ClientRoutes"
 import ValidationError from "../../_Shared/ValidationError/ValidationError"
 import PageHeader from "../../_Shared/PageHeader/PageHeader"
 
@@ -41,6 +41,7 @@ export default function Login() {
     } else {
       setPasswordError("")
     }
+    setFormError("")
     return formIsValid
   }
 
@@ -63,8 +64,12 @@ export default function Login() {
       api.addAccessToken(response.data.token)
       localStorage.setItem("token", response.data.token)
       history.push(ExploreRoute)
-    } catch (error) {
-      setFormError(error.errorClientMessage)
+    } 
+    catch (error) {
+      if(!error.errorClientMessage) {
+        return setFormError("Sorry, there was a server error. Try again.")
+      }
+      return setFormError(error.errorClientMessage)
     }
   }
 
@@ -94,6 +99,9 @@ export default function Login() {
             {passwordError ? <ValidationError text={passwordError} /> : null}
             {formError ? <ValidationError text={formError} /> : null}
           </Form.Group>
+          <Row className="d-flex justify-content-center">
+            <p>Don't have an account? <Link to={SignupRoute}>Sign up</Link></p>
+          </Row>
           <Row className="d-flex justify-content-center">
             <Button variant="primary" type="submit">
               Log in

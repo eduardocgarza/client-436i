@@ -6,8 +6,8 @@ import useSessionContext from "../../../state/context/SessionContext"
 import educonnectionsAPI from "../../../network/educonnectionsAPI"
 import { SignupRequest } from "../../../network/NetworkRequests"
 import ValidationError from "../../_Shared/ValidationError/ValidationError"
-import { useHistory } from "react-router-dom"
-import { ExploreRoute } from "../../../router/constants/ClientRoutes"
+import { Link, useHistory } from "react-router-dom"
+import { ExploreRoute, LoginRoute } from "../../../router/constants/ClientRoutes"
 import PageHeader from "../../_Shared/PageHeader/PageHeader"
 
 export default function Signup() {
@@ -47,26 +47,37 @@ export default function Signup() {
     } else {
       setNameError("")
     }
+    
     if (!email) {
       setEmailError("Please enter an email")
       formIsValid = false
     } else {
       setEmailError("")
     }
-    if (!password) {
+    
+    if (!password ) {
       setPasswordError("Please enter a password")
+      formIsValid = false
+    } 
+    else if (password.length < 8) {
+      setPasswordError("Please enter a password with at least 8 characters")
       formIsValid = false
     } else {
       setPasswordError("")
     }
+
     if (!passwordConfirmation) {
       setConfirmError("Please enter a password")
+      formIsValid = false
+    } else if (passwordConfirmation.length < 8) {
+      setConfirmError("Please enter a password with at least 8 characters")
       formIsValid = false
     } else {
       setConfirmError("")
     }
+
     if (password && passwordConfirmation && password !== passwordConfirmation) {
-      setConfirmError("Passwords must match")
+      setConfirmError("Please make sure the passwords entered match")
       formIsValid = false
     } else if (password && passwordConfirmation && password === passwordConfirmation) {
       setConfirmError("")
@@ -91,11 +102,16 @@ export default function Signup() {
         isAuthenticated: true,
         token: response.data.token,
       })
+      api.addAccessToken(response.data.token)
       localStorage.setItem("token", response.data.token)
       history.push(ExploreRoute)
     }
     catch (error) {
-      setFormError(error.message)
+      console.log(error)
+      if(!error.errorClientMessage) {
+        return setFormError("Sorry, there was a server error. Try again.")
+      }
+      return setFormError(error.errorClientMessage)
     }
   }
 
@@ -149,6 +165,9 @@ export default function Signup() {
             {confirmError ? <ValidationError text={confirmError} /> : null}
             {formError ? <ValidationError text={formError} /> : null}
           </Form.Group>
+          <Row className="d-flex justify-content-center">
+            <p>Already have an account? <Link to={LoginRoute}>Log in</Link></p>
+          </Row>
           <Row className="d-flex justify-content-center">
             <Button variant="primary" type="submit">
               Sign up

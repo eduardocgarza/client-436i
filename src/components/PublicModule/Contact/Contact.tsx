@@ -9,6 +9,7 @@ export default function Contact () {
   const [emailError, setEmailError] = useState("")
   const [message, setMessage] = useState("")
   const [messageError, setMessageError] = useState("")
+  const [formError, setFormError] = useState("")
 
   function handleEmail (e: ChangeEvent<HTMLInputElement>) {
     setEmail(e.target.value)
@@ -41,6 +42,7 @@ export default function Contact () {
     if (!isValid) {
       return
     }
+    setFormError("This feature is currently unavailable.")
   }
   
   return (
@@ -69,6 +71,7 @@ export default function Contact () {
             />
             {messageError ? <ValidationError text={messageError} /> : null}
           </Form.Group>
+          {formError ? <ValidationError text={formError} /> : null}
           <Row className="d-flex justify-content-center">
             <Button variant="primary" type="submit">
               Send message

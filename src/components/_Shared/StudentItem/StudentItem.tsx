@@ -1,5 +1,6 @@
 import React, { useState } from "react"
 import { Link } from "react-router-dom"
+import IStudent from "../../../state/types/IStudent"
 import {
   StudentItemContainer,
   StudentItemButton,
@@ -13,10 +14,7 @@ import {
 } from "./StudentItemStyles"
 
 interface StudentItemProps {
-  student: {
-    accountId: string
-    name: string
-  }
+  student: IStudent
 }
 
 const tempArray = [ "A", "B", "C", "D", "D" ]
