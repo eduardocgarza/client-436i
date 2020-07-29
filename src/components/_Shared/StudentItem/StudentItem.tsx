@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { Link } from "react-router-dom"
-import IStudent from "../../../state/types/IStudent"
+import IStudent from "../../../models/server/IStudent"
 import {
   StudentItemContainer,
   StudentItemButton,
@@ -17,9 +17,8 @@ interface StudentItemProps {
   student: IStudent
 }
 
-const tempArray = [ "A", "B", "C", "D", "D" ]
-
 export default function StudentItem(props: StudentItemProps) {
+  const { commonArtists, commonCourses, commonLikes, commonTracks } = props.student
   const [toggleOpen, setToggleOpen] = useState(false)
   function handleToggle () {
     setToggleOpen(!toggleOpen)
@@ -27,60 +26,71 @@ export default function StudentItem(props: StudentItemProps) {
   return (
     <StudentItemContainer>
       <StudentItemButton onClick={handleToggle}>
-        <StudentImage src="https://thumbor.forbes.com/thumbor/fit-in/416x416/filters%3Aformat%28jpg%29/https%3A%2F%2Fspecials-images.forbesimg.com%2Fimageserve%2F5d8bd74018444200084e889c%2F0x0.jpg%3Fbackground%3D000000%26cropX1%3D1339%26cropX2%3D3743%26cropY1%3D554%26cropY2%3D2956" />
+        <StudentImage 
+          src={props.student.profileURL} 
+          alt="no_photo" 
+        />
         <StudentName>{props.student.name}</StudentName>
       </StudentItemButton>
       {toggleOpen ? (
         <StudentDetails>
           {/* Arists */}
-          <DetailsContainer>
-            <DetailsHeader>Artists in Common</DetailsHeader>
-            <DetailsContent>
-              {tempArray.map((item, index) => (
-                <>
-                  <DetailsItem key={item}>{item}</DetailsItem>
-                  {(index !== tempArray.length - 1) ? <span style={{marginRight: 4 }}>,</span> : null}
-                </>
-              ))}
-            </DetailsContent>
-          </DetailsContainer>
+          {commonArtists.length > 0 ? (
+            <DetailsContainer>
+              <DetailsHeader>Artists in Common</DetailsHeader>
+              <DetailsContent>
+                {commonArtists.map((artist, index) => (
+                  <a className="d-flex" key={artist.artistId} href={artist.url}>
+                    <DetailsItem>{artist.name}</DetailsItem>
+                    {(index !== commonArtists.length - 1) ? <span style={{marginRight: 4 }}>,</span> : null}
+                  </a>
+                ))}
+              </DetailsContent>
+            </DetailsContainer>
+          ) : null}
           {/* Courses */}
-          <DetailsContainer>
-            <DetailsHeader>Courses in Common</DetailsHeader>
-            <DetailsContent>
-              {tempArray.map((item, index) => (
-                <>
-                  <DetailsItem key={item}>{item}</DetailsItem>
-                  {(index !== tempArray.length - 1) ? <span style={{marginRight: 4 }}>,</span> : null}
-                </>
-              ))}
-            </DetailsContent>
-          </DetailsContainer>
+          {commonCourses.length > 0 ? (
+            <DetailsContainer>
+              <DetailsHeader>Courses in Common</DetailsHeader>
+              <DetailsContent>
+                {commonCourses.map((course, index) => (
+                  <div className="d-flex" key={course.courseId}>
+                    <DetailsItem>{`${course.courseDept} ${course.courseNumber}`}</DetailsItem>
+                    {(index !== commonCourses.length - 1) ? <span style={{marginRight: 4 }}>,</span> : null}
+                  </div>
+                ))}
+              </DetailsContent>
+            </DetailsContainer>
+          ) : null}
           {/* Likes */}
-          <DetailsContainer>
-            <DetailsHeader>Likes in Common</DetailsHeader>
-            <DetailsContent>
-              {tempArray.map((item, index) => (
-                <>
-                  <DetailsItem key={item}>{item}</DetailsItem>
-                  {(index !== tempArray.length - 1) ? <span style={{marginRight: 4 }}>,</span> : null}
-                </>
-              ))}
-            </DetailsContent>
-          </DetailsContainer>
+          {commonLikes.length > 0 ? (
+            <DetailsContainer>
+              <DetailsHeader>Likes in Common</DetailsHeader>
+              <DetailsContent>
+                {commonLikes.map((like, index) => (
+                  <div className="d-flex" key={like.likeId}>
+                    <DetailsItem key={like.likeId}>{like.name}</DetailsItem>
+                    {(index !== commonLikes.length - 1) ? <span style={{marginRight: 4 }}>,</span> : null}
+                  </div>
+                ))}
+              </DetailsContent>
+            </DetailsContainer>
+          ) : null}
           {/* Tracks */}
-          <DetailsContainer>
-            <DetailsHeader>Tracks in Common</DetailsHeader>
-            <DetailsContent>
-              {tempArray.map((item, index) => (
-                <>
-                  <DetailsItem key={item}>{item}</DetailsItem>
-                  {(index !== tempArray.length - 1) ? <span style={{marginRight: 4 }}>,</span> : null}
-                </>
-              ))}
-            </DetailsContent>
-          </DetailsContainer>
-          <Link className="btn btn-primary" to="/profile">Visit profile</Link>
+          {commonTracks.length > 0 ? (
+            <DetailsContainer>
+              <DetailsHeader>Tracks in Common</DetailsHeader>
+              <DetailsContent>
+                {commonTracks.map((track, index) => (
+                  <a className="d-flex" key={track.trackId} href={track.url}>
+                    <DetailsItem>{track.name}</DetailsItem>
+                    {(index !== commonTracks.length - 1) ? <span style={{marginRight: 4 }}>,</span> : null}
+                  </a>
+                ))}
+              </DetailsContent>
+            </DetailsContainer>
+          ) : null}
+          <Link className="btn btn-primary" to={`/profile/${props.student.accountId}`}>Visit profile</Link>
         </StudentDetails>
       ) : null}
     </StudentItemContainer>

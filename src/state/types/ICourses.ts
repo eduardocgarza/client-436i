@@ -1,11 +1,4 @@
-import IStudent from "./IStudent"
-
-export interface ICourse {
-  courseId: string
-  courseDept: string
-  courseNumber: string
-  accounts: IStudent[]
-}
+import ICourse from "../../models/server/ICourse"
 
 export default interface ICoursesState {
   courses: ICourse[]
