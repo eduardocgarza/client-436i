@@ -16,6 +16,12 @@ export const ProfileWrapper = styled.div`
   display: flex;
 `
 
+export const SubtitleWrapper = styled.div`
+  font-weight: bold;
+  padding-bottom: 1em;
+  
+`
+
 export default function Profile() {
   const { api } = useSessionContext()
   const { accountState } = useAppContext()
@@ -52,28 +58,46 @@ export default function Profile() {
     </Card>
   }
   
-  function spotifyWrapper() {
-    return <Card key="spotify" style={{ width: "100%", padding:"2em"}}>
-      <Card.Title>Spotify</Card.Title>
-      <hr/>
-      {account.spotify.artists.length > 0 ? spotifyArtistWrapper() : null }
-      {account.spotify.tracks.length > 0 ? spotifyTrackWrapper() : null}
+  function profilePicWrapper() {
+    if (account.facebookVerified && account.facebook.profilePicURL) {
+      return <Card border="light" style={{ width: "25%", padding: "2em" }}>
+        <Card.Img variant="top" src={account.facebook.profilePicURL} />
+      </Card>
+    } else if (account.spotifyVerified && account.spotify.image) {
+      return <Card border="light" style={{ width: "25%", padding: "2em" }}>
+      <Card.Img variant="top" src={account.spotify.image.url} />
     </Card>
+    } else {
+      return null
+    }
+  }
+
+  function spotifyWrapper() {
+    return <div> <hr/> <Card key="spotify" style={{ width: "100%", padding:"2em"}}>
+        <Card.Title>Spotify</Card.Title>
+        <hr/>
+        {account.spotify.artists.length > 0 ? spotifyArtistWrapper() : null }
+        {account.spotify.tracks.length > 0 ? spotifyTrackWrapper() : null}
+      </Card>
+    </div>
   }
 
   function facebookLikesWrapper() {
-    let limit = Math.min(5 , account.facebook.likes.length);
-    let counter = 0;
-    return <ListGroup variant="flush">
-      <Card.Subtitle>Top Likes</Card.Subtitle>
-      {account.facebook.likes.map((like: FacebookLike) => {
-        while(counter < limit ) {
-          counter++;
-          return renderLike(like)
-        }
-      })}
-    </ListGroup>
-
+    if (!account.facebookVerified || account.facebook.likes.length <= 0) {
+      return null
+    } else {
+      let limit = Math.min(5 , account.facebook.likes.length);
+      let counter = 0;
+      return <ListGroup variant="flush">
+        <Card.Subtitle>Top Likes</Card.Subtitle>
+        {account.facebook.likes.map((like: FacebookLike) => {
+          while(counter < limit ) {
+            counter++;
+            return renderLike(like)
+          }
+        })}
+      </ListGroup>
+    }
   }
 
   function renderLike(like: FacebookLike) {
@@ -85,8 +109,9 @@ export default function Profile() {
 
   function spotifyArtistWrapper() {
     return <div>
+      <SubtitleWrapper>Top Artists </SubtitleWrapper>
       <CardDeck style={{width: "100%"}}>
-        <Card.Subtitle className="text-muted"> Top Artists </Card.Subtitle>
+        <Card.Subtitle className="text-muted">  </Card.Subtitle>
         {renderTopArtists()}
       </CardDeck>
       <hr/>
@@ -95,8 +120,9 @@ export default function Profile() {
 
   function spotifyTrackWrapper() {
     return <div>
+      <SubtitleWrapper>Top Tracks </SubtitleWrapper>
       <CardDeck style={{width: "100%"}}>
-        <Card.Subtitle className="text-muted"> Top Tracks </Card.Subtitle>
+        <Card.Subtitle className="text-muted">  </Card.Subtitle>
         {renderTopTracks()}
         </CardDeck>
     </div>
@@ -140,9 +166,7 @@ export default function Profile() {
       <hr/>
       <ProfileWrapper>
       
-      <Card border="light" style={{ width: "25%", padding: "2em" }}>
-        <Card.Img variant="top" src={account.facebookVerified ? account.facebook.profilePicURL ? account.facebook.profilePicURL : undefined : undefined} />
-      </Card>
+      {profilePicWrapper()}
 
       <Card border='light' style={{ width: '75%'}}>
         <Container>
@@ -151,13 +175,13 @@ export default function Profile() {
             <Card.Title>{account.facebookVerified ? account.facebook.name : account.name}</Card.Title>
             <Card.Text>{account.facebookVerified ? account.facebook.email ? account.facebook.email : null : account.email}</Card.Text>
             <Card.Text>{account.facebookVerified ? account.facebook.hometown ? "Hometown: " + account.facebook.hometown : null : null}</Card.Text>
-            {account.facebookVerified ? account.facebook.likes.length > 0 ? facebookLikesWrapper() : null : null}
+            {facebookLikesWrapper()}
           </Card.Body>
         </Container>          
       </Card>
 
       </ProfileWrapper>
-      <hr/>
+      
       {/* Spotify Stuff */}
       {account.spotifyVerified ? spotifyWrapper() : null}
       <hr/>
