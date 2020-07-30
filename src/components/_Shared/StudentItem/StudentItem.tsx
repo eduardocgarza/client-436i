@@ -10,18 +10,18 @@ import {
   DetailsContainer,
   DetailsHeader,
   DetailsContent,
-  DetailsItem
+  DetailsItem,
 } from "./StudentItemStyles"
 
 interface StudentItemProps {
   student: IStudent
 }
 
-const tempArray = [ "A", "B", "C", "D", "D" ]
+const tempArray = ["A", "B", "C", "D", "D"]
 
 export default function StudentItem(props: StudentItemProps) {
   const [toggleOpen, setToggleOpen] = useState(false)
-  function handleToggle () {
+  function handleToggle() {
     setToggleOpen(!toggleOpen)
   }
   return (
@@ -39,7 +39,9 @@ export default function StudentItem(props: StudentItemProps) {
               {tempArray.map((item, index) => (
                 <>
                   <DetailsItem key={item}>{item}</DetailsItem>
-                  {(index !== tempArray.length - 1) ? <span style={{marginRight: 4 }}>,</span> : null}
+                  {index !== tempArray.length - 1 ? (
+                    <span style={{ marginRight: 4 }}>,</span>
+                  ) : null}
                 </>
               ))}
             </DetailsContent>
@@ -51,7 +53,9 @@ export default function StudentItem(props: StudentItemProps) {
               {tempArray.map((item, index) => (
                 <>
                   <DetailsItem key={item}>{item}</DetailsItem>
-                  {(index !== tempArray.length - 1) ? <span style={{marginRight: 4 }}>,</span> : null}
+                  {index !== tempArray.length - 1 ? (
+                    <span style={{ marginRight: 4 }}>,</span>
+                  ) : null}
                 </>
               ))}
             </DetailsContent>
@@ -63,7 +67,9 @@ export default function StudentItem(props: StudentItemProps) {
               {tempArray.map((item, index) => (
                 <>
                   <DetailsItem key={item}>{item}</DetailsItem>
-                  {(index !== tempArray.length - 1) ? <span style={{marginRight: 4 }}>,</span> : null}
+                  {index !== tempArray.length - 1 ? (
+                    <span style={{ marginRight: 4 }}>,</span>
+                  ) : null}
                 </>
               ))}
             </DetailsContent>
@@ -75,12 +81,19 @@ export default function StudentItem(props: StudentItemProps) {
               {tempArray.map((item, index) => (
                 <>
                   <DetailsItem key={item}>{item}</DetailsItem>
-                  {(index !== tempArray.length - 1) ? <span style={{marginRight: 4 }}>,</span> : null}
+                  {index !== tempArray.length - 1 ? (
+                    <span style={{ marginRight: 4 }}>,</span>
+                  ) : null}
                 </>
               ))}
             </DetailsContent>
           </DetailsContainer>
-          <Link className="btn btn-primary" to="/profile">Visit profile</Link>
+          <Link
+            className="btn btn-primary"
+            to={"/profile/" + props.student.accountId}
+          >
+            Visit profile
+          </Link>
         </StudentDetails>
       ) : null}
     </StudentItemContainer>
