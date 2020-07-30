@@ -15,7 +15,11 @@ import AuthSwitch from "./AuthSwitch"
 import HomeRouter from "../routers/HomeRouter"
 import PublicSwitch from "./PublicSwitch"
 import UnauthSwitch from "./UnauthSwitch"
-import { NotFoundRoute, CatchAllRoute, HomeRoute } from "../constants/ClientRoutes"
+import {
+  NotFoundRoute,
+  CatchAllRoute,
+  HomeRoute,
+} from "../constants/ClientRoutes"
 import UnauthorizedRoute from "../routes/UnauthorizedRoute"
 import { IRoute } from "../constants/IClientRoute"
 import AuthorizedRoute from "../routes/AuthorizedRoute"
@@ -28,14 +32,14 @@ const AppContent = styled.section`
   width: 80%;
 `
 
-export default function MainAppSwitch () {
+export default function MainAppSwitch() {
   return (
     <AppContent>
       <Switch>
         <Route path="/spotify">
           <SpotifyAPI />
         </Route>
-        
+
         {/* Public Routes : Accessible at all times to 
           all users */}
         {PublicSwitch.map((route: IRoute) => (
@@ -54,19 +58,20 @@ export default function MainAppSwitch () {
 
         {/* Authenticated Routes : Accessible only to 
           authenticated users */}
-          <AppContextProvider>
-            {/* Home Component : Renders the Homepage or Dashboard
+        <AppContextProvider>
+          {/* Home Component : Renders the Homepage or Dashboard
               whether the user is authenticated or not */}
-            <Route exact path={HomeRoute}>
-              <HomeRouter />
-            </Route>
-            
-            {AuthSwitch.map((route: IRoute) => (
-              <AuthorizedRoute path={route.path} key={route.path} exact>
-                <route.component />
-              </AuthorizedRoute>
-            ))}
-          </AppContextProvider>
+
+          <Route exact path={HomeRoute}>
+            <HomeRouter />
+          </Route>
+
+          {AuthSwitch.map((route: IRoute) => (
+            <AuthorizedRoute path={route.path} key={route.path} exact>
+              <route.component />
+            </AuthorizedRoute>
+          ))}
+        </AppContextProvider>
 
         {/* Not Found Component : Renders on Error when a 
           page cannot be accessed */}

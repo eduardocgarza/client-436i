@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from "react"
-import { GetAccountRequest } from "../../../network/NetworkRequests"
+import { GetAccountRequest, GetProfileRequest } from "../../../network/NetworkRequests"
 import useSessionContext from "../../../state/context/SessionContext"
 import { Card } from "react-bootstrap"
 import { AxiosResponse } from "axios"
@@ -25,16 +25,19 @@ export default function Profile() {
   const { api } = useSessionContext()
   const { accountState } = useAppContext()
   const { account, setAccount } = accountState
-
+  let currentURL = window.location.href
+  
   async function fetchProfileData() {
     try {
-      const x: AxiosResponse = await api.request(GetAccountRequest())
-      if (!x) {
+      currentURL = currentURL.substring(currentURL.lastIndexOf("/") + 1)
+      const getAccountResponse: AxiosResponse = currentURL === 'profile' ? await api.request(GetAccountRequest()) : await api.request(GetProfileRequest(currentURL))
+
+      if (!getAccountResponse) {
         alert("something went wrong with the API call")
       }
-      const y = x.data as IAccount
+      const accountInfo = getAccountResponse.data as IAccount
       setAccount({
-        ...y
+        ...accountInfo
       })
     } catch (e) {
       console.log(e.errorClientMessage)
