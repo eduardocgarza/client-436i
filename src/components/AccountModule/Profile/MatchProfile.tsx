@@ -31,12 +31,12 @@ export default function MatchProfile() {
   const { api } = useSessionContext()
   const { accountState } = useAppContext()
   const { account, setAccount } = accountState
-  const search = window.location.search
-  let params = new URLSearchParams(search)
-
+  let current = window.location.href
+  current = current.substring(current.lastIndexOf("/") + 1)
   async function fetchProfileData() {
     try {
-      const x: AxiosResponse = await api.request(GetProfileRequest(search))
+      console.log(current)
+      const x: AxiosResponse = await api.request(GetProfileRequest(current))
       if (!x) {
         alert("something went wrong with the API call")
       }

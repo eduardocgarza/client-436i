@@ -23,7 +23,8 @@ export function GetAccountRequest() {
   return new Request(Http.GET, AccountRequests)
 }
 export function GetProfileRequest(accountId: string) {
-  return new Request(Http.GET, AccountRequests + accountId)
+  console.log(`hitting: ${AccountRequests}/${accountId}`)
+  return new Request(Http.GET, `${AccountRequests}/${accountId}`)
 }
 export function DeleteAccountRequest() {
   return new Request(Http.DELETE, AccountRequests)

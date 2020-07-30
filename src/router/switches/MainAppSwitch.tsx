@@ -37,8 +37,6 @@ export default function MainAppSwitch() {
   return (
     <AppContent>
       <Switch>
-        <Route path="/profile/:accountId" component={MatchProfile} />
-
         <Route path="/spotify">
           <SpotifyAPI />
         </Route>
