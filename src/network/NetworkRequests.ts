@@ -22,6 +22,7 @@ const courseRequests = "/courses"
 export function GetAccountRequest() {
   return new Request(Http.GET, AccountRequests)
 }
+
 export function GetProfileRequest(accountId: string) {
   return new Request(Http.GET, `${AccountRequests}/${accountId}`)
 }
