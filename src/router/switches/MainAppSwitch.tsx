@@ -5,7 +5,6 @@ import { Switch, Route } from "react-router-dom"
 /**
  * @Components
  */
-import MatchProfile from "../../components/AccountModule/Profile/MatchProfile"
 import RedirectRoute from "../routes/RedirectRoute"
 import NotFound from "../../components/_Shared/NotFound/NotFound"
 
@@ -37,8 +36,6 @@ export default function MainAppSwitch() {
   return (
     <AppContent>
       <Switch>
-        <Route path="/profile/:accountId" component={MatchProfile} />
-
         <Route path="/spotify">
           <SpotifyAPI />
         </Route>
@@ -64,6 +61,7 @@ export default function MainAppSwitch() {
         <AppContextProvider>
           {/* Home Component : Renders the Homepage or Dashboard
               whether the user is authenticated or not */}
+
           <Route exact path={HomeRoute}>
             <HomeRouter />
           </Route>

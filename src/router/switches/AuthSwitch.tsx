@@ -29,6 +29,10 @@ const AuthSwitch: IRoute[] = [
   {
     path: MyCoursesRoute,
     component: MyCourses
+  },
+  {
+    path: `${ProfileRoute}/:accountid`,
+    component: Profile
   }
 ]
 
