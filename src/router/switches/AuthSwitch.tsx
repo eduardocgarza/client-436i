@@ -1,15 +1,9 @@
 import { IRoute } from "../constants/IClientRoute"
-import {
-  ProfileRoute,
-  SettingsRoute,
-  MyMatchesRoute,
-  MyCoursesRoute,
-} from "../constants/ClientRoutes"
+import {  ProfileRoute,  SettingsRoute,  MyMatchesRoute,  MyCoursesRoute } from "../constants/ClientRoutes"
 import Profile from "../../components/AccountModule/Profile/Profile"
 import Settings from "../../components/AccountModule/Settings/Settings"
 import MyMatches from "../../components/MyMatches/MyMatches"
 import MyCourses from "../../components/CoursesModule/MyCourses/MyCourses/MyCourses"
-import MatchProfile from "../../components/AccountModule/Profile/MatchProfile"
 
 const AuthSwitch: IRoute[] = [
   /**
@@ -17,15 +11,15 @@ const AuthSwitch: IRoute[] = [
    */
   {
     path: ProfileRoute,
-    component: Profile,
+    component: Profile
   },
   {
     path: SettingsRoute,
-    component: Settings,
+    component: Settings
   },
   {
     path: MyMatchesRoute,
-    component: MyMatches,
+    component: MyMatches
   },
   {
     path: MyCoursesRoute,
