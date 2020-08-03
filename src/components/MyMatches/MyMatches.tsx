@@ -32,7 +32,11 @@ export default function MyMatches() {
   return (
     <MyMatchesContainer>
       <PageHeader text="My Matches" />
-      {matches.map(match => <StudentItem key={match.accountId} student={match} />)}
+      {matches.length > 0 ? (
+        matches.map(match => (
+          <StudentItem key={match.accountId} student={match} />
+        ))
+      ) : null}
     </MyMatchesContainer>
   )
 }
