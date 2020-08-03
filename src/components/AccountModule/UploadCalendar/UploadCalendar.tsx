@@ -17,6 +17,10 @@ export default function UploadCalendar () {
   const { api } = useSessionContext()
   const history = useHistory()
 
+  function refreshPage() {
+    window.location.reload(false);
+  }
+
   async function onSubmit(data: any) {
     let fd = new FormData();
     fd.append("calendar", data.calendar[0])
@@ -35,6 +39,7 @@ export default function UploadCalendar () {
       console.log("Error: ", error)
     }
     history.push(MyCoursesRoute)
+    refreshPage()
   }
   
   return (

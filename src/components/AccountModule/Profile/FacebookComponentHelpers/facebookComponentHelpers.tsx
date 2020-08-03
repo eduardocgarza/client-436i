@@ -3,6 +3,7 @@ import React from "react"
 import { Card, Container, ListGroup } from "react-bootstrap"
 import { IAccount, FacebookLike } from "../../../../state/types/IAccount"
 import { SubtitleWrapper } from "../Profile"
+import emptyPicture from "../../../../assets/images/blank_fb_pic.jpg"
 
   
 export function profilePicWrapper(account: IAccount) {
@@ -15,7 +16,9 @@ export function profilePicWrapper(account: IAccount) {
     <Card.Img variant="top" src={account.spotify.image.url} />
   </Card>
   } else {
-    return null
+    return <Card border="light" style={{ width: "25%", padding: "2em" }}>
+    <Card.Img variant="top" src={emptyPicture}/>
+    </Card>
   }
 }
 
