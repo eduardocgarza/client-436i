@@ -48,7 +48,7 @@ export const CourseButtonContainer = styled.button`
   margin: 20px;
   height: 135px;
   text-align: center;
-  width: 135px;
+  width: 270px;
 
   &:hover {
     background: ${(props: CourseButtonProps) => {

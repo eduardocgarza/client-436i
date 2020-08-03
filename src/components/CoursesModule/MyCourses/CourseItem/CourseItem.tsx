@@ -1,4 +1,5 @@
 import React from "react"
+import ICourse from "../../../../models/server/ICourse"
 import StudentItem from "../../../_Shared/StudentItem/StudentItem"
 import {
   CourseItemContainer,
@@ -8,30 +9,20 @@ import {
   StudentsContent,
 } from "./CourseItemStyles"
 
-interface Student {
-  accountId: string
-  name: string
-}
-
 interface CourseItemProps {
-  course: {
-    courseId: string
-    courseDept: string
-    courseNumber: string
-    accounts: Student[]
-  }
+  course: ICourse
 }
 
 export default function CourseItem(props: CourseItemProps) {
   const { course } = props
-  const courseName = `${course.courseDept} ${course.courseNumber}`
+  const courseName = `${course.courseDept} ${course.courseNumber} ${course.courseSection}`
   return (
     <CourseItemContainer>
       <CourseItemHeader>{courseName}</CourseItemHeader>
       <StudentsContainer>
         <StudentsHeader>Classmates</StudentsHeader>
         <StudentsContent>
-          {course.accounts.map(student => (
+          {course.students.map(student => (
             <StudentItem 
               key={student.accountId} 
               student={student}

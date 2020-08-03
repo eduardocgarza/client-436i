@@ -12,16 +12,15 @@ import {
 export default function MyMatches() {
   const { api } = useSessionContext()
   const { matchesState } = useAppContext()
-  const { matches } = matchesState
+  const { matches, setMatches } = matchesState
 
   async function fetchMatches() {
     const route = GetMatchesRequest()
     try {
       const response = await api.request(route)
-      console.log("Matches fetched: ", response)
-      if (route.data) {
-        // matches.setMatches(route.data)
-      }
+      const matchesData = response.data.matches
+      console.log("Matches: ", matchesData)
+      setMatches([...matchesData])
     }
     catch (error) {
 

@@ -27,12 +27,13 @@ export default function MyCourses() {
       }
       console.log(error.errorClientMessage)
     }
-
   }
 
   useEffect(() => {
     fetchCoursesData()
   }, [])
+
+  console.log("Courses: ", courses)
 
   return (
     <PageWrapper>
@@ -42,7 +43,8 @@ export default function MyCourses() {
         <CoursesHeader />
         <CoursesContent />
         </>
-      ) : <UploadCalendar /> }
+      ) : null }
+      {courses.length === 0 ? <UploadCalendar /> : null}
     </PageWrapper>
   )
 }
