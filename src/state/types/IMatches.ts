@@ -1,4 +1,4 @@
-import IStudent from "./IStudent"
+import IStudent from "../../models/server/IStudent"
 
 export default interface IMatchesState {
   matches: IStudent[]

@@ -35,7 +35,7 @@ interface IntegrationItemProps {
   service: string
 }
 
-export default function IntegrationItem(props: IntegrationItemProps) {
+export default function IntegrationSpotify(props: IntegrationItemProps) {
   // const [isConnected, setConnected] = useState(false)
   const { api } = useSessionContext()
   const { accountState } = useAppContext()
@@ -46,7 +46,7 @@ export default function IntegrationItem(props: IntegrationItemProps) {
     switch (props.service) {
       case "spotify": {
         await authorizeSpotify()
-        setConnected(!isConnected) // TODO: read the flag returned from the /GET profile endpoint's Object
+        setConnected(!isConnected)
       }
     }
   }
@@ -56,8 +56,8 @@ export default function IntegrationItem(props: IntegrationItemProps) {
   const ConnectText = <ItemNameDisable>Connect Profile</ItemNameDisable>
 
   const DisconnectButton = (
-    <Button onClick={handleConnect} variant="light">
-      Disconnect
+    <Button onClick={handleConnect} variant="light" disabled>
+      Connected
     </Button>
   )
 

@@ -6,6 +6,7 @@ import FacebookLogin from "react-facebook-login"
 import useSessionContext from "../../../../state/context/SessionContext"
 import { FacebookRequest } from "../../../../network/NetworkRequests"
 import useAppContext from "../../../../state/context/ApplicationContext"
+import './IntegrationFb.css'
 
 const ItemContainer = styled(Row)`
   border: 1px solid #ddd;
@@ -56,18 +57,21 @@ export default function IntegrationFB(props: IntegrationItemProps) {
   }
 
   async function facebookSuccess(response: any) {
-    console.log("Facebook Response: ", response)
-    const payload =  {
-      accessToken: response.accessToken,
-      id: response.id,
-      email: response.email,
-      name: response.name,
-      profilePicURL: response.picture.data.url
+    if (response.status === "unknown") {
+      // don't do anything, User did not log in
+    } else {
+      const payload =  {
+        accessToken: response.accessToken,
+        id: response.id,
+        email: response.email,
+        name: response.name,
+        profilePicURL: response.picture.data ? response.picture.data.url : null
+      }
+  
+      await api.apiRequest(FacebookRequest(payload))
+      setConnected(!isConnected)
+      refreshPage()  
     }
-
-    await api.apiRequest(FacebookRequest(payload))
-    setConnected(!isConnected)
-    refreshPage()  
   }
 
   function componentClicked() {
@@ -78,8 +82,8 @@ export default function IntegrationFB(props: IntegrationItemProps) {
   const ConnectText = <ItemNameDisable>Connect Profile</ItemNameDisable>
 
   const DisconnectButton = (
-    <Button onClick={handleConnect} variant="light">
-      Disconnect
+    <Button onClick={handleConnect} variant="light" disabled>
+      Connected
     </Button>
   )
 
