@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import { Link } from "react-router-dom"
 import IStudent from "../../../models/server/IStudent"
+import blankProfilePic from "../../../assets/images/blank_fb_pic.jpg"
 import {
   StudentItemContainer,
   StudentItemButton,
@@ -22,13 +23,15 @@ export default function StudentItem(props: StudentItemProps) {
   const [toggleOpen, setToggleOpen] = useState(false)
   function handleToggle() {
     setToggleOpen(!toggleOpen)
+    console.log(props.student)
+    console.log(props.student.accountId)
+    console.log("hhh")
   }
   return (
     <StudentItemContainer>
       <StudentItemButton onClick={handleToggle}>
         <StudentImage 
-          src={props.student.profileURL} 
-          alt="no_photo" 
+          src={props.student.profileURL? props.student.profileURL: blankProfilePic}
         />
         <StudentName>{props.student.name}</StudentName>
       </StudentItemButton>
