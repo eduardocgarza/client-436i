@@ -23,9 +23,6 @@ export default function StudentItem(props: StudentItemProps) {
   const [toggleOpen, setToggleOpen] = useState(false)
   function handleToggle() {
     setToggleOpen(!toggleOpen)
-    console.log(props.student)
-    console.log(props.student.accountId)
-    console.log("hhh")
   }
   return (
     <StudentItemContainer>
