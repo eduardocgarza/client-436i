@@ -1,10 +1,5 @@
 import { IRoute } from "../constants/IClientRoute"
-import { 
-  ProfileRoute, 
-  SettingsRoute,
-  MyMatchesRoute,
-  MyCoursesRoute
-} from "../constants/ClientRoutes"
+import {  ProfileRoute,  SettingsRoute,  MyMatchesRoute,  MyCoursesRoute } from "../constants/ClientRoutes"
 import Profile from "../../components/AccountModule/Profile/Profile"
 import Settings from "../../components/AccountModule/Settings/Settings"
 import MyMatches from "../../components/MyMatches/MyMatches"
@@ -29,6 +24,10 @@ const AuthSwitch: IRoute[] = [
   {
     path: MyCoursesRoute,
     component: MyCourses
+  },
+  {
+    path: `${ProfileRoute}/:accountid`,
+    component: Profile
   }
 ]
 

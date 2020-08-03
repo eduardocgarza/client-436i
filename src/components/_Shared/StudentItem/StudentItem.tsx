@@ -10,7 +10,7 @@ import {
   DetailsContainer,
   DetailsHeader,
   DetailsContent,
-  DetailsItem
+  DetailsItem,
 } from "./StudentItemStyles"
 
 interface StudentItemProps {
@@ -20,7 +20,7 @@ interface StudentItemProps {
 export default function StudentItem(props: StudentItemProps) {
   const { commonArtists, commonCourses, commonLikes, commonTracks } = props.student
   const [toggleOpen, setToggleOpen] = useState(false)
-  function handleToggle () {
+  function handleToggle() {
     setToggleOpen(!toggleOpen)
   }
   return (
