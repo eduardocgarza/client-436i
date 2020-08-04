@@ -11,7 +11,6 @@ export default function ForgotPassword () {
 
   function handleSubmit (e: FormEvent<HTMLFormElement>) {
     e.preventDefault ()
-    console.log("submitting form")
   }
 
   return (

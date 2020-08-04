@@ -11,7 +11,6 @@ export default function Facebook() {
   const { api } = useSessionContext()
 
   async function facebookSuccess(response: any) {
-    console.log("Facebook Response: ", response)
     setData(response);
     if (response.accessToken) {
       setLogin(true);
@@ -29,7 +28,7 @@ export default function Facebook() {
   }
 
   function componentClicked() {
-    console.log("also clicked")
+    // need to keep this here
   }
 
   return (

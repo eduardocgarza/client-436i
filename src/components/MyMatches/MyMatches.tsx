@@ -8,6 +8,8 @@ import StudentItem from "../_Shared/StudentItem/StudentItem"
 import {
   MyMatchesContainer
 } from "./MyMatchesStyles"
+import { CalendarUploadWrapper, CalendarContainer, Title } from "../AccountModule/UploadCalendar/UploadCalendarStyles"
+
 
 export default function MyMatches() {
   const { api } = useSessionContext()
@@ -19,7 +21,6 @@ export default function MyMatches() {
     try {
       const response = await api.request(route)
       const matchesData = response.data.matches
-      console.log("Matches: ", matchesData)
       setMatches([...matchesData])
     }
     catch (error) {
@@ -36,7 +37,12 @@ export default function MyMatches() {
         matches.map(match => (
           <StudentItem key={match.accountId} student={match} />
         ))
-      ) : null}
+      ) : <CalendarUploadWrapper>
+            <CalendarContainer> 
+              <Title> No Matches Found </Title>
+              Could not find any matches, connect your social media to try and find some! 
+            </CalendarContainer>    
+          </CalendarUploadWrapper>}
     </MyMatchesContainer>
   )
 }

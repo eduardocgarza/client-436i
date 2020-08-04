@@ -33,8 +33,6 @@ export default function MyCourses() {
     fetchCoursesData()
   }, [])
 
-  console.log("Courses: ", courses)
-
   return (
     <PageWrapper>
       <PageHeader text="My Courses" />

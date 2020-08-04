@@ -8,18 +8,15 @@ function redirectToSpotifyAuth () {
 }
 
 export async function authorizeSpotify () {
-  console.log('trying redirect')
   try {
     redirectToSpotifyAuth ()
   }
   catch (error) {
-    console.log("Error: ", error)
     return error
   }
 }
 
 async function handleAuthorize () {
-  console.log ("Beginning authorize...")
   authorizeSpotify ()
 }
 

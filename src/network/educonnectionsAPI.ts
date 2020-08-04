@@ -44,17 +44,14 @@ export default class educonnectionsAPI {
   }
 
   public addAccessToken (accessToken: string) {
-    console.log ("Adding access token...")
     const authorizationHeader = {
       "Authorization": `Bearer: ${accessToken}`
     }
     this.axios.defaults.headers.common = authorizationHeader
     this.tokenVerified = true
-    console.log ("Added accessToken [complete]")
   }
   
   public clearAccessToken () {
-    console.log ("Removing access token")
     this.tokenVerified = false
     delete this.axios.defaults.headers.common["Authorization"]
   }
@@ -66,10 +63,8 @@ export default class educonnectionsAPI {
   public async apiRequest(req: Request) {
     if (!this.tokenVerified) {
       try {
-        console.log ("Verifying request...")
         await this.axios.request (VerifySessionRequest ({ token: this.token }))
         this.addAccessToken (this.token)
-        console.log ("Token valid... returning promise")
         return this.axios (req)
       }
       catch (error) {
@@ -82,10 +77,8 @@ export default class educonnectionsAPI {
   public async requestWithConfig (config: AxiosRequestConfig) {
     if (!this.tokenVerified) {
       try {
-        console.log ("Verifying request...")
         await this.axios.request (VerifySessionRequest ({ token: this.token }))
         this.addAccessToken (this.token)
-        console.log ("Token valid... returning promise")
         return this.axios (config)
       }
       catch (error) {

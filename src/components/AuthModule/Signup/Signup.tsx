@@ -97,7 +97,6 @@ export default function Signup() {
     
     try {
       const response = await api.request(request)
-      console.log("Server response: ", response)
       setSession({
         isAuthenticated: true,
         token: response.data.token,

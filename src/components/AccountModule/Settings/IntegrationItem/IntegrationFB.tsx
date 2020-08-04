@@ -44,7 +44,6 @@ export default function IntegrationFB(props: IntegrationItemProps) {
   const [isConnected, setConnected] = useState(account.facebookVerified)
 
   async function handleConnect() {
-    // console.log(account)
     switch (props.service) {
       case "facebook": {
         setConnected(!isConnected)
