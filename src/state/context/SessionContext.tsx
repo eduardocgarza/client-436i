@@ -14,7 +14,6 @@ export const SessionContextProvider: React.FC = (props) => {
         const result = await api.request (VerifySessionRequest ({ 
           token: localStorageToken 
         }))
-        console.log ("Verified token: ", result)
         setSession ({
           isAuthenticated: true,
           token: localStorageToken

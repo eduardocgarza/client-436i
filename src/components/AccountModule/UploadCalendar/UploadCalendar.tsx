@@ -33,7 +33,6 @@ export default function UploadCalendar () {
 
     try {
       const response = await api.requestWithConfig(config)
-      console.log("Response from upload: ", response)
     }
     catch (error) {
       console.log("Error: ", error)
