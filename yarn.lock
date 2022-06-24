@@ -7054,9 +7054,9 @@ locate-path@^5.0.0:
     p-locate "^4.1.0"
 
 lodash-es@^4.17.15:
-  version "4.17.15"
-  resolved "https://registry.yarnpkg.com/lodash-es/-/lodash-es-4.17.15.tgz#21bd96839354412f23d7a10340e5eac6ee455d78"
-  integrity sha512-rlrc3yU3+JNOpZ9zj5pQtxnx2THmvRykwL4Xlxoa8I9lHBlVbbyPhgyPMioxVZ4NqyxaVVtaJnzsyOidQIhyyQ==
+  version "4.17.21"
+  resolved "https://registry.yarnpkg.com/lodash-es/-/lodash-es-4.17.21.tgz#43e626c46e6591b7750beb2b50117390c609e3ee"
+  integrity sha512-mKnC+QJ9pWVzv+C4/U3rRsHapFfHvQFoFB92e52xeyGMcX6/OlIl78je1u8vePzYZSkkogMPJ2yjxxsb89cxyw==
 
 lodash._reinterpolate@^3.0.0:
   version "3.0.0"
@@ -9254,7 +9254,6 @@ react-hook-form@^6.0.1:
   resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-6.0.2.tgz#4a16064b9a47509736f1b1afe84ad87cac617e58"
   integrity sha512-8KR2bJbwFLuDci/c3tbmCLrkAsHPV7bKGbbXoCokhWx6gYL5me55Gzz2IiVPetj1rlvQejgUGWL+iZF/LpBYUg==
 
-react-is@^16.12.0, react-is@^16.3.2, react-is@^16.6.0, react-is@^16.7.0, react-is@^16.8.1, react-is@^16.8.4, react-is@^16.9.0:
 react-icons@^3.10.0:
   version "3.10.0"
   resolved "https://registry.yarnpkg.com/react-icons/-/react-icons-3.10.0.tgz#6c217a2dde2e8fa8d293210023914b123f317297"
@@ -9286,15 +9285,6 @@ react-overlays@^3.1.2:
     uncontrollable "^7.0.0"
     warning "^4.0.3"
 
-react-profile-card@^0.1.4:
-  version "0.1.4"
-  resolved "https://registry.yarnpkg.com/react-profile-card/-/react-profile-card-0.1.4.tgz#c7fb6504da4c12d90d966e07aaede81c156d2955"
-  integrity sha512-OHhKVQMIIuXi6BIHCOUubuh+HD+CHemBt3lagm2ZtWlpP8XQRwPN1AuaCseeyGgPHkTWO/qcRFAEa+Xx2CGogg==
-  dependencies:
-    react "^16.13.1"
-    react-dom "^16.13.1"
-    react-scripts "3.4.1"
-
 react-popper@^1.3.4, react-popper@^1.3.6:
   version "1.3.7"
   resolved "https://registry.yarnpkg.com/react-popper/-/react-popper-1.3.7.tgz#f6a3471362ef1f0d10a4963673789de1baca2324"
@@ -9307,6 +9297,15 @@ react-popper@^1.3.4, react-popper@^1.3.6:
     prop-types "^15.6.1"
     typed-styles "^0.0.7"
     warning "^4.0.2"
+
+react-profile-card@^0.1.4:
+  version "0.1.4"
+  resolved "https://registry.yarnpkg.com/react-profile-card/-/react-profile-card-0.1.4.tgz#c7fb6504da4c12d90d966e07aaede81c156d2955"
+  integrity sha512-OHhKVQMIIuXi6BIHCOUubuh+HD+CHemBt3lagm2ZtWlpP8XQRwPN1AuaCseeyGgPHkTWO/qcRFAEa+Xx2CGogg==
+  dependencies:
+    react "^16.13.1"
+    react-dom "^16.13.1"
+    react-scripts "3.4.1"
 
 react-redux@^7.2.0:
   version "7.2.0"
@@ -9413,7 +9412,6 @@ react-social-login-buttons@^3.1.0:
   resolved "https://registry.yarnpkg.com/react-social-login-buttons/-/react-social-login-buttons-3.1.0.tgz#21fdb14063bed4adb325de5508db3e4318e452f2"
   integrity sha512-3BU+MqWI6XibmSotZ1LFKUYSwBBzb/CYdnemizVsaFfMu6MXzfUCcbpekO1eMPQg/AI3ZUdg3zu4E3r62t80nw==
 
-react-transition-group@^4.0.0:
 react-transition-group@^2.3.1:
   version "2.9.0"
   resolved "https://registry.yarnpkg.com/react-transition-group/-/react-transition-group-2.9.0.tgz#df9cdb025796211151a436c69a8f3b97b5b07c8d"
