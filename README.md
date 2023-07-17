@@ -1,4 +1,10 @@
-# educonnections
+# Edu Connections
+
+Match with students at UBC based on course schedule, Spotify interest and Instagram feeds
+
+## University Friends Matcher
+
+Enter your courses schedule for the upcoming semester and match with classmates based on hundreds of category-points related to their Facebook friends, followers, friends in common, etc.; Spotify music, top artists and songs, etc.; and Instagram follows and followers, and likes.
 
 ![clientTasks](/docs/assets/home.png)
 
