@@ -18,7 +18,7 @@
     "@types/reactstrap": "^8.4.3",
     "@types/redux-logger": "^3.0.8",
     "@types/styled-components": "^5.1.0",
-    "axios": "^0.19.2",
+    "axios": "^0.21.2",
     "bootstrap": "^4.5.0",
     "react": "^16.13.1",
     "react-avatar": "^3.9.7",
